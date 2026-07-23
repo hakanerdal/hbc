@@ -1,0 +1,108 @@
+(function () {
+  var COLORS = ['#1a5fb4', '#66bb6a', '#ffa726', '#ab47bc', '#78909c', '#ef5350', '#26a69a', '#8d6e63'];
+
+  function initPie(canvasId, labels, data) {
+    var el = document.getElementById(canvasId);
+    if (!el || typeof Chart === 'undefined') return;
+    return new Chart(el, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: COLORS.slice(0, labels.length),
+          borderWidth: 1,
+          borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } } }
+      }
+    });
+  }
+
+  function initBarH(canvasId, labels, data) {
+    var el = document.getElementById(canvasId);
+    if (!el || typeof Chart === 'undefined') return;
+    return new Chart(el, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Ortalama Not',
+          data: data,
+          backgroundColor: '#42a5f5',
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { min: 0, max: 100, grid: { color: '#eef2f7' } },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  function initLine(canvasId, labels, data) {
+    var el = document.getElementById(canvasId);
+    if (!el || typeof Chart === 'undefined') return;
+    return new Chart(el, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Not Ortalaması',
+          data: data,
+          borderColor: '#1a5fb4',
+          backgroundColor: 'rgba(26, 95, 180, 0.08)',
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: '#1a5fb4',
+          fill: true,
+          tension: 0.35
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { min: 0, max: 100, grid: { color: '#eef2f7' } },
+          x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 0, font: { size: 10 } } }
+        }
+      }
+    });
+  }
+
+  function initOgrenciRaporlari() {
+    initPie('chart-sinif-pie', ['9-A', '9-B', '10-A', '10-B', 'Diğer'], [78, 74, 81, 76, 72]);
+    initBarH('chart-ogretmen-bar', ['Ayşe Yılmaz', 'Mehmet Kaya', 'Berna Yıldız', 'Ahmet Kaya', 'Can Öztürk'], [88, 82, 79, 75, 71]);
+    initLine(
+      'chart-ogrenci-line',
+      ['Ali V.', 'Elif D.', 'Can T.', 'Zeynep A.', 'Burak K.', 'Deniz Y.', 'Ece M.', 'Mert S.', 'Selin A.', 'Kaan Ö.', 'İrem K.', 'Oğuz H.', 'Yasin T.', 'Defne L.', 'Arda C.'],
+      [72, 85, 78, 91, 68, 80, 74, 88, 83, 76, 90, 70, 86, 79, 84]
+    );
+  }
+
+  window.MOCK_REPORT_CHARTS = {
+    initPie: initPie,
+    initBarH: initBarH,
+    initLine: initLine,
+    initOgrenciRaporlari: initOgrenciRaporlari
+  };
+
+  if (document.getElementById('chart-sinif-pie')) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initOgrenciRaporlari);
+    } else {
+      initOgrenciRaporlari();
+    }
+  }
+})();

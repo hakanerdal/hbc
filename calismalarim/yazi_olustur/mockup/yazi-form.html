@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mockup: Yazı Formu</title>
+    <link rel="stylesheet" href="../../../css/style.css" />
+    <link rel="stylesheet" href="mock-shell.css" />
+    <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+    <link rel="stylesheet" href="mock-yazi-wizard.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <nav id="sidebar"></nav>
+      <main>
+        <h1 class="mock-dev-only">Mockup: Yazı formu (adımlı)</h1>
+        <p class="subtitle mock-dev-only">Genel Bilgiler → Talep → Havza → … → Özet → Yazı (9 adım)</p>
+        <div class="mock-app-shell mock-app-shell--yazi-wizard">
+          <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+            <div class="menu-app">Görüş Yazısı</div>
+            <button
+              class="mock-menu-toggle"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#mock-menu-yazi"
+              aria-expanded="true"
+              aria-controls="mock-menu-yazi"
+            >
+              Görüş Yazısı
+            </button>
+            <div class="collapse show mock-menu-collapse" id="mock-menu-yazi">
+              <div class="mock-menu-sub">
+                <a href="yazi-liste.html" class="active">Yazılar</a>
+                <a href="hukumler-liste.html">Hükümler Tablosu</a>
+              </div>
+            </div>
+          </nav>
+          <div class="mock-app-body">
+            <div class="mock-header">
+              <div class="mock-breadcrumb">Görüş Yazısı › Yeni Yazı</div>
+              <strong>Görüş Yazısı Oluştur</strong>
+            </div>
+            <div class="mock-content mock-content--form">
+              <div class="yazi-wizard-wrap" id="yazi-wizard">
+                <nav class="yazi-stepper" aria-label="Form adımları">
+                  <div class="yazi-stepper-track">
+                    <button type="button" class="yazi-step is-active" data-step-index="0" aria-current="step">
+                      <span class="yazi-step-icon">✎<span class="yazi-step-badge">1</span></span>
+                      <span class="yazi-step-label">Genel Bilgiler</span>
+                      <span class="yazi-step-meta">0 / 2</span>
+                    </button>
+                    <button type="button" class="yazi-step" data-step-index="1">
+                      <span class="yazi-step-icon">📋<span class="yazi-step-badge">2</span></span>
+                      <span class="yazi-step-label">Talep</span>
+                      <span class="yazi-step-meta">0 / 3</span>
+                    </button>
+                    <button type="button" class="yazi-step" data-step-index="2">
+                      <span class="yazi-step-icon">📍<span class="yazi-step-badge">3</span></span>
+                      <span class="yazi-step-label">Havza Ve Koruma</span>
+                      <span class="yazi-step-meta">0 / 5</span>
+                    </button>
+                    <button type="button" class="yazi-step" data-step-index="3">
+                      <span class="yazi-step-icon">§<span class="yazi-step-badge">4</span></span>
+                      <span class="yazi-step-label">Hükümler</span>
+                      <span class="yazi-step-meta">0 / 2</span>
+                    </button>
+                    <button type="button" class="yazi-step" data-step-index="4">
+                      <span class="yazi-step-icon">💧<span class="yazi-step-badge">5</span></span>
+                      <span class="yazi-step-label">Taşkın, Tarım Ve Ek Görüş</span>
+                      <span class="yazi-step-meta">0 / 4</span>
+                    </button>
+                    <button type="button" class="yazi-step" data-step-index="5">
+                      <span class="yazi-step-icon">📑<span class="yazi-step-badge">6</span></span>
+                      <span class="yazi-step-label">Koruma Planı</span>
+                      <span class="yazi-step-meta">0 / 2</span>
+                    </button>
+                    <button type="button" class="yazi-step" data-step-index="6">
+                      <span class="yazi-step-icon">🏛<span class="yazi-step-badge">7</span></span>
+                      <span class="yazi-step-label">SUKİ</span>
+                      <span class="yazi-step-meta">0 / 2</span>
+                    </button>
+                    <button type="button" class="yazi-step" data-step-index="7" disabled>
+                      <span class="yazi-step-icon">☑<span class="yazi-step-badge">8</span></span>
+                      <span class="yazi-step-label">Özet</span>
+                      <span class="yazi-step-meta">—</span>
+                    </button>
+                    <button type="button" class="yazi-step" data-step-index="8" disabled>
+                      <span class="yazi-step-icon">📄<span class="yazi-step-badge">9</span></span>
+                      <span class="yazi-step-label">Yazı</span>
+                      <span class="yazi-step-meta">—</span>
+                    </button>
+                  </div>
+                </nav>
+
+                <div class="mock-form-panel mock-form-panel--yazi">
+                  <!-- 0 Genel bilgiler -->
+                  <div class="yazi-step-panel is-active" data-step-panel="0">
+                    <div class="mock-field">
+                      <label for="f-baslik">Başlık *</label>
+                      <input
+                        class="mock-input"
+                        id="f-baslik"
+                        type="text"
+                        data-yazi-field
+                        data-required="true"
+                        value="Koza Altın Maden İşletme Görüşü"
+                        placeholder="Yazı listesinde görünecek kısa başlık"
+                      />
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-aciklama">Açıklama *</label>
+                      <textarea
+                        class="mock-input"
+                        id="f-aciklama"
+                        rows="2"
+                        data-yazi-field
+                        data-required="true"
+                        placeholder="Liste ekranında görünecek kısa açıklama"
+                      >
+Çanakkale Serçiler Köyü — 32 parsel maden faaliyeti görüş talebi</textarea
+                      >
+                    </div>
+                  </div>
+
+                  <!-- 1 Talep -->
+                  <div class="yazi-step-panel" data-step-panel="1">
+                    <div class="mock-field">
+                      <label for="f-ilgi-ozet">Talebin (İlgi Yazının) Kısa Özeti *</label>
+                      <textarea class="mock-input" id="f-ilgi-ozet" rows="3" data-yazi-field data-required="true">
+Çanakkale İli, Merkez İlçesi Serçiler Köyü sınırları içerisinde yer alan ilgi yazı ekinde gönderilen 32 adet parselde Koza Altın İşletmeleri A.Ş. nin uhdesinde bulunan S.201001197 sayılı IV. Grup maden işletme ruhsatlı sahada yapılacak olan faaliyet için Genel Müdürlüğümüz görüşü</textarea
+                      >
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-talep-turu">Talep Türü *</label>
+                      <select id="f-talep-turu" class="form-select" data-yazi-options="talep_turu" data-yazi-field data-required="true"></select>
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-tahsis">Tahsis / Satış / Kiralama / Tescil / İfraz Yazısı Mı *</label>
+                      <select id="f-tahsis" class="form-select" data-yazi-options="tahsis_satis" data-yazi-field data-required="true"></select>
+                    </div>
+                  </div>
+
+                  <!-- 2 Havza -->
+                  <div class="yazi-step-panel" data-step-panel="2">
+                    <div class="mock-field">
+                      <label for="f-havza">İçme Suyu Havzasında Kalıyor Mu *</label>
+                      <select id="f-havza" class="form-select" data-yazi-options="havzada_mi" data-yazi-field data-required="true"></select>
+                    </div>
+                    <div class="mock-field">
+                      <span class="mock-field-label" id="f-yeralti-label">Yeraltı Suyu Koruma Alanında Kalıyor Mu *</span>
+                      <div class="mock-radio-group" role="radiogroup" aria-labelledby="f-yeralti-label">
+                        <label class="mock-radio"><input type="radio" name="f-yeralti" value="Evet" data-yazi-field data-required="true" /> Evet</label>
+                        <label class="mock-radio"
+                          ><input type="radio" name="f-yeralti" value="Hayır" data-yazi-field data-required="true" checked /> Hayır</label
+                        >
+                      </div>
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-il">Su Sağlanan İlin Adı</label>
+                      <select id="f-il" class="form-select" data-yazi-options="il" data-yazi-field></select>
+                    </div>
+                    <div class="mock-field">
+                      <span class="mock-field-label" id="f-ilgide-suki-label">İlgi Yazının Dağıtımda SUKİ Var Mı *</span>
+                      <div class="mock-radio-group" role="radiogroup" aria-labelledby="f-ilgide-suki-label">
+                        <label class="mock-radio"><input type="radio" name="f-ilgide-suki" value="Evet" data-yazi-field data-required="true" /> Evet</label>
+                        <label class="mock-radio"
+                          ><input type="radio" name="f-ilgide-suki" value="Hayır" data-yazi-field data-required="true" checked /> Hayır</label
+                        >
+                      </div>
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-baraj">Baraj / Göl Adı</label>
+                      <select id="f-baraj" class="form-select" data-yazi-options="baraj_gol" data-yazi-field></select>
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-koruma-alani">Kaldığı Koruma Alanı İsmi (İsimleri)</label>
+                      <select
+                        id="f-koruma-alani"
+                        class="form-select mock-tom-select"
+                        multiple
+                        data-yazi-options="koruma_alani_mesafe"
+                        data-placeholder="Koruma Alanı Seçin…"
+                        data-yazi-field
+                      ></select>
+                      <div class="mock-hint">Birden Fazla Koruma Alanı Seçilebilir</div>
+                    </div>
+                    <div class="yazi-fe-note-block">
+                      <div class="mock-fe-warning" role="note">
+                        <span class="mock-fe-warning__title">Frontend İçin Uyarı</span>
+                        <p>
+                          Canlı uygulamada <strong>Kaldığı Koruma Alanı Açıklaması</strong> alanı varsayılan olarak gizlidir; koruma alanı listesinde
+                          <strong>Diğer (Yazınız)</strong> seçildiğinde görünür. Mockup'ta SS alabilmek için alan ve bu uyarı her zaman gösterilir.
+                        </p>
+                      </div>
+                      <div class="mock-field">
+                        <label for="f-koruma-acik">Kaldığı Koruma Alanı Açıklaması</label>
+                        <textarea
+                          class="mock-input"
+                          id="f-koruma-acik"
+                          rows="2"
+                          data-yazi-field
+                          placeholder="Maksimum Su Kotundan İtibaren … M Arasında Kalan Alan"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 3 Hükümler -->
+                  <div class="yazi-step-panel" data-step-panel="3">
+                    <div class="mock-field">
+                      <span class="mock-field-label" id="f-hukum-yaz-label">Hüküm Yazıyor Muyuz *</span>
+                      <div class="mock-radio-group" role="radiogroup" aria-labelledby="f-hukum-yaz-label">
+                        <label class="mock-radio"
+                          ><input type="radio" name="f-hukum-yaz" value="Evet" data-yazi-field data-required="true" checked /> Evet</label
+                        >
+                        <label class="mock-radio"><input type="radio" name="f-hukum-yaz" value="Hayır" data-yazi-field data-required="true" /> Hayır</label>
+                      </div>
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-hukumler">Madde Numaraları İle Birlikte İlgili Hükümler *</label>
+                      <textarea class="mock-input" id="f-hukumler" rows="4" data-yazi-field data-required="true" placeholder="Hüküm Yoksa «Yok» Yazın">
+Yok</textarea
+                      >
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-degerlendirme">Hükümlerle İlgili Değerlendirmemiz</label>
+                      <textarea class="mock-input" id="f-degerlendirme" rows="3" data-yazi-field></textarea>
+                    </div>
+                  </div>
+
+                  <!-- 4 Taşkın -->
+                  <div class="yazi-step-panel" data-step-panel="4">
+                    <div class="mock-field">
+                      <label for="f-taskin">Taşkın Daire Görüşü *</label>
+                      <select id="f-taskin" class="form-select" data-yazi-options="taskin_gorusu" data-yazi-field data-required="true"></select>
+                    </div>
+                    <div class="mock-field">
+                      <span class="mock-field-label" id="f-tarim-label">İl Tarım Orman Müdürlüğü Koordinasyon İhtiyacı *</span>
+                      <div class="mock-radio-group" role="radiogroup" aria-labelledby="f-tarim-label">
+                        <label class="mock-radio"><input type="radio" name="f-tarim" value="Var" data-yazi-field data-required="true" /> Var</label>
+                        <label class="mock-radio"><input type="radio" name="f-tarim" value="Yok" data-yazi-field data-required="true" checked /> Yok</label>
+                      </div>
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-ek-kurum">İlave Görüş İstenecek Kurum İsmi</label>
+                      <input class="mock-input" id="f-ek-kurum" type="text" data-yazi-field placeholder="Örn. Çanakkale İl Tarım Ve Orman Müdürlüğü" />
+                    </div>
+                    <div class="mock-field">
+                      <span class="mock-field-label" id="f-ilgide-kurum-label">İlave Görüş İstenecek Kurum İlgi Yazının Dağıtımda Var Mı *</span>
+                      <div class="mock-radio-group" role="radiogroup" aria-labelledby="f-ilgide-kurum-label">
+                        <label class="mock-radio"><input type="radio" name="f-ilgide-kurum" value="Evet" data-yazi-field data-required="true" /> Evet</label>
+                        <label class="mock-radio"
+                          ><input type="radio" name="f-ilgide-kurum" value="Hayır" data-yazi-field data-required="true" checked /> Hayır</label
+                        >
+                      </div>
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-ek-kanun">İlave Görüş İstenecek Yönetmelik / Kanun Sayısı Ve Adı</label>
+                      <input class="mock-input" id="f-ek-kanun" type="text" data-yazi-field placeholder="Örn. 5403 Sayılı Kanun" />
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-hitap">Yazı Sonu Hitap *</label>
+                      <select id="f-hitap" class="form-select" data-yazi-options="hitap" data-yazi-field data-required="true"></select>
+                    </div>
+                  </div>
+
+                  <!-- 5 Koruma planı -->
+                  <div class="yazi-step-panel" data-step-panel="5">
+                    <div class="mock-field">
+                      <label for="f-yil">Özel Hüküm / Koruma Planı Varsa Yılı *</label>
+                      <select id="f-yil" class="form-select" data-yazi-options="koruma_plani_yili" data-yazi-field data-required="true"></select>
+                    </div>
+                    <div class="mock-field">
+                      <label for="f-koruma-plani">İçme-Kullanma Suyu Havzası Koruma Planı / Özel Hüküm İsmi *</label>
+                      <select id="f-koruma-plani" class="form-select" data-yazi-options="koruma_planlari" data-yazi-field data-required="true"></select>
+                    </div>
+                  </div>
+
+                  <!-- 6 SUKİ -->
+                  <div class="yazi-step-panel" data-step-panel="6">
+                    <div class="mock-field">
+                      <label for="f-suki">SUKİ *</label>
+                      <select id="f-suki" class="form-select" data-yazi-options="suki" data-yazi-field data-required="true"></select>
+                    </div>
+                    <div class="mock-field">
+                      <span class="mock-field-label" id="f-suki-yon-label">Büyükşehir Havza Koruma Yönetmeliği Var Mı *</span>
+                      <div class="mock-radio-group" role="radiogroup" aria-labelledby="f-suki-yon-label">
+                        <label class="mock-radio"><input type="radio" name="f-suki-yon" value="Evet" data-yazi-field data-required="true" /> Evet</label>
+                        <label class="mock-radio"
+                          ><input type="radio" name="f-suki-yon" value="Hayır" data-yazi-field data-required="true" checked /> Hayır</label
+                        >
+                      </div>
+                    </div>
+                    <div class="yazi-fe-note-block">
+                      <div class="mock-fe-warning" role="note">
+                        <span class="mock-fe-warning__title">Frontend İçin Uyarı</span>
+                        <p>
+                          Canlı uygulamada bu uyarı kutusu yalnızca talep türü <strong>Diğer</strong> seçildiğinde görünür; faaliyet-tedbir alanı varsayılan
+                          metinle doldurulur ve <strong>düzenlenebilir</strong> olur.
+                        </p>
+                      </div>
+                      <div class="mock-field">
+                        <label for="f-faaliyet-tedbir">Faaliyet-Tedbir (Talep Türüne Göre)</label>
+                        <textarea class="mock-input mock-input--readonly" id="f-faaliyet-tedbir" rows="3" readonly data-yazi-field>
+kümes kaynaklı katı ve sıvı atıkların sızdırmaz alanlarda toplanması, gübre ve ölü hayvan bertarafının uygun şekilde yapılması hususlarında meri mevzuat çerçevesinde gerekli tüm tedbirlerin alınarak uygulanması</textarea
+                        >
+                        <div class="mock-hint" id="f-faaliyet-tedbir-hint">Faaliyet sayfasından otomatik doldurulur (salt okunur)</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 7 Özet -->
+                  <div class="yazi-step-panel" data-step-panel="7">
+                    <p style="font-size: 0.85rem; color: #555; margin: 0 0 1rem">Seçimlerinizi kontrol edin; onayladıktan sonra yazı metni oluşturulacaktır.</p>
+                    <div class="yazi-summary" id="yazi-summary"></div>
+                  </div>
+
+                  <!-- 8 Yazı -->
+                  <div class="yazi-step-panel" data-step-panel="8">
+                    <div class="yazi-doc-preview" id="yazi-doc-preview"></div>
+                  </div>
+
+                  <div class="mock-footer yazi-wizard-nav">
+                    <button type="button" class="mock-btn" id="yazi-btn-back" hidden>← Geri</button>
+                    <div class="mock-btn-group">
+                      <button type="button" class="mock-btn mock-btn-primary" id="yazi-btn-next">İleri →</button>
+                      <button type="button" class="mock-btn mock-btn-primary" id="yazi-btn-create" hidden>Yazı Oluştur</button>
+                      <a href="yazi-liste.html" class="mock-btn" id="yazi-btn-finish" hidden>Listeye Dön</a>
+                      <button type="button" class="mock-btn mock-btn-export mock-btn-word" id="yazi-btn-download-word" hidden>
+                        <svg class="mock-export-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                          <path
+                            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8.2 11.2h1.6l1.1 3.1 1.1-3.1h1.5l-1.8 4.8v2.5H9.9v-2.5l-1.7-4.8z"
+                          />
+                        </svg>
+                        Word İndir
+                      </button>
+                      <button type="button" class="mock-btn mock-btn-export mock-btn-pdf" id="yazi-btn-download-pdf" hidden>
+                        <svg class="mock-export-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                          <path
+                            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM8 15.5h1.4c1.05 0 1.7-.55 1.7-1.45 0-.6-.3-1-.85-1.2l.05-.05c.55-.25.85-.7.85-1.3 0-1-.7-1.55-1.75-1.55H8v5.55zm0-4.55h1.25c.55 0 .9-.3.9-.75s-.35-.75-.9-.75H8v1.5zm0 2.55h1.35c.6 0 .95.3.95.8 0 .5-.35.85-.95.85H8v-1.65zm4.1 1.95h1.45v-5.5h-1.45v5.5zm2.2 0h1.5v-3.75h.05c.35.65.95 1 1.75 1 .25 0 .45-.05.65-.1v-1.35c-.15.05-.3.1-.5.1-.75 0-1.25-.45-1.5-1.15h-.05v-1.35h-1.5v5.5z"
+                          />
+                        </svg>
+                        PDF İndir
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      window.TASK_HUB = {
+        taskRoot: "../../..",
+        page: "mock-yazi-form",
+        calisma: {
+          id: "yazi_olustur",
+          label: "Yazı Oluştur",
+          base: "..",
+          mockups: [
+            { id: "mock-yazi-liste", label: "Yazı Listesi", href: "mockup/yazi-liste.html" },
+            { id: "mock-yazi-form", label: "Yazı Formu", href: "mockup/yazi-form.html" },
+            { id: "mock-hukumler-liste", label: "Hükümler Tablosu", href: "mockup/hukumler-liste.html" },
+            { id: "mock-hukumler-form", label: "Hüküm Kaydı", href: "mockup/hukumler-form.html" },
+          ],
+          islerHref: "isler.html",
+        },
+      };
+    </script>
+    <script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+    <script src="mock-yazi-excel-secenekler.js"></script>
+    <script src="mock-yazi-form.js"></script>
+    <script src="../../../js/mock-tom-select.js"></script>
+    <script src="mock-yazi-wizard.js"></script>
+    <script src="../../../js/calismalar-meta.js"></script>
+    <script src="../../../js/rapor-widgets.js"></script>
+    <script src="../../../js/calisma-cursor.js"></script>
+    <script src="../../../js/sunum-query.js"></script>
+    <script src="../../../js/mock-sunum.js"></script>
+    <script src="../../../js/nav.js"></script>
+  </body>
+</html>

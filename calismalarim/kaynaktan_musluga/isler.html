@@ -1,0 +1,420 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kaynaktan Musluğa — Jira Task Metinleri</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    .task-tabs { display: flex; gap: 0.35rem; margin: 1rem 0 0; border-bottom: 2px solid var(--border); }
+    .task-tab { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; font-size: 0.85rem; font-weight: 600; color: var(--muted); border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; border-radius: 6px 6px 0 0; }
+    .task-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: #fff; }
+    .tab-chip { display: inline-flex; align-items: center; justify-content: center; min-width: 1.35rem; height: 1.35rem; padding: 0 0.35rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; }
+    .tab-chip-be { background: #e3f2fd; color: #1565c0; }
+    .tab-chip-fe { background: #e8f5e9; color: #2e7d32; }
+    .task-tab.active .tab-chip-be { background: #1565c0; color: #fff; }
+    .task-tab.active .tab-chip-fe { background: #2e7d32; color: #fff; }
+    .tab-panel { padding-top: 1rem; }
+    .tab-panel[hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<div class="layout layout--isler">
+  <nav id="sidebar"></nav>
+  <main class="isler-main" id="isler-main">
+    <h1>Kaynaktan Musluğa — Jira task metinleri</h1>
+    <p class="subtitle">10 Backend · 7 Frontend — mockup onaylandı</p>
+    <div class="task-tabs" role="tablist">
+      <button type="button" class="task-tab active" data-tab="be" id="tab-be">Backend <span class="tab-chip tab-chip-be" id="chip-be">10</span></button>
+      <button type="button" class="task-tab" data-tab="fe" id="tab-fe">Frontend <span class="tab-chip tab-chip-fe" id="chip-fe">7</span></button>
+    </div>
+
+    <div class="tab-panel" id="panel-be" data-tab-panel="be">
+
+      <div class="issue" id="be-kaynak-list">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/kaynak-liste.html" target="_blank" rel="noopener">mockup/kaynak-liste.html</a></div>
+        <h4>[BE] Kaynak Listesi Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getKaynakListesi</span>
+          <span><strong>Tablo:</strong> kaynak</span>
+          <span><strong>Tüketici:</strong> [FE] Kaynak Listesi</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Kaynak listesi ekranı için kayıtların listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: id, adi, kodu, su_kalitesi, bolge</li>
+          <li>Sayfalama ve sıralama (varsayılan: adi)</li>
+          <li>İsteğe bağlı arama: adi veya kodu</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-kaynak-detay">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/kaynak-form.html" target="_blank" rel="noopener">mockup/kaynak-form.html</a></div>
+        <h4>[BE] Kaynak Detay Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getKaynakById</span>
+          <span><strong>Tablo:</strong> kaynak</span>
+          <span><strong>Tüketici:</strong> [FE] Kaynak Formu (düzenle)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Kaynak formunda tek kaydın getirilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>id ile tek kayıt döner</li>
+          <li>Dönüş: id, adi, kodu, su_kalitesi, bolge</li>
+          <li>Kayıt yoksa uygun hata</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-kaynak-kaydet">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/kaynak-form.html" target="_blank" rel="noopener">mockup/kaynak-form.html</a></div>
+        <h4>[BE] Kaynak Kaydet Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> saveKaynak</span>
+          <span><strong>Tablo:</strong> kaynak</span>
+          <span><strong>Tüketici:</strong> [FE] Kaynak Formu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Yeni kaynak oluşturma ve mevcut kaydı güncelleme.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Zorunlu: adi, kodu, su_kalitesi, bolge</li>
+          <li>su_kalitesi 0–100 arası sayı</li>
+          <li>bolge: Marmara, Ege, Akdeniz, İç Anadolu, Karadeniz, Doğu Anadolu, Güneydoğu Anadolu</li>
+          <li>kodu benzersiz (aynı kodla ikinci kayıt reddedilir)</li>
+          <li>id varsa güncelle, yoksa ekle</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-tesis-list">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/tesis-liste.html" target="_blank" rel="noopener">mockup/tesis-liste.html</a></div>
+        <h4>[BE] Tesis Listesi Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getTesisListesi</span>
+          <span><strong>Tablo:</strong> tesis, tesis_kaynak, kaynak</span>
+          <span><strong>Tüketici:</strong> [FE] Tesis Listesi</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Tesis listesi ekranı için kayıtların listelenmesi; bağlı kaynak adları birlikte gelir.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: id, adi, kodu, kalite, kaynaklar (virgülle ayrılmış kaynak adları)</li>
+          <li>Sayfalama ve sıralama (varsayılan: adi)</li>
+          <li>İsteğe bağlı arama: adi veya kodu</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-tesis-detay">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/tesis-form.html" target="_blank" rel="noopener">mockup/tesis-form.html</a></div>
+        <h4>[BE] Tesis Detay Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getTesisById</span>
+          <span><strong>Tablo:</strong> tesis, tesis_kaynak</span>
+          <span><strong>Tüketici:</strong> [FE] Tesis Formu (düzenle)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Tesis formunda tek kayıt ve bağlı kaynakların getirilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: id, adi, kodu, kalite, kaynakIdListesi (çoklu)</li>
+          <li>Kayıt yoksa uygun hata</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-tesis-kaydet">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/tesis-form.html" target="_blank" rel="noopener">mockup/tesis-form.html</a></div>
+        <h4>[BE] Tesis Kaydet Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> saveTesis</span>
+          <span><strong>Tablo:</strong> tesis, tesis_kaynak</span>
+          <span><strong>Tüketici:</strong> [FE] Tesis Formu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Tesis kaydı ve su kaynağı ilişkilerinin kaydedilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Zorunlu: adi, kodu, kalite, en az bir kaynak</li>
+          <li>kalite 0–100 arası sayı</li>
+          <li>kodu benzersiz</li>
+          <li>kaynakIdListesi ile tesis_kaynak güncellenir (önce sil-yeniden yaz veya eşdeğeri)</li>
+          <li>id varsa güncelle, yoksa ekle</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-musluk-list">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/musluk-liste.html" target="_blank" rel="noopener">mockup/musluk-liste.html</a></div>
+        <h4>[BE] Musluk Listesi Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getMuslukListesi</span>
+          <span><strong>Tablo:</strong> musluk, musluk_tesis, tesis</span>
+          <span><strong>Tüketici:</strong> [FE] Musluk Listesi</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Musluk listesi ekranı için kayıtların listelenmesi; bağlı tesis adları birlikte gelir.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: id, adi, kodu, tesisler (virgülle ayrılmış tesis adları)</li>
+          <li>Sayfalama ve sıralama (varsayılan: adi)</li>
+          <li>İsteğe bağlı arama: adi veya kodu</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-musluk-detay">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/musluk-form.html" target="_blank" rel="noopener">mockup/musluk-form.html</a></div>
+        <h4>[BE] Musluk Detay Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getMuslukById</span>
+          <span><strong>Tablo:</strong> musluk, musluk_tesis</span>
+          <span><strong>Tüketici:</strong> [FE] Musluk Formu (düzenle)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Musluk formunda tek kayıt ve bağlı tesislerin getirilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: id, adi, kodu, tesisIdListesi (çoklu)</li>
+          <li>Kayıt yoksa uygun hata</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-musluk-kaydet">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/musluk-form.html" target="_blank" rel="noopener">mockup/musluk-form.html</a></div>
+        <h4>[BE] Musluk Kaydet Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> saveMusluk</span>
+          <span><strong>Tablo:</strong> musluk, musluk_tesis</span>
+          <span><strong>Tüketici:</strong> [FE] Musluk Formu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Musluk kaydı ve tesis ilişkilerinin kaydedilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Zorunlu: adi, kodu, en az bir tesis</li>
+          <li>kodu benzersiz</li>
+          <li>tesisIdListesi ile musluk_tesis güncellenir</li>
+          <li>id varsa güncelle, yoksa ekle</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-dashboard">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/dashboard.html" target="_blank" rel="noopener">mockup/dashboard.html</a></div>
+        <h4>[BE] Etoloji Dashboard Harita Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getEtolojiDashboardHarita</span>
+          <span><strong>Tablo:</strong> kaynak, tesis, musluk, tesis_kaynak, musluk_tesis</span>
+          <span><strong>Tüketici:</strong> [FE] Dashboard</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Dashboard haritasında gösterilecek düğümler ve yönlü ilişki çizgileri.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: kaynaklar, tesisler, musluklar (id, adi, tip)</li>
+          <li>Dönüş: baglantilar — kaynak → tesis (tesis_kaynak), tesis → musluk (musluk_tesis)</li>
+          <li>Her bağlantıda fromId, toId ve yön bilgisi</li>
+          <li>Liste ekranlarındaki ilişkilerle tutarlı veri</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+    </div>
+
+    <div class="tab-panel" id="panel-fe" data-tab-panel="fe" hidden>
+
+      <div class="issue" id="fe-dashboard">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/dashboard.html" target="_blank" rel="noopener">mockup/dashboard.html</a></div>
+        <h4>[FE] Dashboard</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Kaynaktan Musluğa › Etoloji › Dashboard</span>
+          <span><strong>Veri:</strong> [BE] Etoloji Dashboard Harita Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Kaynak, tesis ve muslukların harita üzerinde ilişkileriyle gösterilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Kaynaklar mavi yuvarlak, tesisler fabrika ikonu, musluklar ev ikonu</li>
+          <li>Kesikli mor oklu çizgiler ikonlar arasında: kaynak → tesis, tesis → musluk</li>
+          <li>Üstte legend (kaynak / tesis / musluk / akış yönü)</li>
+          <li>Etoloji menüsünde ilk sıra Dashboard</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-kaynak-liste">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/kaynak-liste.html" target="_blank" rel="noopener">mockup/kaynak-liste.html</a></div>
+        <h4>[FE] Kaynak Listesi</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Kaynaktan Musluğa › Etoloji › Kaynaklar</span>
+          <span><strong>Veri:</strong> [BE] Kaynak Listesi Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Kaynak kayıtlarının tabloda listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Sütunlar: Adı, Kodu, Su Kalitesi, Bölge</li>
+          <li>«+ Yeni Kaynak» ile forma gider</li>
+          <li>Satırda düzenle ikonu (title: Düzenle) ile forma gider</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-kaynak-form">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/kaynak-form.html" target="_blank" rel="noopener">mockup/kaynak-form.html</a></div>
+        <h4>[FE] Kaynak Formu</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Kaynaktan Musluğa › Etoloji › Kaynaklar › Yeni / Düzenle</span>
+          <span><strong>Veri:</strong> [BE] Kaynak Detay + [BE] Kaynak Kaydet</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Kaynak adı, kodu, su kalitesi ve bölge alanları; kaydet ve listeye dön.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Alanlar: Adı *, Kodu *, Su Kalitesi * (0–100), Bulunduğu Bölge * (dropdown)</li>
+          <li>Bölge seçenekleri: Marmara, Ege, Akdeniz, İç Anadolu, Karadeniz, Doğu Anadolu, Güneydoğu Anadolu</li>
+          <li>Kaydet ve Listeye Dön butonları çalışır</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-tesis-liste">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/tesis-liste.html" target="_blank" rel="noopener">mockup/tesis-liste.html</a></div>
+        <h4>[FE] Tesis Listesi</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Kaynaktan Musluğa › Etoloji › Tesisler</span>
+          <span><strong>Veri:</strong> [BE] Tesis Listesi Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Tesis kayıtlarının tabloda listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Sütunlar: Adı, Kodu, Kalite, Su Kaynakları (virgülle)</li>
+          <li>«+ Yeni Tesis» ile forma gider</li>
+          <li>Satırda düzenle ikonu ile forma gider</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-tesis-form">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/tesis-form.html" target="_blank" rel="noopener">mockup/tesis-form.html</a></div>
+        <h4>[FE] Tesis Formu</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Kaynaktan Musluğa › Etoloji › Tesisler › Yeni / Düzenle</span>
+          <span><strong>Veri:</strong> [BE] Tesis Detay + [BE] Tesis Kaydet, kaynak listesi (dropdown)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Tesis bilgileri ve çoklu su kaynağı seçimi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Alanlar: Adı *, Kodu *, Kalite * (0–100), Su Kaynakları * (çoklu seçim dropdown)</li>
+          <li>Kaynak seçiminde ad ve kod görünür; birden fazla seçilebilir</li>
+          <li>Kaydet ve Listeye Dön butonları çalışır</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-musluk-liste">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/musluk-liste.html" target="_blank" rel="noopener">mockup/musluk-liste.html</a></div>
+        <h4>[FE] Musluk Listesi</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Kaynaktan Musluğa › Etoloji › Musluklar</span>
+          <span><strong>Veri:</strong> [BE] Musluk Listesi Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Musluk kayıtlarının tabloda listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Sütunlar: Adı, Kodu, Tesisler (virgülle)</li>
+          <li>«+ Yeni Musluk» ile forma gider</li>
+          <li>Satırda düzenle ikonu ile forma gider</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-musluk-form">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/musluk-form.html" target="_blank" rel="noopener">mockup/musluk-form.html</a></div>
+        <h4>[FE] Musluk Formu</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Kaynaktan Musluğa › Etoloji › Musluklar › Yeni / Düzenle</span>
+          <span><strong>Veri:</strong> [BE] Musluk Detay + [BE] Musluk Kaydet, tesis listesi (dropdown)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Musluk bilgileri ve çoklu tesis seçimi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Alanlar: Adı *, Kodu *, Tesisler * (çoklu seçim dropdown)</li>
+          <li>Tesis seçiminde ad ve kod görünür; birden fazla seçilebilir</li>
+          <li>Kaydet ve Listeye Dön butonları çalışır</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+    </div>
+  </main>
+  <aside class="isler-toc-wrap" id="isler-toc" aria-label="Task listesi"></aside>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../..',
+  page: 'calisma-isler',
+  calisma: {
+    label: 'Kaynaktan Musluğa',
+    base: '.',
+    mockups: [
+      { id: 'mock-dashboard', label: 'Dashboard', href: 'mockup/dashboard.html' },
+      { id: 'mock-kaynak-liste', label: 'Kaynak listesi', href: 'mockup/kaynak-liste.html' },
+      { id: 'mock-kaynak-form', label: 'Kaynak formu', href: 'mockup/kaynak-form.html' },
+      { id: 'mock-tesis-liste', label: 'Tesis listesi', href: 'mockup/tesis-liste.html' },
+      { id: 'mock-tesis-form', label: 'Tesis formu', href: 'mockup/tesis-form.html' },
+      { id: 'mock-musluk-liste', label: 'Musluk listesi', href: 'mockup/musluk-liste.html' },
+      { id: 'mock-musluk-form', label: 'Musluk formu', href: 'mockup/musluk-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+(function () {
+  function switchTab(name) {
+    document.querySelectorAll('.task-tab').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-tab') === name);
+    });
+    document.querySelectorAll('[data-tab-panel]').forEach(function (panel) {
+      panel.hidden = panel.getAttribute('data-tab-panel') !== name;
+    });
+    if (location.hash !== '#' + name) location.hash = name;
+  }
+  document.querySelectorAll('.task-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () { switchTab(btn.getAttribute('data-tab')); });
+  });
+  var hash = (location.hash || '').replace('#', '');
+  if (hash === 'fe' || hash === 'be') switchTab(hash);
+})();
+</script>
+<script src="../../js/sunum-query.js"></script>
+<script src="../../js/isler-mockups.js"></script>
+<script src="../../js/isler-copy.js"></script>
+<script src="../../js/isler-task-edit.js"></script>
+<script src="../../js/isler-toc.js"></script>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

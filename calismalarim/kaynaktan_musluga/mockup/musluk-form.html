@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockup: Musluk Formu</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="mock-shell.css" />
+  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Mockup: Musluk formu</h1>
+    <p class="subtitle">Yeni kayıt / düzenle</p>
+    <div class="mock-app-shell">
+      <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+        <div class="menu-app">Kaynaktan Musluğa</div>
+        <button class="mock-menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mock-menu-etoloji" aria-expanded="true" aria-controls="mock-menu-etoloji">Etoloji</button>
+        <div class="collapse show mock-menu-collapse" id="mock-menu-etoloji">
+          <div class="mock-menu-sub">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="kaynak-liste.html">Kaynaklar</a>
+            <a href="tesis-liste.html">Tesisler</a>
+            <a href="musluk-liste.html" class="active">Musluklar</a>
+          </div>
+        </div>
+      </nav>
+      <div class="mock-app-body">
+        <div class="mock-header">
+          <div class="mock-breadcrumb">Kaynaktan Musluğa › Etoloji › Musluklar › Yeni</div>
+          <strong>Musluk Kaydı</strong>
+        </div>
+        <div class="mock-content mock-content--form">
+        <div class="mock-form-panel">
+          <div class="mock-field">
+            <label>Adı *</label>
+            <input class="mock-input" type="text" placeholder="Örn. Merkez Musluk A" value="Merkez Musluk A" />
+          </div>
+          <div class="mock-field">
+            <label>Kodu *</label>
+            <input class="mock-input" type="text" placeholder="Örn. MSL-001" value="MSL-001" />
+          </div>
+          <div class="mock-field">
+            <label for="f-tesisler">Tesisler *</label>
+            <select id="f-tesisler" class="form-select mock-tom-select" multiple
+              data-placeholder="Tesis seçin…">
+              <option value="ART-K01" selected>Arıtma Tesisi Kuzey (ART-K01)</option>
+              <option value="IC-M02" selected>İçme Suyu Tesisi Merkez (IC-M02)</option>
+              <option value="DAG-G03">Dağıtım Tesisi Güney (DAG-G03)</option>
+            </select>
+            <div class="mock-hint">Birden fazla tesis seçilebilir</div>
+          </div>
+          <div class="mock-footer">
+            <a href="musluk-liste.html" class="mock-btn">← Listeye Dön</a>
+            <a href="musluk-liste.html" class="mock-btn mock-btn-primary">Kaydet</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mock-prompt" aria-label="Cursor örnek prompt">
+      <h2>Cursor'a örnek prompt</h2>
+      <div class="mock-prompt-note">
+        <strong>Örnek proje — bu ekran böyle tarif edildi</strong>
+        Kutuyu kopyalayıp Cursor'a yapıştır; kendi çalışmanda klasör adı, menü yolu ve alanları değiştirmen yeterli.
+        Tüm akış için <a href="../../../module-creator/is-analisti.html">iş analisti rehberi</a>.
+      </div>
+      <div class="prompt-box">kaynaktan_musluga çalışmasında musluk formu mockup'ı istiyorum.
+
+Menü: Etoloji › Musluklar (breadcrumb'ta «Yeni» veya «Düzenle»)
+Alanlar: adı *, kodu *, tesisler * (çoklu seçim — Tom Select / Bootstrap 5; tesis adı ve kodu görünsün)
+Birden fazla tesis seçilebilsin.
+Altta «Listeye Dön» ve «Kaydet»; musluk listesine bağlansın.
+
+Sadece bu form ekranı; Jira task yazma.</div>
+    </section>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../../..',
+  page: 'mock-musluk-form',
+  calisma: {
+    label: 'Kaynaktan Musluğa',
+    base: '..',
+    mockups: [
+      { id: 'mock-dashboard', label: 'Dashboard', href: 'mockup/dashboard.html' },
+      { id: 'mock-kaynak-liste', label: 'Kaynak listesi', href: 'mockup/kaynak-liste.html' },
+      { id: 'mock-kaynak-form', label: 'Kaynak formu', href: 'mockup/kaynak-form.html' },
+      { id: 'mock-tesis-liste', label: 'Tesis listesi', href: 'mockup/tesis-liste.html' },
+      { id: 'mock-tesis-form', label: 'Tesis formu', href: 'mockup/tesis-form.html' },
+      { id: 'mock-musluk-liste', label: 'Musluk listesi', href: 'mockup/musluk-liste.html' },
+      { id: 'mock-musluk-form', label: 'Musluk formu', href: 'mockup/musluk-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+<script src="../../../js/mock-tom-select.js"></script>
+<script src="../../../js/calismalar-meta.js"></script>
+<script src="../../../js/rapor-widgets.js"></script>
+<script src="../../../js/calisma-cursor.js"></script>
+<script src="../../../js/sunum-query.js"></script>
+<script src="../../../js/mock-sunum.js"></script>
+<script src="../../../js/nav.js"></script>
+</body>
+</html>

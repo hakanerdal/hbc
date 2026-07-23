@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Çalışmalarım | HBC</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="layout layout--home">
+      <nav id="sidebar"></nav>
+      <main class="home-main">
+        <details class="home-hint-mobile">
+          <summary>Bu sayfa — kısa bilgi</summary>
+          <ul class="home-aside-list">
+            <li>Klasöre tıklayarak çalışmaya gir.</li>
+            <li><strong>Durum filtresi</strong> ve <strong>arama</strong> ile listeyi daralt.</li>
+            <li>Turuncu <strong>Örnek</strong> = referans; gri <strong>Gerçek</strong> = canlı modül.</li>
+            <li>Durum / Cursor metni için çalışma <strong>özet sayfası</strong>ndaki butonları kullan.</li>
+            <li>Kart etiketi: Mockup taslak · Onay bekliyor · Task hazır.</li>
+            <li>Task metinlerini <strong>Tümünü kopyala</strong> ile Jira'ya yapıştır.</li>
+          </ul>
+          <p class="home-aside-links">
+            <a href="module-creator/is-analisti.html">Başlangıç rehberi</a>
+            ·
+            <a href="module-creator/jira-analist.html">Jira İş Açma</a>
+            ·
+            <a href="module-creator/kurulum-analist.html">Kurulum</a>
+          </p>
+        </details>
+
+        <div class="calismalar-heading">
+          <div class="home-title-row">
+            <h1>Çalışmalarım</h1>
+            <p class="subtitle">Modül ve Ekran Tasarımları</p>
+          </div>
+          <div class="calismalar-filters" id="calismalar-filters" role="tablist" aria-label="Durum filtresi"></div>
+        </div>
+        <div class="calismalar-toolbar">
+          <button type="button" class="calismalar-new-btn" id="btn-yeni-calisma" title="Yeni çalışma klasörü oluştur">
+            <svg
+              class="calismalar-new-btn__icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.25"
+              stroke-linecap="round"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            Yeni çalışma
+          </button>
+          <div class="calismalar-search-wrap">
+            <input type="search" class="calismalar-search" id="calismalar-search" placeholder="Çalışma ara…" autocomplete="off" aria-label="Çalışma ara" />
+          </div>
+        </div>
+        <p class="calismalar-empty" id="calismalar-empty" hidden>Eşleşen çalışma bulunamadı. Filtreyi değiştirin veya aramayı temizleyin.</p>
+        <div class="folder-grid" id="calismalar-grid"></div>
+        <p class="calismalar-more" id="calismalar-more" hidden></p>
+      </main>
+      <aside class="home-aside" aria-label="Bu sayfa — kısa bilgi">
+        <ul class="home-aside-list">
+          <li>Klasöre tıklayarak çalışmaya gir.</li>
+          <li><strong>Durum filtresi</strong> ve <strong>arama</strong> ile listeyi daralt.</li>
+          <li>Turuncu <strong>Örnek</strong> rozeti referans çalışmaları; gri <strong>Gerçek</strong> canlı modülleri gösterir.</li>
+          <li>Durum değiştirmek ve Cursor metni almak için çalışma <strong>özet sayfası</strong>na gir.</li>
+          <li>Kart etiketi hangi aşamada olduğunu söyler: <strong>Mockup taslak</strong> · <strong>Onay bekliyor</strong> · <strong>Task hazır</strong>.</li>
+          <li>Mockup'ları tarayıcıda görüntüle.</li>
+          <li>Hazır task metinlerini <strong>Tümünü kopyala</strong> ile Jira'ya yapıştır.</li>
+        </ul>
+        <p class="home-aside-links">
+          <a href="module-creator/is-analisti.html">Başlangıç rehberi</a><br />
+          <a href="module-creator/jira-analist.html">Jira İş Açma</a><br />
+          <a href="module-creator/kurulum-analist.html">Kurulum</a>
+        </p>
+      </aside>
+    </div>
+    <script>
+      window.TASK_HUB = { taskRoot: ".", page: "home" };
+    </script>
+    <script src="js/calismalar-meta.js"></script>
+    <script src="js/calisma-ozet.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/yeni-calisma.js"></script>
+    <script src="js/calismalar-home.js"></script>
+  </body>
+</html>

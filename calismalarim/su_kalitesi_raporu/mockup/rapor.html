@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockup: Su Kalitesi Bölgesel Özet</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="mock-shell.css" />
+  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Mockup: Su kalitesi bölgesel özet</h1>
+    <p class="subtitle mock-doc">Salt okunur rapor — form ve düzenleme yok</p>
+    <div class="mock-app-shell">
+      <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+        <div class="menu-app">Su Kalitesi Özeti</div>
+        <button class="mock-menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mock-menu-raporlar" aria-expanded="true" aria-controls="mock-menu-raporlar">Raporlar</button>
+        <div class="collapse show mock-menu-collapse" id="mock-menu-raporlar">
+          <div class="mock-menu-sub">
+            <a href="rapor.html" class="active">Bölgesel özet</a>
+          </div>
+        </div>
+      </nav>
+      <div class="mock-app-body">
+        <div class="mock-header">
+          <div class="mock-breadcrumb">Su Kalitesi Özeti › Raporlar › Bölgesel özet</div>
+          <strong>Su Kalitesi Bölgesel Özet</strong>
+        </div>
+        <div class="mock-toolbar">
+          <div class="mock-field-inline">
+            <label for="f-bolge">Bölge</label>
+            <select class="mock-input" id="f-bolge">
+              <option selected>Tümü</option>
+              <option>Marmara</option>
+              <option>Ege</option>
+              <option>Akdeniz</option>
+              <option>İç Anadolu</option>
+              <option>Karadeniz</option>
+              <option>Doğu Anadolu</option>
+              <option>Güneydoğu Anadolu</option>
+            </select>
+          </div>
+          <button type="button" class="mock-btn mock-btn-primary">Raporla</button>
+          <button type="button" class="mock-btn">Excel'e aktar</button>
+        </div>
+        <div class="mock-content mock-content--report">
+          <div class="mock-report-widget mock-report-widget--kpis">
+          <div class="mock-report-kpis">
+            <div class="mock-report-kpi"><strong>24</strong><span>Toplam kaynak</span></div>
+            <div class="mock-report-kpi"><strong>71</strong><span>Genel ortalama kalite</span></div>
+            <div class="mock-report-kpi"><strong>Doğu Anadolu</strong><span>En düşük ortalama bölge</span></div>
+          </div>
+          </div>
+
+          <div class="mock-report-widget">
+            <h3>Bölgeye göre ortalama su kalitesi</h3>
+            <div class="mock-report-bars">
+              <div class="mock-report-bar-row">
+                <span>Marmara</span>
+                <div class="mock-report-bar-track"><div class="mock-report-bar-fill" style="width:82%"></div></div>
+                <span class="mock-report-bar-val">82</span>
+              </div>
+              <div class="mock-report-bar-row">
+                <span>Ege</span>
+                <div class="mock-report-bar-track"><div class="mock-report-bar-fill" style="width:76%"></div></div>
+                <span class="mock-report-bar-val">76</span>
+              </div>
+              <div class="mock-report-bar-row">
+                <span>Akdeniz</span>
+                <div class="mock-report-bar-track"><div class="mock-report-bar-fill" style="width:74%"></div></div>
+                <span class="mock-report-bar-val">74</span>
+              </div>
+              <div class="mock-report-bar-row">
+                <span>İç Anadolu</span>
+                <div class="mock-report-bar-track"><div class="mock-report-bar-fill" style="width:68%"></div></div>
+                <span class="mock-report-bar-val">68</span>
+              </div>
+              <div class="mock-report-bar-row">
+                <span>Karadeniz</span>
+                <div class="mock-report-bar-track"><div class="mock-report-bar-fill" style="width:79%"></div></div>
+                <span class="mock-report-bar-val">79</span>
+              </div>
+              <div class="mock-report-bar-row">
+                <span>Doğu Anad.</span>
+                <div class="mock-report-bar-track"><div class="mock-report-bar-fill" style="width:58%"></div></div>
+                <span class="mock-report-bar-val">58</span>
+              </div>
+              <div class="mock-report-bar-row">
+                <span>G. Doğu An.</span>
+                <div class="mock-report-bar-track"><div class="mock-report-bar-fill" style="width:63%"></div></div>
+                <span class="mock-report-bar-val">63</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-report-widget">
+            <h3>Kaynak dağılımı (bölge payı)</h3>
+            <div class="mock-report-donut-wrap">
+              <div class="mock-report-donut" aria-hidden="true"></div>
+              <ul class="mock-report-legend">
+                <li><span class="dot" style="background:#1a5fb4"></span> Marmara %28</li>
+                <li><span class="dot" style="background:#66bb6a"></span> Ege %22</li>
+                <li><span class="dot" style="background:#ffa726"></span> Akdeniz %18</li>
+                <li><span class="dot" style="background:#ab47bc"></span> Diğer %32</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mock-report-widget">
+            <h3>Özet tablo</h3>
+            <table class="mock-table">
+              <thead>
+                <tr>
+                  <th>Bölge</th>
+                  <th class="num">Kaynak sayısı</th>
+                  <th class="num">Ort. kalite</th>
+                  <th class="num">Min</th>
+                  <th class="num">Max</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Marmara</td><td class="num">7</td><td class="num">82</td><td class="num">71</td><td class="num">91</td></tr>
+                <tr><td>Ege</td><td class="num">5</td><td class="num">76</td><td class="num">65</td><td class="num">88</td></tr>
+                <tr><td>Akdeniz</td><td class="num">4</td><td class="num">74</td><td class="num">62</td><td class="num">85</td></tr>
+                <tr><td>İç Anadolu</td><td class="num">3</td><td class="num">68</td><td class="num">55</td><td class="num">79</td></tr>
+                <tr><td>Karadeniz</td><td class="num">3</td><td class="num">79</td><td class="num">70</td><td class="num">86</td></tr>
+                <tr><td>Doğu Anadolu</td><td class="num">1</td><td class="num">58</td><td class="num">58</td><td class="num">58</td></tr>
+                <tr><td>Güneydoğu Anadolu</td><td class="num">1</td><td class="num">63</td><td class="num">63</td><td class="num">63</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mock-prompt" aria-label="Cursor örnek prompt">
+      <h2>Cursor'a örnek prompt</h2>
+      <div class="mock-prompt-note">
+        <strong>Rapor örneği — salt okunur ekran</strong>
+        Kaynaktan Musluğa'daki kaynak verisinden türeyen özet rapor; form veya düzenleme yok.
+      </div>
+      <div class="prompt-box">su_kalitesi_raporu için mockup istiyorum.
+
+Menü: Raporlar altında tek ekran — Bölgesel özet
+Veri kaynağı: hbc.kaynak tablosu (Kaynaktan Musluğa ile aynı kaynaklar)
+Filtre: bölge (Tümü + 7 bölge)
+Üstte 3 özet kart: toplam kaynak, genel ortalama kalite, en düşük ortalama bölge
+Grafik: bölgeye göre ortalama su kalitesi çubuk grafiği
+Grafik: kaynak dağılımı pasta/ halka
+Altta tablo: bölge, kaynak sayısı, ort/min/max kalite
+Raporla ve Excel'e aktar butonları (mockup'ta statik)
+Form ekranı yok. Jira task yazma.</div>
+    </section>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../../..',
+  page: 'mock-rapor',
+  calisma: {
+    id: 'su_kalitesi_raporu',
+    label: 'Su Kalitesi Özeti',
+    base: '..',
+    mockups: [
+      { id: 'mock-rapor', label: 'Bölgesel özet', href: 'mockup/rapor.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+<script src="../../../js/mock-tom-select.js"></script>
+<script src="../../../js/calismalar-meta.js"></script>
+<script src="../../../js/rapor-widgets.js"></script>
+<script src="../../../js/calisma-cursor.js"></script>
+<script src="../../../js/sunum-query.js"></script>
+<script src="../../../js/mock-sunum.js"></script>
+<script src="../../../js/nav.js"></script>
+</body>
+</html>

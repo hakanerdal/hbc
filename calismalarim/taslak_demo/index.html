@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Taslak Demo | Çalışmalarım</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    .tile { display: block; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-decoration: none; color: inherit; margin-bottom: 0.5rem; }
+    .tile:hover { border-color: var(--accent); }
+    .tile strong { color: var(--accent); }
+    .tile span { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+    .empty-note { font-size: 0.88rem; color: var(--muted); background: #f5f7fa; border: 1px dashed var(--border); border-radius: 8px; padding: 1rem; }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Taslak Demo</h1>
+
+    <div class="calisma-amac-panel" id="calisma-amac-panel">
+      <h2 class="calisma-amac-heading">Amaç</h2>
+      <p class="calisma-amac" id="calisma-amac"></p>
+    </div>
+
+    <div class="calisma-durum-bar" id="calisma-durum-bar"></div>
+
+    <div class="lead">
+      <strong>Örnek · tüm türler</strong> — liste, form, rapor ve üst menü bir arada. Mockup sayfalarının altında Cursor örnek prompt kutuları var.
+      Menü: <strong>Okul</strong> altında <strong>Dashboard</strong> (Coğrafi Dağılım), <strong>Raporlar</strong> (Öğrenci Raporları),
+      <strong>İletişim</strong> ve <strong>Listeler</strong> (Sınıflar, Öğretmenler).
+      Mockup sayfalarında <strong>Sunum</strong> linki ile müşteriye tam ekran gösterim.
+    </div>
+
+    <h2>FE Mockup'lar</h2>
+    <div class="tile-panel">
+      <p class="tile-panel__lead">Wireframe ekranlar — geliştirme öncesi PM / analist onayı.</p>
+      <div class="tile-grid tile-grid--mock">
+        <a class="tile-card tile-card--fe" href="mockup/cografi-dagilim.html">
+          <span class="tile-card__badge">1</span>
+          <div class="tile-card__body">
+            <strong>Coğrafi Dağılım</strong>
+            <span>Dashboard › Türkiye + Ankara haritası</span>
+          </div>
+        </a>
+        <a class="tile-card tile-card--fe" href="mockup/ogrenci-rapor.html">
+          <span class="tile-card__badge">2</span>
+          <div class="tile-card__body">
+            <strong>Öğrenci Raporları</strong>
+            <span>Okul › Raporlar</span>
+          </div>
+        </a>
+        <a class="tile-card tile-card--fe" href="mockup/iletisim-form.html">
+          <span class="tile-card__badge">3</span>
+          <div class="tile-card__body">
+            <strong>İletişim Formu</strong>
+            <span>Tekil form · Gönder</span>
+          </div>
+        </a>
+        <a class="tile-card tile-card--fe" href="mockup/sinif-liste.html">
+          <span class="tile-card__badge">4</span>
+          <div class="tile-card__body">
+            <strong>Sınıf Listesi</strong>
+            <span>Okul › Listeler › Sınıflar</span>
+          </div>
+        </a>
+        <a class="tile-card tile-card--fe" href="mockup/sinif-form.html">
+          <span class="tile-card__badge">5</span>
+          <div class="tile-card__body">
+            <strong>Sınıf Formu</strong>
+            <span>Yeni + düzenle</span>
+          </div>
+        </a>
+        <a class="tile-card tile-card--fe" href="mockup/ogretmen-liste.html">
+          <span class="tile-card__badge">6</span>
+          <div class="tile-card__body">
+            <strong>Öğretmen Listesi</strong>
+            <span>Okul › Listeler › Öğretmenler</span>
+          </div>
+        </a>
+        <a class="tile-card tile-card--fe" href="mockup/ogretmen-form.html">
+          <span class="tile-card__badge">7</span>
+          <div class="tile-card__body">
+            <strong>Öğretmen Formu</strong>
+            <span>Yeni + düzenle</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <h2>Jira</h2>
+    <a class="tile" href="isler.html"><strong>Task metinleri</strong><span>9 Backend · 7 Frontend — mockup onaylandı</span></a>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../..',
+  page: 'calisma-ozet',
+  calisma: {
+    id: 'taslak_demo',
+    label: 'Taslak Demo',
+    base: '.',
+    menuYer: 'ust',
+    mockups: [
+      { id: 'mock-cografi-dagilim', label: 'Coğrafi Dağılım', href: 'mockup/cografi-dagilim.html', rapor: true },
+      { id: 'mock-ogrenci-rapor', label: 'Öğrenci Raporları', href: 'mockup/ogrenci-rapor.html', rapor: true },
+      { id: 'mock-iletisim-form', label: 'İletişim Formu', href: 'mockup/iletisim-form.html' },
+      { id: 'mock-sinif-liste', label: 'Sınıf Listesi', href: 'mockup/sinif-liste.html' },
+      { id: 'mock-sinif-form', label: 'Sınıf Formu', href: 'mockup/sinif-form.html' },
+      { id: 'mock-ogretmen-liste', label: 'Öğretmen Listesi', href: 'mockup/ogretmen-liste.html' },
+      { id: 'mock-ogretmen-form', label: 'Öğretmen Formu', href: 'mockup/ogretmen-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../../js/sunum-query.js"></script>
+<script src="../../js/calismalar-meta.js"></script>
+<script src="../../js/calisma-ozet.js"></script>
+<script src="../../js/rapor-widgets.js"></script>
+<script src="../../js/calisma-cursor.js"></script>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

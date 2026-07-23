@@ -1,0 +1,766 @@
+---
+description: HBC iş analisti — mockup, calismalarim, Jira task metinleri
+globs: calismalarim/**,module-creator/**,module-creator.md,index.html,js/**
+alwaysApply: false
+---
+
+# HBC İş Analisti — Task & Mockup
+
+Giriş: `index.html` · Rehber: `module-creator/is-analisti.html` · Örnekler: `calismalarim/kaynaktan_musluga/` (CRUD), `calismalarim/su_kalitesi_raporu/` (rapor)
+
+**HBC** — Hazal, Berna, Ceren iş analisti aracı (CYS’den bağımsız paylaşılan paket).
+
+## Kitle
+
+İş analisti — teknik jargon minimum. Örnek modül: `calismalarim/kaynaktan_musluga/`.
+
+## Akış
+
+1. `calismalarim/<modul>/` — mockup HTML (`mockup/`)
+2. Analist onayı
+3. Jira metinleri — `isler.html` (basit) veya `faz/*.html` (büyük modül)
+4. Yeni çalışma: ana sayfada filtre satırının altındaki (sol) **+ Yeni çalışma** butonu veya Cursor prompt; örnek promptlar `module-creator/is-analisti.html` (Kaynaktan Musluğa)
+
+## Mockup kuralları
+
+### Ekranlar arası gezinme
+
+Bir ekrandaki buton/aksiyon başka bir ekrana gidiyorsa mockup'ta **gerçek link** (`<a href="...">`) kullan:
+
+| Kaynak | Aksiyon | Hedef mockup |
+|--------|---------|--------------|
+| Liste | Yeni, Düzenle | `form.html` |
+| Form | Listeye dön, Kaydet sonrası | `liste.html` |
+
+Analist ve müşteri mockup'ta akışı tıklayarak gezebilmeli. Ölü buton bırakma.
+
+### Sunum modu
+
+Her mockup sayfasında mockup kabuğunun üstünde **Sunum** linki (sol) ve **Düzenle** butonu (sağ, turuncu) bulunur (`js/mock-sunum.js` + `js/calisma-cursor.js` + `mock-shell.css`). Örnek çalışmalarda (`ornek` / `ornekRapor` / `ornekTumTurler`) Düzenle gizlenir; örnek mockup'larda altta **Cursor örnek prompt** kutusu kalır.
+
+- **Sunum** (sol): müşteri gösterimi — `?sunum=1`
+- **Düzenle** (sağ): `TASK_CURSOR.open({ mode: 'mockup-duzelt', mockup })` — seçili ekran için Cursor düzeltme metni; rapor mockup'larında **+ Widget ekle** paneli de açılır
+- Sunum modunda (`?sunum=1`) üst çubuk ve Düzenle gizlenir; sağ üstte yalnızca **Sunumdan çık** kalır
+- Tıklanınca `?sunum=1` — sol **HBC** menüsü, sayfa başlığı, alttaki Cursor prompt bölümü ve üst çubuk (Sunum / Düzenle) gizlenir
+- Yalnızca uygulama mockup'ı (sol menü + içerik) tam sayfa kalır; müşteri sunumu için
+- Uzun raporlarda içerik alanı kaydırılabilir (`body.mock-sunum .mock-content { overflow-y: auto }`)
+- **Sunumda kabuk:** `.mock-app-shell` ve `.mock-app-menu` tam ekran yüksekliği (`100vh`); sol uygulama menüsü içerik kısa olsa bile aşağıya uzanır
+- **Liste mockup:** içerik alanı (`mock-content`) tablo altında biter — sayfalama tabloya yapışık kalır, ekranın dibine itilmez
+- **HBC sol menü (çalışma):** Özet → **Ekranlar** → girintili mockup linkleri → **Sunum** butonu → **Task Metinleri** (`nav.js`)
+- **Sunumda gezinme:** `?sunum=1` açıkken mockup içi linkler (`mock-app-menu`, toolbar, tablo satırları) ve HBC **Ekranlar** listesi `sunum=1` parametresini korur — ekran değişince sunum modundan çıkılmaz
+- Script sırası mockup HTML'de: `calismalar-meta.js` öncesinde Bootstrap 5 (yerel bundle) + Tom Select CDN + `mock-tom-select.js`; sonra `rapor-widgets.js` → `calisma-cursor.js` → …
+- **Dashboard / Rapor** mockup'ında Chart.js ve/veya il haritası varsa sıraya ekle: `mock-report-charts.js`, `mock-geo-map.js` (harita init script'inden **önce**)
+
+Referans (ilişki/akış özeti — coğrafi değil): `calismalarim/kaynaktan_musluga/mockup/dashboard.html`
+Referans (dashboard/rapor — Chart.js): `calismalarim/taslak_demo/mockup/ogrenci-rapor.html`
+Referans (coğrafi harita — Türkiye + il): `calismalarim/taslak_demo/mockup/cografi-dagilim.html`
+
+### Harita SVG — mockup (file:// uyumu)
+
+Harita widget'lı mockup'ta SVG **mockup HTML içine gömülür** (`<template id="geo-map-turkiye" hidden>` / `geo-map-ankara`). Böylece zip / HTML çift tıklama (`file://`) ve sunum modu (`?sunum=1`) CORS hatası vermez.
+
+**Kaynak metin (kopya):** repo `assets/map.svg` ve/veya `assets/ankara.svg` → `calismalarim/<modul>/assets/` (referans + gömme kaynağı). Sihirbaz prompt'u (`haritaAssetsSetupPrompt`) hangi dosyaların gerektiğini yazar.
+
+**Klasör yapısı:**
+
+```
+calismalarim/<modul>/
+  assets/
+    map.svg      ← Türkiye haritası widget'ı seçildiyse (kaynak kopya)
+    ankara.svg   ← İl haritası (ör. Ankara) widget'ı seçildiyse
+  mockup/
+    rapor.html   ← <template> içine SVG gövdesi + init({ templateId: '…' })
+```
+
+**Init (mockup):**
+
+```javascript
+MOCK_GEO_MAP.init('#harita-memleket', {
+  templateId: 'geo-map-turkiye',
+  kapsam: 'turkiye',
+  colors: { '34': '#1a5fb4' },
+  legendScale: {
+    min: 0,
+    max: 90,
+    steps: 5,
+    colors: ['#e3f2fd', '#90caf9', '#42a5f5', '#1976d2', '#0d47a1']
+  },
+  legendLabel: 'Öğrenci sayısı'
+});
+MOCK_GEO_MAP.init('#harita-adres', {
+  templateId: 'geo-map-ankara',
+  kapsam: 'ankara',
+  colors: { 0: '#1a5fb4', 3: '#66bb6a' },
+  legendScale: {
+    min: 0,
+    max: 50,
+    steps: 5,
+    colors: ['#e8f5e9', '#a5d6a7', '#66bb6a', '#43a047', '#2e7d32']
+  },
+  legendLabel: 'Öğrenci sayısı'
+});
+```
+
+**Gömme (agent):** `scripts/embed-geo-map-templates.py` — `calismalarim/<modul>/assets/` kopyalarından mockup HTML'e `<template>` ekler. Manuel: SVG gövdesini `</body>` öncesine `<template>` olarak yapıştır.
+
+**Renk ve örnek veri:** SVG şablon renksiz kalır; `MOCK_GEO_MAP.init` ile JS'te uygulanır (Türkiye: plaka → renk; Ankara: path sıra no → renk).
+
+**Görüntüleme:** `prepareSvgDisplay` — `viewBox` + `preserveAspectRatio` ile oran korunur. **Etiketler:** İl / ilçe adları varsayılan görünür (`hideLabels` belirtilmezse false). Ankara'da paintmaps siyah şablon katmanı atlanır.
+
+**Lejant (zorunlu):** Her harita widget'ının sol alt köşesinde renk lejantı (`.mock-geo-map-legend`). `MOCK_GEO_MAP.init` içinde `legendScale: { min, max, steps, colors }` — `colors` haritadaki tonlarla uyumlu olmalı; üst satır yüksek değer aralığı. Kapatmak için `legend: false`. Stil: `mock-shell.css` (`.mock-report-chart--map` `position: relative`).
+
+**HTML kalıbı (her harita widget):**
+
+```html
+<div class="mock-content mock-content--report">
+  <div class="mock-report-widget">
+    <h3>Başlık</h3>
+    <p class="mock-report-hint">…</p>
+    <div id="harita-…" class="mock-report-chart mock-report-chart--map"></div>
+  </div>
+</div>
+```
+
+**Yasak:** Mockup'ta harita için dış SVG URL'si (`mapUrl: '../assets/…'`) — `file://` üzerinde fetch/XHR CORS ile başarısız olur. `http(s)` sunucuda `mapUrl` yedek olarak kalabilir.
+
+**Script:** `js/mock-geo-map.js` — öncelik `templateId` / `svgMarkup`; sonra `mapUrl` (http sunucu).
+
+### Liste işlem sütunu
+
+Satır işlemleri (Düzenle, Sil, Görüntüle vb.) **metin linki değil ikon** ile gösterilir; üzerine gelince `title` ile metin görünür. **Emoji yasak** — ince çizgili SVG (`mock-icon-svg`, `stroke="currentColor"`).
+
+```html
+<div class="mock-row-actions">
+  <a href="form.html#step-yazi" class="mock-icon-btn" title="Görüntüle" aria-label="Görüntüle">
+    <svg class="mock-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+  </a>
+  <a href="form.html" class="mock-icon-btn" title="Düzenle" aria-label="Düzenle">
+    <svg class="mock-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+  </a>
+</div>
+```
+
+- Her aksiyonun kendi ikonu, `title` ve `aria-label` metni olur.
+- Toolbar’daki birincil aksiyonlar (ör. «+ Yeni») metinli kalabilir; satır içi işlemler ikon.
+- Stil: `mock-shell.css` → `.mock-icon-btn`, `.mock-icon-svg`, `.mock-row-actions` (ghost buton, hover’da mavi).
+
+Referans: `calismalarim/yazi_olustur/mockup/yazi-liste.html`, `calismalarim/kaynaktan_musluga/mockup/kaynak-liste.html`.
+
+### Liste mockup — sayfalama, sıralama, filtre
+
+Liste ekranlarında (`mockup/*-liste.html`):
+
+- **Sayfalama:** Tablonun hemen altında (`.mock-list-wrap` içinde); ekranın en dibine yapıştırma — `mock-content` flex ile büyümesin
+- **Sıralama / filtre:** Kolon başlığında metin + küçük ikon butonları (`.mock-col-btn--sort`, `.mock-col-btn--filter`); başlık altında ayrı filtre input satırı **kullanma**
+- Aktif sıralama: `is-active` + ▲; diğer kolonlar ↕
+- Filtre butonu `title="Filtrele"` — panel açık göstermek zorunlu değil (wireframe)
+
+```html
+<th class="mock-th-tools">
+  <span class="mock-th-label">Ad</span>
+  <span class="mock-th-btns">
+    <button type="button" class="mock-col-btn mock-col-btn--sort is-active" title="Sırala">▲</button>
+    <button type="button" class="mock-col-btn mock-col-btn--filter" title="Filtrele">⌕</button>
+  </span>
+</th>
+```
+
+Referans: `calismalarim/taslak_demo/mockup/sinif-liste.html`
+
+### Form mockup — panel düzeni
+
+Form ekranlarında (`mockup/*-form.html`):
+
+- İçerik alanı: `.mock-content.mock-content--form` — açık gri arka plan, padding
+- Form: `.mock-form-panel` içinde — beyaz kart, ~420px max genişlik, gölge + kenarlık
+- Alanlar üst üste; butonlar panel altında ayrı şerit (`.mock-footer`)
+- **Yerleşim:** varsayılan **tek sütun** (~420px kart); sihirbazda grid/kolon sorusu yok. İki alan yan yana gerekirse mockup düzelt metninde belirtilir (ileride tam/yarım genişlik eklenebilir)
+- **CRUD form** (liste şablonundan): Listeye dön + Kaydet
+- **Tekil form** (form şablonundan): yalnızca gönder butonu; liste bağlantısı yok
+- **Uzun metin** alanı: `<textarea class="mock-input" rows="4">` — mesaj, açıklama vb.
+- **Evet / Hayır** alanı: dropdown değil — `.mock-radio-group` içinde iki `radio` (Evet, Hayır)
+- Sunum modunda gri alan içerik yüksekliğini doldurur; form kartı üstte kalır
+
+```html
+<div class="mock-field">
+  <span class="mock-field-label" id="f-ornek-label">Soru metni *</span>
+  <div class="mock-radio-group" role="radiogroup" aria-labelledby="f-ornek-label">
+    <label class="mock-radio"><input type="radio" name="f-ornek" value="evet" checked /> Evet</label>
+    <label class="mock-radio"><input type="radio" name="f-ornek" value="hayir" /> Hayır</label>
+  </div>
+</div>
+```
+
+```html
+<div class="mock-content mock-content--form">
+  <div class="mock-form-panel">
+    <div class="mock-field">…</div>
+    <div class="mock-footer">…</div>
+  </div>
+</div>
+```
+
+Referans: `calismalarim/taslak_demo/mockup/sinif-form.html` (CRUD), `iletisim-form.html` (tekil)
+Referans (görüş yazısı / Excel): `calismalarim/yazi_olustur/` — dropdown listeler `scripts/export-yazi-excel-secenekler.py` → `mockup/mock-yazi-excel-secenekler.js` (Excel «Seçenekler» + «Faaliyet»). **Tekli** uzun listeler → `form-select` (native); **çoklu** (ör. koruma alanı) → `form-select mock-tom-select` + Tom Select (`musluk-form.html` ile aynı kalıp). **Yasak:** `size="5"` native çoklu liste.
+
+**Yazı Oluştur mockup akışı:** `yazi-liste.html` + `yazi-form.html` (9 adımlı wizard) + `hukumler-liste.html` / `hukumler-form.html` (referans veri — `hükümler_tablosu.xlsx` → `scripts/export-yazi-hukumler-tablosu.py` → `mock-hukumler-tablosu.js`). Menü: **Yazılar** | **Hükümler Tablosu** (yeni yazı yalnızca liste araç çubuğundan). Stepper: `mock-yazi-wizard.css` + `mock-yazi-wizard.js` — her adımda «X / Y dolduruldu» (`data-yazi-field`, `data-required="true"`). Özet adımında seçim özeti + **Yazı Oluştur**; Yazı adımında metin önizleme + Word indir. Liste sütunları: başlık, açıklama, oluşturulma, güncelleme. Tüm label ve seçenek metinleri kelime başı büyük harf. Dropdown altında **Frontend İçin Uyarı** (`mock-yazi-form.js`): Excel kaynaklı listeler → «Excel'den alınan seçeneklerdir. Canlı ekranda görünmelidir.» Radio gruplarına uyarı eklenmez. **Koşullu alanlar:** koruma alanı açıklaması (`Diğer (Yazınız)`); faaliyet-tedbir uyarısı (talep türü «Diğer») — canlıda koşullu; mockup'ta `yazi-fe-note-block` içinde uyarı (ve gerekiyorsa alan) her zaman görünür.
+
+### Özet sayfası — FE Mockup'lar
+
+`calismalarim/<modul>/index.html` özetinde mockup listesi **dikey kutu değil**, numaralı kart grid ile gösterilir.
+
+- Başlık: **FE Mockup'lar**
+- Stiller: `css/style.css` → `tile-panel`, `tile-grid`, `tile-grid--mock`, `tile-card`, `tile-card--fe`
+- Panel içi lead: *Wireframe ekranlar — geliştirme öncesi PM / analist onayı.*
+- Her kart: yeşil numara rozeti (`tile-card__badge`) + başlık + kısa alt satır (menü yolu veya «Yeni + düzenle»)
+- Kartlar akış sırasına göre numaralanır (1…n); `href` ilgili `mockup/*.html` dosyasına gider
+- Örnek olmayan çalışmalarda kart altında **Mockup düzelt…** (`tile-card-duzelt`, `calisma-ozet.js`) — alternatif olarak mockup sayfasında sağ üst **Düzenle**
+- Jira (`isler.html`) ayrı bölümde kalır; mockup grid’ine karıştırma
+
+Referans: `calismalarim/kaynaktan_musluga/index.html`
+
+### Özet sayfası — durum çubuğu
+
+`calismalarim/<modul>/index.html` başlığın altında `#calisma-durum-bar` bulunur; `js/calisma-ozet.js` + `js/calismalar-meta.js` ile doldurulur.
+
+- **Durum etiketi:** `mockup-taslak` · `onay-bekliyor` · `task-hazir` (Türkçe etiketler otomatik)
+- **Özet satırı:** örn. `7 mockup · 17 task`
+- **Onay kaydı** (mockup onayından sonra): `Mockup onayı: YYYY-AA-GG — İsim`
+
+`TASK_HUB.calisma.id` zorunlu — `calismalar-meta.js` içindeki `id` ile aynı olmalı.
+
+```html
+<div class="calisma-durum-bar" id="calisma-durum-bar"></div>
+```
+
+```html
+<script src="../../js/calismalar-meta.js"></script>
+<script src="../../js/calisma-ozet.js"></script>
+```
+
+Yeni scaffold (`scaffold-calisma.mjs`) bunları otomatik ekler; ayrıca `assets/bootstrap-5.0.2-dist` kopyası, `templates/mock-shell.css` → `mockup/mock-shell.css` ve `calisma.json` (`menuYer`: `sol` \| `ust`).
+
+### Mockup uygulama menüsü — zorunlu (Bootstrap)
+
+**Tüm mockup'larda** müşteriye gösterilen uygulama menüsü (sol veya üst) Bootstrap 5 ile yapılır:
+
+| Bileşen | Sol menü | Üst menü |
+|---------|----------|----------|
+| Kabuk | `.mock-app-shell` + `.mock-app-menu` | `.mock-app-shell.mock-app-shell--menu-ust` |
+| Düz link | `<a href="…">` | aynı |
+| Grup / alt menü | **collapse** — `mock-menu-toggle` + `data-bs-toggle="collapse"` + `div.collapse.mock-menu-collapse` + `.mock-menu-sub` | **dropdown** — `div.dropdown.mock-menu-dropdown` + `data-bs-toggle="dropdown"` + `ul.dropdown-menu.mock-menu-dropdown-menu` + `li > a.dropdown-item` |
+| Script | `../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` (zorunlu) | aynı |
+
+**Yasak:** `<details>/<summary>`, yalnızca görsel başlık olan `.menu-group` (açılır olmayan grup), özel JS ile toggle. Üst menüde alt menü için **collapse** (tam genişlik ikinci satır) kullanma — Bootstrap **dropdown** kullan.
+
+Referans: `calismalarim/taslak_demo/mockup/sinif-liste.html` (üst + Listeler **dropdown**), `calismalarim/kaynaktan_musluga/mockup/kaynak-liste.html` (sol + Etoloji **collapse**).
+
+### Yeni çalışma — menü konumu
+
+`+ Yeni çalışma` formunda iş analisti **mockup uygulama menüsünün** konumunu seçer:
+
+| Seçim | `menuYer` | Mockup kabuğu |
+|-------|-----------|---------------|
+| Sol (dikey) | `sol` (varsayılan) | `.mock-app-shell` — sol `.mock-app-menu` |
+| Üst (yatay) | `ust` | `.mock-app-shell.mock-app-shell--menu-ust` |
+
+Kayıt: `js/calismalar-meta.js` + `calismalarim/<modul>/calisma.json` + `TASK_HUB.calisma.menuYer`. Özet sayfası durum çubuğunda «Menü: sol/üst» gösterilir. Ekran sihirbazı ilk mockup prompt'una bu tercihi yazar.
+
+**Sol menü — alt menü (collapse):**
+
+```html
+<button class="mock-menu-toggle collapsed" type="button" data-bs-toggle="collapse"
+  data-bs-target="#mock-menu-listeler" aria-expanded="false" aria-controls="mock-menu-listeler">Listeler</button>
+<div class="collapse mock-menu-collapse" id="mock-menu-listeler">
+  <div class="mock-menu-sub">
+    <a href="sinif-liste.html">Sınıflar</a>
+    <a href="ogretmen-liste.html">Öğretmenler</a>
+  </div>
+</div>
+```
+
+Aktif alt sayfada: butonda `collapsed` yok, `div.collapse.show`. Stiller: `.mock-menu-toggle`, `.mock-menu-sub`. Aktif link: `box-shadow: inset 3px 0 0` — alt menü girintisi (`2rem`) korunur.
+
+**Üst menü — alt menü (dropdown):**
+
+```html
+<div class="dropdown mock-menu-dropdown mock-menu-dropdown--child-active">
+  <button class="mock-menu-toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Listeler</button>
+  <ul class="dropdown-menu mock-menu-dropdown-menu">
+    <li><a class="dropdown-item active" href="sinif-liste.html">Sınıflar</a></li>
+    <li><a class="dropdown-item" href="ogretmen-liste.html">Öğretmenler</a></li>
+  </ul>
+</div>
+```
+
+Alt sayfa açıkken: `mock-menu-dropdown--child-active` (üst çubukta alt çizgi) + ilgili `dropdown-item.active`. Stiller: `mock-shell.css` → `.mock-menu-dropdown-menu` (koyu tema).
+
+### Bootstrap — yerel dosyalar ve yollar
+
+**Neden yerel?** Mockup'lar çoğu zaman `file://` ile açılır; CDN veya repo kökündeki paylaşımlı klasöre bağımlılık `ERR_FILE_NOT_FOUND` üretir. Yeni çalışmada `scaffold-calisma.mjs`, repo `assets/bootstrap-5.0.2-dist/` kopyasını **her çalışmanın kendi** `calismalarim/<modul>/assets/` klasörüne yazar.
+
+| HTML dosyası | Bootstrap JS yolu |
+|--------------|-------------------|
+| `calismalarim/<modul>/mockup/*.html` | `../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` |
+| `calismalarim/<modul>/ekranlar.html` | `assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` |
+
+CSS: mockup head'te `../../../css/mock-bootstrap.css` (repo `css/`); bu dosya `@import` ile repo kökündeki `assets/bootstrap-5.0.2-dist/css/bootstrap.min.css` yükler — form stilleri için yeterli. **Menü collapse** için ayrıca yukarıdaki **JS bundle** şarttır.
+
+**Yaygın hata:** mockup'ta `../../assets/…` → `calismalarim/assets/…` (klasör yok). Doğrusu bir üst dizin: `../assets/…` → `calismalarim/<modul>/assets/…`.
+
+### Form — çoklu seçim (Bootstrap 5 + Tom Select)
+
+Mockup sayfalarında **Bootstrap 5** (yerel: `assets/bootstrap-5.0.2-dist`) ve çoklu seçim için **Tom Select** (`tom-select.bootstrap5` teması) kullanılır. Görünüm: seçili öğeler etiket (pill) olarak, arama kutulu açılır liste — müşteri/yazılımcıya gösterilebilir kalitede.
+
+**Dosyalar:**
+- Kaynak: repo `assets/bootstrap-5.0.2-dist/` — yeni çalışmada `scaffold-calisma.mjs` bunu `calismalarim/<modul>/assets/` altına kopyalar
+- `css/mock-bootstrap.css` — Bootstrap (yerel `@import`) + Tom Select CDN ve mockup kabuğu düzeltmeleri
+- `js/mock-tom-select.js` — `select.mock-tom-select[multiple]` otomatik init
+- Mockup HTML: `mock-shell.css` sonrası `mock-bootstrap.css`; script: `../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` + Tom Select + `mock-tom-select.js`
+
+**HTML kalıbı:**
+
+```html
+<select id="f-kaynaklar" class="form-select mock-tom-select" multiple
+  data-placeholder="Kaynak seçin…">
+  <option value="GDZ-K01" selected>Gediz Kaynağı (GDZ-K01)</option>
+  <option value="MNG-K02">Manavgat Kaynağı (MNG-K02)</option>
+</select>
+```
+
+- Toolbar il filtresi: `HBC_RAPOR_WIDGETS.ilCokluToolbarHtml()`
+- Liste ekranında aynı alan virgülle ayrılmış metin sütunu
+- **Yasak:** native scrollbar `size="5"` çoklu liste; eski `.mock-multiselect` dropdown
+
+Referans: `calismalarim/kaynaktan_musluga/mockup/tesis-form.html`, `musluk-form.html`
+
+## Dashboard / Rapor modülü (salt okunur)
+
+CRUD değil — tek veya az sayıda **özet ekranı** (dashboard veya rapor adıyla menüde); form, liste düzenleme veya «+ Yeni» yok. Ayrı «Dashboard» sihirbaz türü **yok** — KPI, grafik, il haritası ve tablo aynı **Dashboard / Rapor** akışında seçilir (`ekran-wizard.js`).
+
+| Özellik | Dashboard / Rapor | CRUD (Kaynaktan Musluğa) |
+|---------|---------------------|--------------------------|
+| Ekran sayısı | Genelde 1 (birden fazla widget) | Liste + form çiftleri |
+| Aksiyonlar | Filtre, Raporla, dışa aktar | Yeni, Düzenle, Sil |
+| BE task | Özet/agregasyon endpoint | CRUD method'ları |
+| FE task | Widget'lar (KPI, grafik, harita, tablo) + filtre | Form alanları, liste sütunları |
+| Veri kaynağı | Mevcut tablo(lar); task'ta Tablo + hangi alanlar belirtilir | Yeni entity şeması |
+
+**İki harita türü (karıştırma):**
+
+| Tür | Ne zaman? | Mockup |
+|-----|-----------|--------|
+| **Türkiye haritası** | 81 il, plakaya göre renk | `<template id="geo-map-turkiye">` + `mock-geo-map.js` `templateId` — widget `harita-turkiye` |
+| **İl haritası (ör. Ankara)** | İlçe path renklendirme; il seçimi yok | `<template id="geo-map-ankara">` + `mock-geo-map.js` kapsam `ankara` — widget `harita-il` |
+| **İlişki / akış** | Kaynak→tesis→musluk gibi düğümler ve oklar; coğrafi değil | `mock-map-canvas` — ayrı ekran (ör. kaynaktan_musluga dashboard) |
+
+**Toolbar il filtresi** (`il-coklu`, Tom Select çoklu seçim) harita widget'ı değildir — Türkiye veya il haritası widget'ından bağımsız düşünülür.
+
+### Mockup — dashboard / rapor ekranı
+
+- Menü: uygulama adı + rapor/dashboard linki (grup adı analiste göre)
+- Üst toolbar: filtre alanları (dropdown, tarih, **il çoklu seçim** vb.), **Raporla**, isteğe bağlı **Excel'e aktar**
+- İçerik (widget sırası sihirbazda): özet KPI kartları, **il haritası**, Chart.js grafikleri (pie, yatay bar, line), özet tablo
+- **Widget kartları:** `.mock-content--report` arka planı; her widget (KPI satırı, harita, grafik, tablo) `.mock-report-widget` kartı içinde; KPI satırı `.mock-report-widget--kpis`
+- Grafikler: **Chart.js** (CDN) + `<canvas>`; `js/mock-report-charts.js`; sarmalayıcı `.mock-report-chart`
+- Grafik genişliği varsayılan **%50** (`.mock-report-chart`); tam genişlik `.mock-report-chart--full`
+- **Harita widget'ları:** SVG gövdesi mockup HTML'de `<template hidden>`; `MOCK_GEO_MAP.init({ templateId, legendScale })`. Sarmalayıcı `.mock-report-chart--map` — **her zaman tam genişlik (%100)**; sol alt **lejant zorunlu** (`legendScale.colors` harita tonlarıyla uyumlu).
+- **Harita etiketleri:** İl ve ilçe adları varsayılan görünür. İl haritası örneği şimdilik yalnızca Ankara.
+- Sunum modu (`?sunum=1`): `.mock-content` içinde `overflow-y: auto`
+- Satır işlemi ikonu yok; tablo salt okunur
+- **Tablo hizalama (`mock-table`):** Sayısal sütunlarda hem `<th class="num">` hem `<td class="num">` kullan — ikisi de sağa hizalı (`text-align: right`; `tabular-nums`). Yalnız `td`'ye `num` vermek başlık ile değeri kaydırır. İki sütunlu basit özet listeler (`.mock-report-widget .mock-list-wrap` içinde, örn. sınıf mevcutları) istisna: sola hizalı kalır.
+- `mock-prompt` kutusunda veri kaynağı tablosu ve filtre alanlarını yaz
+
+Stiller: modül `mockup/mock-shell.css` içinde `.mock-report-*` (grafik + harita).
+
+Referans: `calismalarim/taslak_demo/mockup/ogrenci-rapor.html` (Chart.js), `calismalarim/taslak_demo/mockup/cografi-dagilim.html` (Türkiye + Ankara haritası), `calismalarim/su_kalitesi_raporu/mockup/rapor.html` (eski CSS grafik).
+
+### Task — dashboard / rapor modülü
+
+- Genelde **1 BE + 1 FE** task yeterli (ek ekran → ek FE; ek veri kaynağı → ek BE)
+- **BE:** Method adı, Tablo, agregasyon alanları; Türkiye haritası için il plakası + metrik; il haritası (ör. Ankara) için ilçe/bölge + metrik
+- **FE:** Menü yolu, BE referansı, filtre, widget listesi (KPI / harita / grafik / tablo), dışa aktarma
+- «Form ekranı yok» kabul kriterine eklenebilir
+
+Referans: `calismalarim/su_kalitesi_raporu/isler.html`
+
+### Ana sayfa — rapor örneği kartı
+
+`calismalar-meta.js` içinde `ornekRapor: true` → `folder-card-rapor` stili (mor ton; CRUD örneğinden ayrılır).
+
+## Task sayfası (`isler.html`)
+
+Basit modüllerde tüm Jira metinleri tek dosyada; **sekme (tab)** yapısı zorunlu:
+
+| Sekme | İçerik |
+|-------|--------|
+| **Backend** | API / servis task'ları (`[BE]` öneki) |
+| **Frontend** | Ekran task'ları (`[FE]` öneki) |
+
+- Sekme başlığında **chip** ile o sekmedeki task sayısı gösterilir (paneldeki `.issue` kutularından otomatik).
+- Aktif sekme vurgulanır; isteğe bağlı URL hash: `#be`, `#fe`.
+- Task başlığı (`h4`) ilgili sekmenin önekiyle başlar: Backend → `[BE] …`, Frontend → `[FE] …`. Jira issue başlığı = kutudaki `h4` metni.
+- Başlıkta görsel **chip/badge kullanma** (`tag-be`, `tag-fe` span'leri yok); yalnızca metin öneki.
+- Çapraz referanslarda (Tüketici / Veri) diğer sekmedeki task'ı belirtmek için `[BE]` / `[FE]` öneki kullanılır.
+- Referans uygulama: `calismalarim/kaynaktan_musluga/isler.html` (CRUD), `calismalarim/taslak_demo/isler.html` (tüm türler + sağ TOC).
+
+**BE task:** Method, Tablo, Tüketici (hangi FE ekranı kullanır). Menü detayı Jira metnine yazma.
+
+**Tablo adı (`issue-meta` içindeki `Tablo:` satırı):** Yalnızca tablo adını yaz — şema öneki (`hbc.` vb.) **yazma**. Örnek: `Tablo: yazi_secenek` (veya Excel import tabloları); `Tablo: yazi, yazi_form_alan`. Kabul kriterlerinde ve İster metninde de aynı kural geçerli.
+
+**FE task:** Menü, Veri (hangi BE endpoint). İster + kabul kriterleri analist dilinde.
+
+**FE tema notu (zorunlu):** Her `[FE]` task kutusunda kabul kriterleri listesinin **altında** (boş satırla ayrılmış) şu metin yer alır; Jira kopyasında kalın görünsün diye HTML'de `<strong>`, `js/isler-copy.js` bunu `*metin*` olarak kopyalar:
+
+```html
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+```
+
+- BE task'larına bu not **eklenmez**.
+- Mockup'taki Tom Select, native select vb. teknik ayrıntıları FE task metnine yazma; yazılımcı mevcut uygulama bileşenlerini kullanır.
+
+**Mockup linki (yalnızca sayfada, Jira'ya gitmez):**
+
+Her task kutusunda (BE ve FE) üstte tıklanabilir mockup satırı; Jira metnine **yazılmaz**, **Tümünü kopyala** çıktısına **dahil edilmez**.
+
+```html
+<div class="issue-mockup no-copy">
+  <span>Mockup: </span>
+  <a href="mockup/liste.html" target="_blank" rel="noopener">mockup/liste.html</a>
+</div>
+```
+
+- Sınıf `no-copy` — kopya scripti bu bloğu çıkarır.
+- BE task'larında da ilgili ekran mockup'ına link ver (analist bağlamı için).
+- FE task `issue-meta` içinde `Mockup:` satırı **kullanma**; yalnızca üstteki link.
+
+**Kopya alanı düzeni:**
+
+Mockup linkinin **altında** koyu arka planlı kopya container'ı; **Tümünü kopyala** butonu container'ın **sağ üstünde** (altta değil).
+
+```
+[Mockup: link]
+┌─ issue-copy-block ─────────────────── [Tümünü kopyala] ─┐
+│ h4, issue-meta, İster, Kabul kriterleri                    │
+└────────────────────────────────────────────────────────────┘
+```
+
+- HTML'de içerik mockup'tan sonra düz sıralanır; `js/isler-copy.js` sayfa yüklenince `.issue-copy-block` + `.issue-copy-toolbar` oluşturur ve butonu taşır.
+- Kopyalama yalnızca `.issue-copy-block` içeriğinden yapılır (mockup ve toolbar hariç). `<strong>` metinleri Jira wiki kalınlığı için `*…*` olarak kopyalanır (`js/isler-copy.js`).
+- Stiller: `css/style.css` → `.issue-copy-block`, `.issue-copy-toolbar`, `.copy-btn`
+- Yeni task kutusu şablonu:
+
+```html
+<div class="issue" id="be-ornek">
+  <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/liste.html" target="_blank" rel="noopener">mockup/liste.html</a></div>
+  <h4>[BE] Örnek Endpoint</h4>
+  <div class="issue-meta">…</div>
+  <h5>İster</h5>
+  <p class="desc">…</p>
+  <h5>Kabul kriterleri</h5>
+  <ul class="criteria">…</ul>
+  <br>
+  <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+  <button type="button" class="copy-btn">Tümünü kopyala</button>
+</div>
+```
+
+FE şablonunda tema notu zorunlu; BE şablonunda yok. Her kutuda **Tümünü kopyala** → Jira **Text** modunda yapıştır → **Visual** ile kontrol.
+
+**Sağ menü (hızlı erişim):**
+
+- `layout--isler` + `#isler-toc` aside; `js/isler-toc.js` Backend / Frontend başlıkları altında `.issue` linklerini üretir (sağ TOC; «Bu sayfada» başlığı yok).
+- Tıklanınca ilgili sekme açılır ve kutuya kaydırılır; URL hash task `id` ile güncellenir.
+- Her `.issue` kutusuna anlamlı `id` ver (ör. `be-sinif-list`); TOC ve hash için.
+
+**Task düzenleme (Düzenle butonu):**
+
+- `js/isler-task-edit.js` — `isler-copy.js` toolbar oluşturduktan sonra çalışır; **Düzenle** butonu **Tümünü kopyala**'nın solunda.
+- Dialog: `modal-backdrop` + iç kart **`modal-card modal-card--cursor`** (yalnızca `modal` sınıfı kullanma — arka plan ve gölge `modal-card` ile gelir; Bootstrap `.modal` ile karışmaz).
+- Alanlar: düzenleme türü (İster / Kabul kriterleri / Method·Tablo·Menü / Diğer) + istenen değişiklik metni → Cursor prompt önizlemesi → panoya kopyala.
+- Prompt şablonu: `{calismaId} isler.html içinde «{task başlığı}» task kutusunu güncelle` — yalnızca ilgili kutuya dokun.
+
+Script sırası (`isler.html` sonunda): `isler-mockups.js` → `isler-copy.js` → `isler-task-edit.js` → `isler-toc.js` → `nav.js`
+
+**Sol menü (agent):** Özet → **Ekranlar** → girintili mockup linkleri (`nav-ekran`) → **Sunum** (`nav-sunum`) → **Task Metinleri**. «Mockup linkleri» başlığı yok.
+
+### Ekranlar sayfası ve sihirbaz (`js/ekran-wizard.js`, `js/ekranlar-page.js`)
+
+Her çalışmada `calismalarim/<modul>/ekranlar.html` — mockup **önizleme kartları** + **+ Yeni ekran** sihirbazı. Bu sayfada mockup düzelt butonu **yok**; düzeltme mockup sayfasındaki **Düzenle** veya özet mockup kartından yapılır.
+
+Script sırası `ekranlar.html`: `sunum-query.js` → **`rapor-widgets.js`** → `ekran-wizard.js` → `ekranlar-page.js` → `nav.js`
+
+| Tür | Durum |
+|-----|--------|
+| Liste | Tablo + isteğe bağlı kayıt formu → Cursor prompt |
+| Form | Tekil form (liste yok) → Cursor prompt |
+| Dashboard / Rapor | Filtre + widget'lar (KPI, Türkiye/il haritası, grafik, tablo) → Cursor prompt |
+| Emin değilim (serbest) | Serbest metin → Cursor prompt |
+
+**Liste adımları:** menü yolu → başlık + model → sütunlar → sayfalama/filtre/sıralama/+Yeni → isteğe bağlı kayıt formu → önizleme + panoya kopyala.
+
+**Form adımları:** menü yolu → form adı → alanlar (ad + tür) → gönder butonu metni → önizleme + panoya kopyala.
+
+**Rapor adımları:** menü + rapor adı → veri kaynağı → filtreler → Excel aktar → widget listesi → widget detayları → önizleme + panoya kopyala.
+
+**Dashboard / Rapor widget türleri** (`js/rapor-widgets.js`):
+
+| Widget | Sihirbazda sorulan | Mockup |
+|--------|-------------------|--------|
+| Sayısal özet (KPI) | Kart sayısı, etiket/değer | `.mock-report-widget--kpis` içinde `.mock-report-kpis` |
+| Türkiye haritası | Metrik, örnek renkler | `.mock-report-widget` + `<template id="geo-map-turkiye">` + `init({ templateId, kapsam: 'turkiye', legendScale })` — tam genişlik, il adları görünür, sol alt lejant |
+| İl haritası (ör. Ankara) | Metrik, örnek renkler (ilçe sıra no) | `.mock-report-widget` + `<template id="geo-map-ankara">` + `init({ templateId, kapsam: 'ankara', legendScale })` — tam genişlik, ilçe adları görünür, sol alt lejant; örnek yalnızca Ankara |
+| Bar / Pie / Line | Eksen, örnek kategoriler/dilimler | `.mock-report-widget` + Chart.js + `.mock-report-chart` (%50; `--full` tam) |
+| Özet liste | Sütunlar, sayfalama | `.mock-report-widget` + `.mock-table` |
+
+Coğrafi olmayan ilişki özeti (kaynaktan_musluga `dashboard.html`) ayrı mockup kalır — bu widget listesine eklenmez.
+
+### İl haritası widget (`harita-il`) — sabit kurallar
+
+Widget listesi etiketi: **İl haritası (ör. Ankara)** (`js/rapor-widgets.js` → `harita-il`).
+
+| Kural | Doğru | Yanlış (eski — kullanma) |
+|-------|--------|---------------------------|
+| İl seçimi | Yok; örnek şehir sabit (Ankara) | Sihirbazda il `<select>`, `secili-iller` zoom |
+| SVG | `calismalarim/<modul>/assets/` kopya → mockup HTML `<template>`; init `templateId` | Repo kökü fetch veya `mapUrl: '../assets/…'` (file:// CORS) |
+| Renk anahtarı | Path **sıra no** (`0:#1a5fb4, 3:#66bb6a`) | Plaka (`06:#…`) |
+| Script | `mock-geo-map.js`, `kapsam: 'ankara'`, `paintDistricts` | `fitViewToSelected` + `data-plate` |
+| Sarmalayıcı | `.mock-report-widget` kartı + `.mock-report-chart--map` — her zaman tam genişlik (%100) | Yarım genişlik (`--half`, yan yana satır) |
+| Etiketler | İl / ilçe adları görünür | `hideLabels: true` ile gizleme (nadiren) |
+| Lejant | Sol alt `legendScale` — renkler harita tonlarıyla uyumlu | Lejantsız harita |
+
+**Karıştırma (üç ayrı kavram):**
+
+1. **Türkiye haritası** (`harita-turkiye`) — `<template id="geo-map-turkiye">`, init `templateId`, 81 il `g[data-plate]`
+2. **İl haritası widget** (`harita-il`) — `<template id="geo-map-ankara">`, init `templateId`, ilçe path renklendirme
+3. **Toolbar il filtresi** (`il-coklu`) — Tom Select çoklu seçim; harita widget'ından bağımsız
+4. **İlişki haritası** — kaynaktan_musluga `dashboard.html`; coğrafi değil, widget listesine eklenmez
+
+**Mockup init örneği** (`mockup/cografi-dagilim.html`):
+
+```javascript
+MOCK_GEO_MAP.init('#harita-memleket', {
+  templateId: 'geo-map-turkiye',
+  kapsam: 'turkiye',
+  colors: { '34': '#1a5fb4', '06': '#42a5f5' },
+  legendScale: { min: 0, max: 90, steps: 5, colors: ['#e3f2fd','#90caf9','#42a5f5','#1976d2','#0d47a1'] },
+  legendLabel: 'Öğrenci sayısı'
+});
+MOCK_GEO_MAP.init('#harita-adres', {
+  templateId: 'geo-map-ankara',
+  kapsam: 'ankara',
+  colors: { 0: '#1a5fb4', 3: '#66bb6a' },
+  legendScale: { min: 0, max: 50, steps: 5, colors: ['#e8f5e9','#a5d6a7','#66bb6a','#43a047','#2e7d32'] },
+  legendLabel: 'Öğrenci sayısı'
+});
+```
+
+Harita widget içeren yeni mockup: önce `calismalarim/<modul>/assets/` altına gerekli SVG'leri repo `assets/` içinden kopyala; SVG gövdesini mockup HTML'e `<template>` olarak göm (`scripts/embed-geo-map-templates.py` veya manuel). Renkler SVG'ye gömülmez, `init` ile DOM üzerinde uygulanır. **Lejant:** `legendScale` ile sol alt köşe; renkler harita tonlarıyla eşleşmeli.
+
+**Sihirbaz detayı:** metrik, örnek renkler (ilçe sıra no); genişlik sorusu yok (harita her zaman %100); il alanı gösterilmez.
+
+**Rapor mockup düzelt:** mockup sayfasında **Düzenle** veya özet kartı → `mockup-duzelt` dialogu. Rapor ekranlarında (`href` veya `id` içinde `rapor`) **+ Widget ekle** paneli — tür, başlık, kısa detay; Cursor metnine «Sayfaya eklenecek widget'lar» bloğu eklenir.
+
+**Form alan türleri** (`ekran-wizard.js`): Metin, Uzun metin, Sayı, Tarih, Dropdown (tekli/çoklu), Checkbox, Evet/Hayır. Mockup’ta **Uzun metin** → `textarea`; **Evet/Hayır** → radio (Evet + Hayır), dropdown değil.
+
+### Çoklu seçim (zorunlu kalıp)
+
+**Kullan:** Bootstrap 5 (yerel `assets/bootstrap-5.0.2-dist`) + Tom Select — `<select multiple class="form-select mock-tom-select">`. Mockup head: `mock-bootstrap.css`; script: `mock-tom-select.js` (otomatik init).
+
+```html
+<link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+...
+<select class="form-select mock-tom-select" id="f-il" multiple data-placeholder="İl seçin…">
+  <option value="06" selected>Ankara</option>
+</select>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+<script src="../../../js/mock-tom-select.js"></script>
+```
+
+**Yasak:** native `size="…"` scrollbar listesi; eski `.mock-multiselect` / `multiselect-dropdown.js`.
+
+İl listesi: `HBC_RAPOR_WIDGETS.ilCokluToolbarHtml()`. Toplu ekleme: `scripts/patch-mockup-bootstrap.py`.
+
+Referans: `css/mock-bootstrap.css`, `js/mock-tom-select.js`, `tesis-form.html`
+
+- `window.EKRAN_WIZARD.open(calisma)` — `TASK_HUB.calisma` ile çağrılır
+- Hash `#yeni-ekran` sayfa açılınca sihirbazı açar
+- `mockup-taslak` özet sayfasında «Mockup iste» yerine **Ekranlar — yeni ekran** linki (`ekranlar.html#yeni-ekran`)
+- Yeni scaffold: `ekranlar.html` otomatik (`scaffold-calisma.mjs`)
+- Mockup üretildikten sonra: `TASK_HUB.calisma.mockups` + `nav.js` + `ekranlar-page.js` listesini güncelle; `calismalar-meta.js` → `mockupSayisi`, `durum`
+
+**Rehber:** `module-creator/is-analisti.html#ekran-sihirbazi` · plan: `module-creator.md`
+
+**Rehber:** Örnek promptlar `module-creator/is-analisti.html` (Kaynaktan Musluğa). Jira yapıştırma: `module-creator/jira-analist.html` (**Jira İş Açma**).
+
+**Boş `isler.html`:** Task kutusu yokken her sekmede `empty-note`; Backend panelinde mockup onayı + `is-analisti.html#prompt-onay` linki. Task eklemeden boş bırakma.
+
+## Çalışma durumu (`js/calismalar-meta.js`)
+
+Tüm modüllerin listesi, durumu ve sayıları **tek dosyada** tutulur. Ana sayfa klasör kartları ve modül özet çubuğu buradan okur. **Analist elle düzenlemez** — Cursor günceller.
+
+| Alan | Açıklama |
+|------|----------|
+| `id` | Klasör adı (`kaynaktan_musluga`) |
+| `label` | Görünen ad |
+| `desc` | Çalışmanın amacı (özet sayfasında **Amaç** kutusu) |
+| `durum` | `mockup-taslak` \| `onay-bekliyor` \| `task-hazir` \| `iptal` |
+| `mockupSayisi` | `mockup/*.html` sayısı |
+| `taskBe` / `taskFe` | `isler.html` içindeki `.issue` sayıları |
+| `onay` | `{ tarih: 'YYYY-AA-GG', kim: 'İsim' }` — mockup onayı sonrası |
+| `ornek` | `true` → örnek çalışma kartı + turuncu rozet (`ornekTumTurler` → «Örnek · Tüm türler», `ornekRapor` → «Örnek · Rapor», yoksa «Örnek · CRUD») |
+| `ornekTumTurler` | Liste + form + rapor + üst menü örneği (`taslak_demo`); kart stili `folder-card-tum`; mockup altında Cursor prompt kutusu |
+| `ornekRapor` | Rapor örneği kart stili (`folder-card-rapor`) |
+| `eklendi` | `YYYY-AA-GG` — ana sayfa sıralaması (yeniden eskiye); yeni scaffold kaydı listenin başına eklenir |
+| `iptal` | `{ tarih, kim, neden? }` — iptal sonrası isteğe bağlı |
+
+**Ne zaman güncelle:**
+
+| Olay | `durum` | Diğer |
+|------|---------|--------|
+| Yeni çalışma (scaffold) | `mockup-taslak` | sayılar 0 |
+| Mockup'lar eklendi | `onay-bekliyor` | `mockupSayisi` |
+| Analist onayladı | `onay-bekliyor` | `onay` doldur |
+| `isler.html` task kutuları yazıldı | `task-hazir` | `taskBe`, `taskFe` |
+| Analist / HBC iptal istedi | `iptal` | `iptal: { tarih, kim }`; klasör silinmez |
+
+Yeni modül: `scaffold-calisma.mjs` meta dosyasına kayıt ekler (`nav.js` değil).
+
+**İptal:** Dosyalar kalır; ana listede görünmez; yalnızca **İptal** filtresi. Örnek çalışmalarda iptal butonu yok.
+
+### Cursor dialogu (`js/calisma-cursor.js`)
+
+HBC meta dosyasını tarayıcıdan yazamaz. **Çalışma özet sayfasında** (`#calisma-durum-bar` altı `#calisma-actions`) duruma göre butonlar dialog açar; analist **Panoya kopyala** → Cursor'a yapıştırır. Ana sayfa kartlarında işlem butonu yok — yalnızca klasöre girilir.
+
+| `durum` | Özet sayfası butonları | Prompt özeti |
+|---------|------------------------|--------------|
+| `mockup-taslak` | Ekranlar — yeni ekran · İptal et… | `ekranlar.html` sihirbazı veya serbest prompt; mockup üret |
+| `onay-bekliyor` | + Yeni ekran · Onayla, task yaz… · İptal et… | Mockup sayfasında **Düzenle** (sağ üst) | `isler.html` task veya yeni mockup |
+| `task-hazir` | İptal et… | Task güncelleme yalnızca `isler.html` → **Düzenle** (özet sayfasında Task güncelle butonu yok) |
+| `iptal` | Listeye geri al… | Meta'da iptali kaldır |
+
+- İsteğe bağlı alanlar: **onaylayan / iptal eden** ismi, **ek not** (mockup/task tarifi)
+- Scaffold + mevcut özet `index.html` dosyalarına `calisma-cursor.js` ekle
+- `window.TASK_CURSOR.open({ id, mode })` — `mode`: `mockup-iste` \| `mockup-duzelt` \| `onay-task` \| `iptal` \| `geri-al`
+
+**Ana sayfa kartı:** durum rozeti + `N mockup · M task` (`index.html` → `calismalar-meta.js` + `calismalar-home.js`).
+
+### Ana sayfa — klasör kartları
+
+`index.html` → `layout--home`: sol menü + `home-main` (kartlar) + sağda sabit **Bu sayfa** paneli (`home-aside`) — madde madde kısa bilgi + rehber linkleri; rehber TOC ile aynı sticky mantık. Dar ekranda panel gizlenir, `home-hint-mobile` (açılır kutu) gösterilir. Üstte mavi `.lead` paragrafı **kullanma**.
+
+`#calismalar-grid`; veri kaynağı `js/calismalar-meta.js` (`window.HBC_CALISMALAR`). Render ve filtre: `js/calismalar-home.js`.
+
+- **Durum filtresi:** Tümü (iptal hariç) · Tasarım · Onay · Hazır · **İptal** (yalnızca iptal edilenler); her chip'te adet
+- **Arama:** görünen ad, klasör adı (`id`), açıklama (`desc`) içinde metin arar
+- **Sıralama:** `eklendi` tarihine göre **yeniden eskiye** (yoksa dosyadaki sıra)
+- **Uzun liste:** Izgara satır satır büyür (sayfalandırma yok); 12'den fazla eşleşmede **Tümünü göster** butonu çıkar — filtre/arama ile daraltma birincil yöntem
+- Her kart: ikon, **tür rozeti** (turuncu Örnek · … veya gri **Gerçek**), **label**, **durum rozeti**, özet satırı (`N mockup · M task`)
+- Kart içi hizalama: `folder-card__icon` / `folder-card__kind` / `__title` / `__badge` / `__meta` (başlık 2 satır yüksekliği sabit; tür rozeti her kartta — hizalama için boş yer bırakılmaz)
+- `ornek: true` → `folder-card-ornek` stili (örnek çalışma vurgusu); `ornek` yok → `folder-card-gercek` + gri **Gerçek** rozeti
+- `ornekRapor: true` → `folder-card-rapor` stili (salt okunur rapor örneği)
+- Yeni çalışma: başlık satırının altında soldaki yeşil **Yeni çalışma** butonu (`#btn-yeni-calisma`, artı ikon SVG); durum filtreleri başlık satırında sağda. `yeni-calisma.js` — görünen ad, klasör adı, amaç ve **menü konumu** (sol/üst) sorar; Cursor metnini panoya kopyalar (isteğe bağlı: geliştirici `npm start` ile anında scaffold).
+- Sayfa script sırası: `calismalar-meta.js` → `calisma-ozet.js` (yardımcı) → `nav.js`
+
+İlerleme planı (insan takibi): `module-creator.md`.
+
+## Rehber sayfaları (analist)
+
+| Sayfa | İçerik |
+|-------|--------|
+| `module-creator/is-analisti.html` | 4 adım, Cursor promptları, mockup/Sunum, çalışma durumu, onay listesi |
+| `module-creator/jira-analist.html` | **Jira İş Açma** — Text/Visual, `[BE]`/`[FE]` önekleri |
+| `module-creator/kurulum-analist.html` | **Kurulum** — iş analisti bilgisayarı (Cursor, Python) |
+| `module-creator.md` | Plan, tamamlananlar, iptal edilen fikirler |
+
+Analist rehberine teknik dosya yolu, `nav.js`, `calismalar-meta.js` detayı yazma — yalnızca ne görecekleri ve ne diyecekleri.
+
+## Yapılmayacak (karar verildi)
+
+- Müşteri toplantısı şablonu (#5)
+- Sekme bazlı toplu kopyala (#9)
+- Basit veri modeli sayfası (#10)
+- Analist kurulum rehberi: `kurulum-analist.html` (Cursor, Python — Node.js analist için şart değil)
+- Jira mini SSS (#3), ekran görüntülü Jira adımı (#12)
+
+## Klasör yapısı
+
+```
+index.html
+calismalarim/<modul>/
+  calisma.json        # id, label, desc, menuYer (sol|ust)
+  index.html          # özet: durum çubuğu + FE Mockup'lar tile-panel + Jira linki
+  ekranlar.html       # mockup listesi + yeni ekran sihirbazı
+  assets/bootstrap-5.0.2-dist/  # scaffold kopyası (kaynak: repo assets/)
+  mockup/mock-shell.css  # scaffold: templates/mock-shell.css (sol + üst menü stilleri)
+  mockup → ../../../css/mock-bootstrap.css  # Bootstrap 5 (yerel) + Tom Select CDN
+  js/mock-sunum.js       # Sunum modu + mockup üst çubuğu (Sunum / Düzenle)
+  isler.html          # tab: Backend | Frontend (basit modül)
+  db/*.sql            # isteğe bağlı örnek şema
+  faz/*.html          # isteğe bağlı — çok fazlı büyük modüller
+module-creator/
+  is-analisti.html    # Başlangıç rehberi
+  jira-analist.html   # Jira İş Açma
+  kurulum-analist.html # Kurulum — iş analisti gereksinimleri
+module-creator.md     # plan / ilerleme (chat dışı takip)
+css/
+  mock-bootstrap.css  # Bootstrap 5 (assets/bootstrap-5.0.2-dist) + Tom Select CDN; mockup kabuğu
+js/
+  calismalar-meta.js  # modül listesi, durum, sayılar, onay
+  calisma-ozet.js     # modül özet durum çubuğu
+  calismalar-home.js  # ana sayfa kart grid, durum filtresi, arama
+  calisma-cursor.js   # tüm durumlar için Cursor prompt dialogu (kopyala-yapıştır)
+  rapor-widgets.js    # dashboard/rapor widget türleri + prompt formatı
+  multiselect-dropdown.js # @deprecated eski .mock-multiselect — yeni mockup'ta kullanma
+  mock-tom-select.js  # Tom Select init (select.mock-tom-select)
+  mock-report-charts.js # Chart.js örnek init (pie, bar, line)
+  mock-geo-map.js     # Türkiye (map.svg) ve ilçe (ankara.svg) harita yükleme ve renklendirme
+  ekran-wizard.js     # yeni ekran step sihirbazı (liste + form + dashboard/rapor + serbest)
+  ekranlar-page.js    # ekranlar.html listesi ve sihirbaz tetikleyici
+  isler-copy.js       # task kutusu kopyalama + issue-copy-block
+  sunum-query.js      # ?sunum=1 yardımcı (nav + mockup gezinme)
+  nav.js
+  isler-mockups.js
+scripts/scaffold-calisma.mjs  # yeni çalışma + bootstrap kopyası + mock-shell şablonu + calisma.json
+templates/mock-shell.css      # mockup kabuğu şablonu (sol menü + --menu-ust)
+scripts/patch-mockup-bootstrap.py  # mevcut mockup HTML'e yerel Bootstrap + Tom Select ekler
+scripts/embed-geo-map-templates.py  # harita SVG → mockup HTML <template> gömme (file://)
+assets/
+  map.svg             # Türkiye il haritası (data-plate / plaka eşlemesi)
+```
+
+## Cursor davranışı
+
+- Türkçe, iş analisti dili
+- Onay olmadan task metni üretme
+- Mockup: menü yolu, breadcrumb, dropdown örnekleri
+- Mockup'ta bağlı ekranlar arası `<a href>` linkleri kur
+- Dashboard / Rapor mockup: harita SVG'leri `calismalarim/<modul>/assets/` kopyasından mockup HTML `<template>` içine göm; `MOCK_GEO_MAP.init({ templateId })` + `js/mock-geo-map.js`
+- Mockup sayfalarına `js/mock-sunum.js` ekle; Sunum modu (`?sunum=1`) müşteri gösterimi için; Düzenle → mockup düzelt dialogu
+- Liste satır işlemlerini ikon + `title` ile göster
+- Analist sayfalarında (`index.html`, rehberler) teknik dosya yolu ve `nav.js` gösterme
+- Faz numarası ve iç plan jargonu Jira metinlerine yazma
+- Tab yapısını `isler.html` oluştururken/güncellerken koru
+- Task `h4` başlığında `[BE]` veya `[FE]` öneki kullan; görsel chip/badge (`tag-be`, `tag-fe`) ekleme
+- Mockup linkini `issue-mockup no-copy` ile ekle; Jira metnine mockup URL yazma
+- Task kutusu: mockup üstte, kopya içeriği altta; `copy-btn` + `js/isler-copy.js` ile sağ üst toolbar
+- Özet `index.html`: mockup listesini `tile-panel` + numaralı `tile-card--fe` grid ile kur
+- Çoklu seçim form alanı: `form-select mock-tom-select` (Bootstrap 5 yerel + Tom Select CDN)
+- Yeni çalışma sonrası `calismalar-meta.js` kaydını doğrula; modül `index.html` içinde `TASK_HUB.calisma.id` eşleşsin
+- Yeni çalışma: analist **çalışmanın amacını** girer (`desc`); özet `index.html` üstünde **Amaç** paneli (`calisma-ozet.js`)
+- Mockup düzelt: mockup sayfasında sağ üst **Düzenle** (birincil) veya özet mockup kartı (`tile-card-duzelt`); **Ekranlar** listesinde düzelt butonu yok; `TASK_CURSOR.open({ mode: 'mockup-duzelt', mockup })`
+- Mockup bitince: `durum` → `onay-bekliyor`, `mockupSayisi` güncelle
+- Analist mockup onaylayınca: `onay: { tarih, kim }` yaz; task yoksa `durum` `onay-bekliyor` kalsın
+- `isler.html` doldurulunca: `taskBe` / `taskFe` say, `durum` → `task-hazir`
+- Her `[FE]` task kutusuna kabul kriterleri altında tema notu ekle (`issue-fe-theme-note` + `<br>`)
+- Çalışma iptal: `durum` → `iptal`, `iptal: { tarih, kim }`; klasörü silme
+- Scaffold şablonuna `calisma-cursor.js` ekle
+- Analist özet sayfası butonları `calisma-cursor.js` — Cursor metnini kopyalar; meta güncellemesini agent yapar
+- İptal geri al: önceki `durum` değerine dön, `iptal` alanını kaldır; özet ve `isler.html` içindeki iptal metinlerini scaffold boş şablonuna döndür
+- Boş `isler.html` scaffold mesajını silme; task eklenene kadar `empty-note` + rehber linki kalsın
+- Mockup / onay / task işlerinde `js/calismalar-meta.js` güncelle; ayrıntılı plan: `module-creator.md`
+- #5 toplantı şablonu, #9 toplu kopyala, #10 veri modeli sayfası, #11 npm rehberi — yapma

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockup: Hükümler Tablosu</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="mock-shell.css" />
+  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1 class="mock-dev-only">Mockup: Hükümler tablosu</h1>
+    <p class="subtitle mock-dev-only">Koruma alanı + sektör → madde metni referans verisi</p>
+    <div class="mock-app-shell">
+      <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+        <div class="menu-app">Görüş Yazısı</div>
+        <button class="mock-menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mock-menu-yazi" aria-expanded="true" aria-controls="mock-menu-yazi">Görüş Yazısı</button>
+        <div class="collapse show mock-menu-collapse" id="mock-menu-yazi">
+          <div class="mock-menu-sub">
+            <a href="yazi-liste.html">Yazılar</a>
+            <a href="hukumler-liste.html" class="active">Hükümler Tablosu</a>
+          </div>
+        </div>
+      </nav>
+      <div class="mock-app-body">
+        <div class="mock-header">
+          <div class="mock-breadcrumb">Görüş Yazısı › Hükümler Tablosu</div>
+          <strong>Hükümler Tablosu</strong>
+        </div>
+        <div class="mock-toolbar">
+          <a href="hukumler-form.html" class="mock-btn mock-btn-primary">+ Yeni Kayıt</a>
+          <label class="mock-toolbar-filter">
+            <span>Kaynak</span>
+            <select id="hukumler-filter-kaynak" class="form-select form-select-sm">
+              <option value="">Tümü</option>
+              <option value="Yönetmelik">Yönetmelik</option>
+              <option value="Özel Hüküm">Özel Hüküm</option>
+            </select>
+          </label>
+        </div>
+        <div class="mock-content">
+          <div class="mock-data-note" role="note">
+            <p><strong>Aşağıdakiler kurumdan alınan gerçek verilerdir.</strong> Liste, <strong>hükümler_tablosu.xlsx</strong> dosyasındaki kayıtların tamamını içerir (59 kayıt).</p>
+          </div>
+          <div class="mock-fe-warning mock-fe-warning--compact" role="note">
+            <span class="mock-fe-warning__title">Frontend İçin Uyarı</span>
+            <p>Yazı formunda hüküm metni bu tablodan üretilir; yetkili kullanıcılar canlı uygulamada buradan günceller.</p>
+          </div>
+          <div class="mock-list-wrap">
+            <table class="mock-table mock-table--hukumler">
+              <thead>
+                <tr>
+                  <th>Kaynak</th>
+                  <th>Koruma Alanı</th>
+                  <th>Sektör</th>
+                  <th>İlgili Madde</th>
+                  <th class="mock-th-tools mock-th-tools--action"></th>
+                </tr>
+              </thead>
+              <tbody id="hukumler-tbody"></tbody>
+            </table>
+            <div class="mock-pagination">
+              <span id="hukumler-count">—</span>
+              <div class="mock-pagination-pages" aria-label="Sayfalama">
+                <button type="button" disabled aria-label="Önceki">‹</button>
+                <button type="button" class="active">1</button>
+                <button type="button" disabled aria-label="Sonraki">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../../..',
+  page: 'mock-hukumler-liste',
+  calisma: {
+    id: 'yazi_olustur',
+    label: 'Yazı Oluştur',
+    base: '..',
+    mockups: [
+      { id: 'mock-yazi-liste', label: 'Yazı Listesi', href: 'mockup/yazi-liste.html' },
+      { id: 'mock-yazi-form', label: 'Yazı Formu', href: 'mockup/yazi-form.html' },
+      { id: 'mock-hukumler-liste', label: 'Hükümler Tablosu', href: 'mockup/hukumler-liste.html' },
+      { id: 'mock-hukumler-form', label: 'Hüküm Kaydı', href: 'mockup/hukumler-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="mock-hukumler-tablosu.js"></script>
+<script src="mock-hukumler-liste.js"></script>
+<script src="../../../js/calismalar-meta.js"></script>
+<script src="../../../js/rapor-widgets.js"></script>
+<script src="../../../js/calisma-cursor.js"></script>
+<script src="../../../js/sunum-query.js"></script>
+<script src="../../../js/mock-sunum.js"></script>
+<script src="../../../js/nav.js"></script>
+</body>
+</html>

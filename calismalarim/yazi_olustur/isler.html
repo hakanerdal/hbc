@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yazı Oluştur — Jira Task Metinleri</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    .task-tabs { display: flex; gap: 0.35rem; margin: 1rem 0 0; border-bottom: 2px solid var(--border); }
+    .task-tab { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; font-size: 0.85rem; font-weight: 600; color: var(--muted); border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; border-radius: 6px 6px 0 0; }
+    .task-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: #fff; }
+    .tab-chip { display: inline-flex; align-items: center; justify-content: center; min-width: 1.35rem; height: 1.35rem; padding: 0 0.35rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; }
+    .tab-chip-be { background: #e3f2fd; color: #1565c0; }
+    .tab-chip-fe { background: #e8f5e9; color: #2e7d32; }
+    .task-tab.active .tab-chip-be { background: #1565c0; color: #fff; }
+    .task-tab.active .tab-chip-fe { background: #2e7d32; color: #fff; }
+    .tab-panel { padding-top: 1rem; }
+    .tab-panel[hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<div class="layout layout--isler">
+  <nav id="sidebar"></nav>
+  <main class="isler-main" id="isler-main">
+    <h1>Yazı Oluştur — Jira task metinleri</h1>
+    <p class="subtitle">10 Backend · 4 Frontend — mockup onaylandı</p>
+    <div class="task-tabs" role="tablist">
+      <button type="button" class="task-tab active" data-tab="be" id="tab-be">Backend <span class="tab-chip tab-chip-be" id="chip-be">10</span></button>
+      <button type="button" class="task-tab" data-tab="fe" id="tab-fe">Frontend <span class="tab-chip tab-chip-fe" id="chip-fe">4</span></button>
+    </div>
+
+    <div class="tab-panel" id="panel-be" data-tab-panel="be">
+
+      <div class="issue" id="be-yazi-secenekler">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/yazi-form.html" target="_blank" rel="noopener">mockup/yazi-form.html</a></div>
+        <h4>[BE] Yazı Formu Seçenekleri Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getYaziFormSecenekleri</span>
+          <span><strong>Tablo:</strong> yazi_secenek</span>
+          <span><strong>Tüketici:</strong> [FE] Yazı Formu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Formdaki dropdown seçenekleri ile talep türüne göre faaliyet-tedbir metinlerinin tek yanıtta sunulması.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş anahtarları: talepTuru, tahsisSatis, havzadaMi, il, barajGol, taskinGorusu, hitap, korumaPlaniYili, korumaPlanlari, suki, korumaAlaniMesafe, faaliyetTedbir</li>
+          <li>faaliyetTedbir: talep türü → metin (string) haritası</li>
+          <li>Seçenek listeleri string dizisi olarak döner</li>
+          <li>Veriler import ile güncellenir</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-yazi-list">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/yazi-liste.html" target="_blank" rel="noopener">mockup/yazi-liste.html</a></div>
+        <h4>[BE] Yazı Listesi Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getYaziListesi</span>
+          <span><strong>Tablo:</strong> yazi</span>
+          <span><strong>Tüketici:</strong> [FE] Yazı Listesi</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Oluşturulan görüş yazılarının listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: id, baslik, aciklama, olusturulmaTarihi, guncellemeTarihi</li>
+          <li>Sayfalama ve sıralama (varsayılan: guncellemeTarihi desc)</li>
+          <li>İsteğe bağlı arama: baslik veya aciklama</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-yazi-detay">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/yazi-form.html" target="_blank" rel="noopener">mockup/yazi-form.html</a></div>
+        <h4>[BE] Yazı Detay Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getYaziById</span>
+          <span><strong>Tablo:</strong> yazi, yazi_form_alan</span>
+          <span><strong>Tüketici:</strong> [FE] Yazı Formu (düzenle / görüntüle)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Wizard tüm adımlarındaki alan değerlerinin tek kayıt olarak getirilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: baslik, aciklama ve tüm form alanları (talep, havza, hüküm, taşkın, koruma planı, SUKİ)</li>
+          <li>Çoklu seçim alanları dizi olarak döner (ör. korumaAlani)</li>
+          <li>olusturulmusMetin varsa yazı önizleme adımı için döner</li>
+          <li>Kayıt yoksa uygun hata</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-yazi-kaydet">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/yazi-form.html" target="_blank" rel="noopener">mockup/yazi-form.html</a></div>
+        <h4>[BE] Yazı Kaydet Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> saveYazi</span>
+          <span><strong>Tablo:</strong> yazi, yazi_form_alan</span>
+          <span><strong>Tüketici:</strong> [FE] Yazı Formu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Wizard adımlarındaki verilerin taslak veya tam kayıt olarak saklanması.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Zorunlu: baslik, aciklama</li>
+          <li>Adım alanları mockup ile uyumlu doğrulanır (zorunlu alanlar)</li>
+          <li>id varsa güncelle, yoksa yeni kayıt; guncellemeTarihi güncellenir</li>
+          <li>Kısmi kayıt (taslak) desteklenebilir</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-hukum-olustur">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/yazi-form.html" target="_blank" rel="noopener">mockup/yazi-form.html</a></div>
+        <h4>[BE] Hüküm Metni Oluşturma Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> olusturHukumMetni</span>
+          <span><strong>Tablo:</strong> hukumler_tablosu</span>
+          <span><strong>Tüketici:</strong> [FE] Yazı Formu (Hükümler adımı)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Koruma alanı ve sektör (talep türü) seçimine göre hükümler tablosundan madde metinlerinin birleştirilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Girdi: korumaAlaniListesi, talepTuru (veya sektör), kaynak (Yönetmelik / Özel Hüküm)</li>
+          <li>Dönüş: hukumMetni, degerlendirmeMetni (varsa)</li>
+          <li>Eşleşme yoksa boş veya «Yok» döner; Excel makro mantığıyla uyumlu</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-yazi-olustur">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/yazi-form.html" target="_blank" rel="noopener">mockup/yazi-form.html</a></div>
+        <h4>[BE] Görüş Yazısı Metni Oluşturma Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> olusturYaziMetni</span>
+          <span><strong>Tablo:</strong> yazi</span>
+          <span><strong>Tüketici:</strong> [FE] Yazı Formu (Özet → Yazı)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Form verilerinden görüş yazısı gövde metninin üretilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Girdi: yaziId veya tam form JSON</li>
+          <li>Dönüş: onizlemeHtml veya duzMetin</li>
+          <li>Üretilen metin yazi kaydına yazılır; tekrar çağrıda güncellenebilir</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-yazi-export">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/yazi-form.html" target="_blank" rel="noopener">mockup/yazi-form.html</a></div>
+        <h4>[BE] Yazı Dışa Aktarma Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> exportYazi</span>
+          <span><strong>Tablo:</strong> yazi</span>
+          <span><strong>Tüketici:</strong> [FE] Yazı Formu (Yazı adımı)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Oluşturulan görüş yazısının Word ve PDF olarak indirilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Girdi: yaziId, format (docx | pdf)</li>
+          <li>Dönüş: dosya stream veya indirme URL'si</li>
+          <li>İçerik önizleme ile aynı; kurumsal şablon uygulanır</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-hukumler-list">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/hukumler-liste.html" target="_blank" rel="noopener">mockup/hukumler-liste.html</a></div>
+        <h4>[BE] Hükümler Tablosu Listesi Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getHukumlerTablosuListesi</span>
+          <span><strong>Tablo:</strong> hukumler_tablosu</span>
+          <span><strong>Tüketici:</strong> [FE] Hükümler Tablosu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Referans hüküm kayıtlarının listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: id, kaynak, korumaAlani, sektor, madde (liste için kısaltılmış veya tam)</li>
+          <li>İsteğe bağlı filtre: kaynak (Yönetmelik / Özel Hüküm)</li>
+          <li>Sayfalama ve sıralama (varsayılan: korumaAlani, sektor)</li>
+          <li>İsteğe bağlı arama: korumaAlani, sektor, madde metni</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-hukumler-kaydet">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/hukumler-form.html" target="_blank" rel="noopener">mockup/hukumler-form.html</a></div>
+        <h4>[BE] Hüküm Kaydı Kaydet Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> saveHukumKaydi</span>
+          <span><strong>Tablo:</strong> hukumler_tablosu</span>
+          <span><strong>Tüketici:</strong> [FE] Hüküm Kaydı</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Hükümler tablosuna yeni kayıt ekleme ve mevcut kaydı güncelleme.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Zorunlu: kaynak, korumaAlani, sektor, madde</li>
+          <li>kaynak: Yönetmelik veya Özel Hüküm</li>
+          <li>id varsa güncelle, yoksa ekle</li>
+          <li>İsteğe bağlı silme endpoint'i veya pasif alan</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+    </div>
+
+    <div class="tab-panel" id="panel-fe" data-tab-panel="fe" hidden>
+
+      <div class="issue" id="fe-yazi-liste">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/yazi-liste.html" target="_blank" rel="noopener">mockup/yazi-liste.html</a></div>
+        <h4>[FE] Yazı Listesi</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Görüş Yazısı › Yazılar</span>
+          <span><strong>Veri:</strong> [BE] Yazı Listesi Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Oluşturulan görüş yazılarının tabloda listelenmesi ve yeni yazıya geçiş.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Sütunlar: Başlık, Açıklama, Oluşturulma, Güncelleme</li>
+          <li>«+ Yeni Yazı» ile adımlı forma gider (sol menüde ayrı link yok)</li>
+          <li>Satırda görüntüle ikonu → yazı adımına; düzenle ikonu → forma</li>
+          <li>Sol menü: Yazılar, Hükümler Tablosu</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-yazi-form">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/yazi-form.html" target="_blank" rel="noopener">mockup/yazi-form.html</a></div>
+        <h4>[FE] Yazı Formu (Adımlı Wizard)</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Görüş Yazısı › Yazılar › Yeni / Düzenle</span>
+          <span><strong>Veri:</strong> [BE] Yazı Formu Seçenekleri, Hüküm Metni Oluşturma, Yazı Kaydet, Görüş Yazısı Metni Oluşturma, Yazı Dışa Aktarma</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">9 adımlı wizard ile görüş yazısı veri girişi, özet, metin oluşturma ve indirme. <strong>Not:</strong> Adımlı form yapısı için mevcut uygulamada Havza Bilgi Sistemi › Yas › Karakterizasyon formuna bakılabilir.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Adımlar: Genel Bilgiler → Talep → Havza Ve Koruma → Hükümler → Taşkın, Tarım Ve Ek Görüş → Koruma Planı → SUKİ → Özet → Yazı</li>
+          <li>Stepper: her adımda «X / Y dolduruldu»; alan dolduruldukça güncellenir</li>
+          <li>Excel kaynaklı dropdown altında uyarı: «Excel'den alınan seçeneklerdir…»</li>
+          <li>Koruma alanı çoklu seçim; «Diğer (Yazınız)» seçilince açıklama alanı (canlıda koşullu; mockup'ta her zaman görünür + Frontend uyarısı)</li>
+          <li>Talep türü değişince faaliyet-tedbir metin alanı faaliyetTedbir haritasından varsayılan metinle doldurulur; «Diğer» seçiliyken düzenlenebilir, diğer türlerde salt okunur</li>
+          <li>Faaliyet-tedbir Frontend uyarısı: canlıda yalnızca talep türü «Diğer» iken görünür; diğer türlerde gizli. Mockup'ta uyarı her zaman görünür (SS)</li>
+          <li>Özet adımında tüm seçimler; «Yazı Oluştur» ile metin üretilir</li>
+          <li>Yazı adımında önizleme; Word (mavi) ve PDF (kırmızı) indir butonları</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-hukumler-liste">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/hukumler-liste.html" target="_blank" rel="noopener">mockup/hukumler-liste.html</a></div>
+        <h4>[FE] Hükümler Tablosu</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Görüş Yazısı › Hükümler Tablosu</span>
+          <span><strong>Veri:</strong> [BE] Hükümler Tablosu Listesi Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Kurumdan alınan referans hüküm kayıtlarının yönetimi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Üst bilgi: kurumdan alınan gerçek veri notu</li>
+          <li>Sütunlar: Kaynak, Koruma Alanı, Sektör, İlgili Madde (kısaltılmış)</li>
+          <li>Kaynak filtresi: Tümü / Yönetmelik / Özel Hüküm</li>
+          <li>«+ Yeni Kayıt» ve satır düzenle ikonu ile forma gider</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-hukumler-form">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/hukumler-form.html" target="_blank" rel="noopener">mockup/hukumler-form.html</a></div>
+        <h4>[FE] Hüküm Kaydı</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Görüş Yazısı › Hükümler Tablosu › Yeni / Düzenle</span>
+          <span><strong>Veri:</strong> [BE] Hüküm Kaydı Kaydet</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Tek hüküm kaydının eklenmesi veya düzenlenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Alanlar: Kaynak * (Yönetmelik / Özel Hüküm), Koruma Alanı * (dropdown), Sektör * (dropdown), İlgili Madde * (textarea)</li>
+          <li>Koruma alanı ve sektör seçenekleri hükümler tablosundaki tanımlı değerlerden gelir; koruma alanı değişince sektör listesi filtrelenir</li>
+          <li>Kaydet ve Listeye Dön butonları çalışır</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+    </div>
+  </main>
+  <aside class="isler-toc-wrap" id="isler-toc" aria-label="Task listesi"></aside>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../..',
+  page: 'calisma-isler',
+  calisma: {
+    id: 'yazi_olustur',
+    label: 'Yazı Oluştur',
+    base: '.',
+    mockups: [
+      { id: 'mock-yazi-liste', label: 'Yazı Listesi', href: 'mockup/yazi-liste.html' },
+      { id: 'mock-yazi-form', label: 'Yazı Formu', href: 'mockup/yazi-form.html' },
+      { id: 'mock-hukumler-liste', label: 'Hükümler Tablosu', href: 'mockup/hukumler-liste.html' },
+      { id: 'mock-hukumler-form', label: 'Hüküm Kaydı', href: 'mockup/hukumler-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+(function () {
+  function switchTab(name) {
+    document.querySelectorAll('.task-tab').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-tab') === name);
+    });
+    document.querySelectorAll('[data-tab-panel]').forEach(function (panel) {
+      panel.hidden = panel.getAttribute('data-tab-panel') !== name;
+    });
+    if (location.hash !== '#' + name) location.hash = name;
+  }
+  document.querySelectorAll('.task-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () { switchTab(btn.getAttribute('data-tab')); });
+  });
+  var hash = (location.hash || '').replace('#', '');
+  if (hash === 'fe' || hash === 'be') switchTab(hash);
+})();
+</script>
+<script src="../../js/sunum-query.js"></script>
+<script src="../../js/isler-mockups.js"></script>
+<script src="../../js/isler-copy.js"></script>
+<script src="../../js/isler-task-edit.js"></script>
+<script src="../../js/isler-toc.js"></script>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

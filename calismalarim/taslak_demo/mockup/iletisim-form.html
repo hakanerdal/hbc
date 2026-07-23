@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockup: İletişim Formu</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="mock-shell.css" />
+  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1 class="mock-dev-only">Mockup: İletişim formu</h1>
+    <p class="subtitle mock-dev-only">Tekil form — liste yok</p>
+    <div class="mock-app-shell mock-app-shell--menu-ust">
+      <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+        <div class="menu-app">Okul</div>
+        <a href="cografi-dagilim.html">Dashboard</a>
+        <a href="ogrenci-rapor.html">Raporlar</a>
+        <a href="iletisim-form.html" class="active">İletişim</a>
+        <div class="dropdown mock-menu-dropdown">
+          <button class="mock-menu-toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Listeler</button>
+          <ul class="dropdown-menu mock-menu-dropdown-menu">
+            <li><a class="dropdown-item" href="sinif-liste.html">Sınıflar</a></li>
+            <li><a class="dropdown-item" href="ogretmen-liste.html">Öğretmenler</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="mock-app-body">
+        <div class="mock-header">
+          <div class="mock-breadcrumb">Okul › İletişim</div>
+          <strong>İletişim Formu</strong>
+        </div>
+        <div class="mock-content mock-content--form">
+        <div class="mock-form-panel">
+          <div class="mock-field">
+            <label for="f-adsoyad">Ad Soyad *</label>
+            <input class="mock-input" id="f-adsoyad" type="text" placeholder="Adınız ve soyadınız" value="Ayşe Yılmaz" />
+          </div>
+          <div class="mock-field">
+            <span class="mock-field-label" id="f-veli-label">Öğrenci velisi misiniz? *</span>
+            <div class="mock-radio-group" role="radiogroup" aria-labelledby="f-veli-label">
+              <label class="mock-radio"><input type="radio" name="f-veli" value="evet" checked /> Evet</label>
+              <label class="mock-radio"><input type="radio" name="f-veli" value="hayir" /> Hayır</label>
+            </div>
+          </div>
+          <div class="mock-field">
+            <label for="f-telefon">Telefon *</label>
+            <input class="mock-input" id="f-telefon" type="text" placeholder="Örn. 0532 111 22 33" value="0532 111 22 33" />
+          </div>
+          <div class="mock-field">
+            <label for="f-eposta">E-posta *</label>
+            <input class="mock-input" id="f-eposta" type="email" placeholder="ornek@mail.com" value="ayse.yilmaz@mail.com" />
+          </div>
+          <div class="mock-field">
+            <label for="f-mesaj">Mesaj *</label>
+            <textarea class="mock-input" id="f-mesaj" rows="4" placeholder="Mesajınızı yazın">Okul kayıt süreci hakkında bilgi almak istiyorum.</textarea>
+          </div>
+          <div class="mock-footer">
+            <button type="button" class="mock-btn mock-btn-primary">Gönder</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mock-prompt" aria-label="Cursor örnek prompt">
+      <h2>Cursor'a örnek prompt</h2>
+      <div class="mock-prompt-note">
+        <strong>Taslak Demo — örnek · tüm türler</strong>
+        Liste, form, rapor ve üst menü bu çalışmada bir arada. Kutuyu kopyalayıp Cursor'a yapıştır; kendi çalışmanda klasör adı, menü yolu ve alanları değiştirmen yeterli.
+        Tüm akış için <a href="../../../module-creator/is-analisti.html">iş analisti rehberi</a>.
+      </div>
+      <div class="prompt-box">taslak_demo çalışmasında iletişim formu mockup'ı istiyorum.
+
+Menü: üst menü, düz «İletişim» linki (tekil form — liste yok)
+Alanlar: ad soyad *, öğrenci velisi misiniz? * (Evet/Hayır radio), telefon *, e-posta *, mesaj * (uzun metin)
+Gönder butonu; kayıt listesi yok.
+
+Sadece bu form ekranı; Jira task yazma.</div>
+    </section>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../../..',
+  page: 'mock-iletisim-form',
+  calisma: {
+    id: 'taslak_demo',
+    label: 'Taslak Demo',
+    base: '..',
+    mockups: [
+      { id: 'mock-cografi-dagilim', label: 'Coğrafi Dağılım', href: 'mockup/cografi-dagilim.html', rapor: true },
+      { id: 'mock-ogrenci-rapor', label: 'Öğrenci Raporları', href: 'mockup/ogrenci-rapor.html', rapor: true },
+      { id: 'mock-iletisim-form', label: 'İletişim Formu', href: 'mockup/iletisim-form.html' },
+      { id: 'mock-sinif-liste', label: 'Sınıf Listesi', href: 'mockup/sinif-liste.html' },
+      { id: 'mock-sinif-form', label: 'Sınıf Formu', href: 'mockup/sinif-form.html' },
+      { id: 'mock-ogretmen-liste', label: 'Öğretmen Listesi', href: 'mockup/ogretmen-liste.html' },
+      { id: 'mock-ogretmen-form', label: 'Öğretmen Formu', href: 'mockup/ogretmen-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+<script src="../../../js/mock-tom-select.js"></script>
+<script src="../../../js/calismalar-meta.js"></script>
+<script src="../../../js/rapor-widgets.js"></script>
+<script src="../../../js/calisma-cursor.js"></script>
+<script src="../../../js/sunum-query.js"></script>
+<script src="../../../js/mock-sunum.js"></script>
+<script src="../../../js/nav.js"></script>
+</body>
+</html>

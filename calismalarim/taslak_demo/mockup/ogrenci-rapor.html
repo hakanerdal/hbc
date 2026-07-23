@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockup: Öğrenci Raporları</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="mock-shell.css" />
+  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1 class="mock-dev-only">Mockup: Öğrenci raporları</h1>
+    <p class="subtitle mock-dev-only">Salt okunur rapor — form ve düzenleme yok</p>
+    <div class="mock-app-shell mock-app-shell--menu-ust">
+      <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+        <div class="menu-app">Okul</div>
+        <a href="cografi-dagilim.html">Dashboard</a>
+        <a href="ogrenci-rapor.html" class="active">Raporlar</a>
+        <a href="iletisim-form.html">İletişim</a>
+        <div class="dropdown mock-menu-dropdown">
+          <button class="mock-menu-toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Listeler</button>
+          <ul class="dropdown-menu mock-menu-dropdown-menu">
+            <li><a class="dropdown-item" href="sinif-liste.html">Sınıflar</a></li>
+            <li><a class="dropdown-item" href="ogretmen-liste.html">Öğretmenler</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="mock-app-body">
+        <div class="mock-header">
+          <div class="mock-breadcrumb">Okul › Raporlar</div>
+          <strong>Öğrenci Raporları</strong>
+        </div>
+        <div class="mock-toolbar">
+          <div class="mock-field-inline">
+            <label for="f-sinif">Sınıf</label>
+            <select class="mock-input" id="f-sinif">
+              <option selected>Tümü</option>
+              <option>9-A</option>
+              <option>9-B</option>
+              <option>10-A</option>
+              <option>10-B</option>
+              <option>11-A</option>
+              <option>12-A</option>
+            </select>
+          </div>
+          <button type="button" class="mock-btn mock-btn-primary">Raporla</button>
+          <button type="button" class="mock-btn">Excel'e aktar</button>
+        </div>
+        <div class="mock-content mock-content--report">
+          <div class="mock-report-widget mock-report-widget--kpis">
+          <div class="mock-report-kpis">
+            <div class="mock-report-kpi"><strong>433</strong><span>Toplam Öğrenci</span></div>
+            <div class="mock-report-kpi"><strong>24</strong><span>Toplam Öğretmen</span></div>
+            <div class="mock-report-kpi"><strong>14</strong><span>Toplam Sınıf</span></div>
+          </div>
+          </div>
+
+          <div class="mock-report-row">
+            <div class="mock-report-widget">
+              <h3>Sınıfa Göre Ortalama Not</h3>
+              <div class="mock-report-chart mock-report-chart--pie mock-report-chart--full">
+                <canvas id="chart-sinif-pie" aria-label="Sınıfa göre ortalama not pasta grafiği"></canvas>
+              </div>
+            </div>
+
+            <div class="mock-report-widget">
+              <h3>Öğretmene Göre Ortalama Not</h3>
+              <div class="mock-report-chart mock-report-chart--bar mock-report-chart--full">
+                <canvas id="chart-ogretmen-bar" aria-label="Öğretmene göre ortalama not çubuk grafiği"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-report-widget">
+            <h3>Öğrenci Ortalama Not</h3>
+            <div class="mock-report-chart mock-report-chart--line mock-report-chart--full">
+              <canvas id="chart-ogrenci-line" aria-label="Öğrenci ortalama not çizgi grafiği"></canvas>
+            </div>
+          </div>
+
+          <div class="mock-report-widget">
+            <h3>Sınıf Mevcutları</h3>
+            <div class="mock-list-wrap">
+            <table class="mock-table">
+              <thead>
+                <tr>
+                  <th>Sınıf Adı</th>
+                  <th class="num">Öğrenci Sayısı</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>9-A</td><td class="num">32</td></tr>
+                <tr><td>9-B</td><td class="num">30</td></tr>
+                <tr><td>10-A</td><td class="num">31</td></tr>
+                <tr><td>10-B</td><td class="num">29</td></tr>
+                <tr><td>11-A</td><td class="num">28</td></tr>
+                <tr><td>11-B</td><td class="num">27</td></tr>
+                <tr><td>12-A</td><td class="num">26</td></tr>
+                <tr><td>12-B</td><td class="num">24</td></tr>
+              </tbody>
+            </table>
+            <div class="mock-pagination">
+              <span>Toplam 14 kayıt · sayfa başına 8</span>
+              <div class="mock-pagination-pages" aria-label="Sayfalama">
+                <button type="button" disabled aria-label="Önceki">‹</button>
+                <button type="button" class="active">1</button>
+                <button type="button">2</button>
+                <button type="button" aria-label="Sonraki">›</button>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mock-prompt" aria-label="Cursor örnek prompt">
+      <h2>Cursor'a örnek prompt</h2>
+      <div class="mock-prompt-note">
+        <strong>Taslak Demo — örnek · tüm türler</strong>
+        Liste, form, rapor ve üst menü bu çalışmada bir arada. Kutuyu kopyalayıp Cursor'a yapıştır; kendi çalışmanda klasör adı, menü yolu ve alanları değiştirmen yeterli.
+        Tüm akış için <a href="../../../module-creator/is-analisti.html">iş analisti rehberi</a>.
+      </div>
+      <div class="prompt-box">taslak_demo çalışmasında öğrenci raporları mockup'ı istiyorum.
+
+Menü: üst menü — «Raporlar» (sayfa başlığı: Öğrenci Raporları)
+Salt okunur rapor: filtre (sınıf dropdown), Raporla, Excel'e aktar
+Widget'lar: KPI kartları, pasta grafik, yatay çubuk grafik, çizgi grafik, sınıf mevcutları özet tablosu (sayfalama)
+Grafikler Chart.js; form veya + Yeni yok.
+
+Sadece bu rapor ekranı; Jira task yazma.</div>
+    </section>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../../..',
+  page: 'mock-ogrenci-rapor',
+  calisma: {
+    id: 'taslak_demo',
+    label: 'Taslak Demo',
+    base: '..',
+    mockups: [
+      { id: 'mock-cografi-dagilim', label: 'Coğrafi Dağılım', href: 'mockup/cografi-dagilim.html', rapor: true },
+      { id: 'mock-ogrenci-rapor', label: 'Öğrenci Raporları', href: 'mockup/ogrenci-rapor.html', rapor: true },
+      { id: 'mock-iletisim-form', label: 'İletişim Formu', href: 'mockup/iletisim-form.html' },
+      { id: 'mock-sinif-liste', label: 'Sınıf Listesi', href: 'mockup/sinif-liste.html' },
+      { id: 'mock-sinif-form', label: 'Sınıf Formu', href: 'mockup/sinif-form.html' },
+      { id: 'mock-ogretmen-liste', label: 'Öğretmen Listesi', href: 'mockup/ogretmen-liste.html' },
+      { id: 'mock-ogretmen-form', label: 'Öğretmen Formu', href: 'mockup/ogretmen-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="../../../js/mock-report-charts.js"></script>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+<script src="../../../js/mock-tom-select.js"></script>
+<script src="../../../js/calismalar-meta.js"></script>
+<script src="../../../js/rapor-widgets.js"></script>
+<script src="../../../js/calisma-cursor.js"></script>
+<script src="../../../js/sunum-query.js"></script>
+<script src="../../../js/mock-sunum.js"></script>
+<script src="../../../js/nav.js"></script>
+</body>
+</html>

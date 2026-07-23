@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kurulum ve Gereksinimler | HBC</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+<div class="layout layout--rehber">
+  <nav id="sidebar"></nav>
+  <main class="rehber-main" id="rehber-main">
+    <h1>Kurulum ve Gereksinimler</h1>
+    <p class="subtitle">Mockup üretimi ve task metinleri için bilgisayar hazırlığı</p>
+
+    <div class="lead">
+      HBC ile mockup tasarlayıp Jira task metinlerini üretmek için <strong>Cursor</strong> kullanırsınız.
+      Bu sayfa, iş analisti bilgisayarında bir kez yapılacak kurulum adımlarını özetler.
+    </div>
+
+    <h2>Ne kurulmalı?</h2>
+    <table>
+      <thead><tr><th>Program</th><th>Gerekli mi?</th><th>Ne için?</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Cursor</strong></td>
+          <td>Evet</td>
+          <td>Mockup üretimi, düzeltme, <code>isler.html</code> task kutuları; HBC sihirbazlarından kopyalanan metinleri buraya yapıştırırsınız</td>
+        </tr>
+        <tr>
+          <td><strong>Chrome</strong></td>
+          <td>Evet</td>
+          <td>HBC'yi açmak, mockup gezmek, <strong>Sunum</strong> modu, Jira <strong>Tümünü kopyala</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Python 3</strong></td>
+          <td>Evet</td>
+          <td>Cursor kurar — sohbete kurulum isteği yazmanız yeterli (Excel, harita, Bootstrap script'leri için). Siz python.org veya terminal kullanmazsınız</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>HBC ve Cursor'ı açma</h2>
+    <ol class="rehber-steps">
+      <li>HBC klasörünü bilgisayarınıza alın (git, zip veya paylaşımlı sürücü). Klasör adı <code>hbc</code> olmalı; içinde <code>index.html</code> ve <code>calismalarim</code> görünür.
+        <figure class="rehber-figure">
+          <img src="images/kurulum-hbc-klasor.png" alt="Dosya gezgininde seçili hbc klasörü" width="320" height="auto" loading="lazy" />
+          <figcaption>Dosya gezgininde <strong>hbc</strong> klasörü — üst klasör değil, doğrudan <code>hbc</code>.</figcaption>
+        </figure>
+      </li>
+      <li><a href="https://cursor.com" target="_blank" rel="noopener">cursor.com</a> üzerinden Cursor'ı kurun ve oturum açın.</li>
+      <li>Cursor'da <strong>File › Add Folder to Workspace…</strong> ile <code>hbc</code> klasörünü ekleyin (üst klasör değil, doğrudan <code>hbc</code>).
+        <figure class="rehber-figure">
+          <img src="images/kurulum-cursor-add-folder.png" alt="Cursor File menüsünde Add Folder to Workspace seçeneği" width="320" height="auto" loading="lazy" />
+          <figcaption><strong>File › Add Folder to Workspace…</strong> — ardından bir önceki görseldeki <code>hbc</code> klasörünü seçin.</figcaption>
+        </figure>
+      </li>
+      <li>Sol dosya ağacında <code>calismalarim</code> görünmeli — doğru klasörü eklediğinizi böyle anlarsınız.
+        <figure class="rehber-figure">
+          <img src="images/kurulum-cursor-calismalarim.png" alt="Cursor sol panelinde hbc workspace ve calismalarim klasörü" width="320" height="auto" loading="lazy" />
+          <figcaption>Cursor sol panelinde <code>hbc</code> altında <code>calismalarim</code> listelenmeli.</figcaption>
+        </figure>
+      </li>
+      <li>Dosya gezgininde <code>hbc</code> klasöründeki <code>index.html</code> dosyasına çift tıklayın — Chrome'da <strong>Çalışmalarım</strong> açılır. Cursor'dan değil, Windows klasöründen açın.
+        <figure class="rehber-figure">
+          <img src="images/kurulum-index-html.png" alt="Dosya gezgininde hbc klasöründe index.html" width="320" height="auto" loading="lazy" />
+          <figcaption><code>index.html</code> — dosya gezgininden çift tıklayın.</figcaption>
+        </figure>
+      </li>
+      <li>Günlük akış: <a href="is-analisti.html">Başlangıç rehberi</a> — ekran sihirbazından veya özet sayfasındaki butonlardan metni kopyala → Cursor sohbetine yapıştır. Mockup düzeltme ve task güncelleme: sayfadaki <strong>Düzenle</strong> → panoya kopyala → Cursor'a yapıştır.</li>
+    </ol>
+
+    <h2>+ Yeni çalışma</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.5rem">
+      Ana sayfadaki <strong>+ Yeni çalışma</strong> butonu formu doldurduktan sonra Cursor'a yapıştırılacak metni <strong>panoya kopyalar</strong>.
+      Metni Cursor sohbetine yapıştırın; klasör ve boş şablon Cursor tarafından oluşturulur. Ek program kurmanız gerekmez.
+    </p>
+
+    <h2>Python</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.5rem">
+      Python'u kendiniz kurmanız gerekmez. HBC workspace'i açtıktan sonra Cursor sohbetine aşağıdaki gibi bir istek yazın; Cursor kurulumu ve gerekli paketleri halleder.
+    </p>
+    <div class="prompt-box">HBC mockup script'leri için Python 3 kurulumunu yap. Excel modüllerinde gerekirse openpyxl paketini de kur.</div>
+    <p style="font-size:0.85rem;color:var(--muted);margin:0.75rem 0 0">
+      Bu adımı bir kez yapmanız yeterli. Sonrasında mockup üretirken Python veya terminal ile uğraşmazsınız.
+    </p>
+
+    <h2>İlk kontrol listesi</h2>
+    <table>
+      <thead><tr><th>Kontrol</th><th>Beklenen</th></tr></thead>
+      <tbody>
+        <tr><td><code>index.html</code> açılıyor</td><td>Çalışmalarım kartları görünür</td></tr>
+        <tr><td>Örnek mockup (ör. Kaynaktan Musluğa)</td><td>Menü ve ekranlar gezinilebilir; <strong>Sunum</strong> çalışır</td></tr>
+        <tr><td>Cursor'da HBC workspace</td><td>Dosya ağacında <code>calismalarim</code> görünür</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Sorun giderme</h2>
+    <table>
+      <thead><tr><th>Belirti</th><th>Ne yapın?</th></tr></thead>
+      <tbody>
+        <tr><td>HBC sayfası düz metin / stiller yok</td><td>Tek dosyayı değil, tüm <code>hbc</code> klasörünü koruyarak açın</td></tr>
+        <tr><td>+ Yeni çalışma sonrası klasör yok</td><td>Panodaki metni Cursor sohbetine yapıştırdınız mı kontrol edin</td></tr>
+        <tr><td>Cursor «script» / Python hatası</td><td>Cursor'a yukarıdaki <strong>Python kurulum</strong> prompt'unu tekrar gönderin</td></tr>
+        <tr><td>Mockup'ta menü, buton veya seçim kutusu düzgün görünmüyor</td><td>Önce sayfayı yenileyin; düzelmezse mockup'ta <strong>Düzenle</strong> → Cursor'a neyin bozuk olduğunu kısaca yazın</td></tr>
+      </tbody>
+    </table>
+
+    <h2>İlgili sayfalar</h2>
+    <ul style="font-size:0.9rem;margin:0;padding-left:1.25rem">
+      <li><a href="is-analisti.html">Başlangıç rehberi</a> — 4 adımlı akış, ekran sihirbazı</li>
+      <li><a href="jira-analist.html">Jira İş Açma</a> — Text / Visual, Tümünü kopyala</li>
+      <li><a href="../index.html">Çalışmalarım</a></li>
+    </ul>
+  </main>
+  <aside class="rehber-toc-wrap" id="rehber-toc" hidden aria-label="Sayfa içi bağlantılar"></aside>
+</div>
+<script>window.TASK_HUB = { taskRoot: '..', page: 'rehber-kurulum' };</script>
+<script src="../js/rehber-toc.js"></script>
+<script src="../js/nav.js"></script>
+</body>
+</html>

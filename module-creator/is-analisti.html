@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>İş Analisti Rehberi | HBC</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .hero-analist {
+        background: linear-gradient(135deg, #e8f4fd 0%, #f0f7ff 100%);
+        border: 1px solid #90caf9;
+        border-radius: 10px;
+        padding: 1.25rem 1.35rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero-analist h2 {
+        margin-top: 0;
+        border: none;
+        font-size: 1rem;
+      }
+      .note-box {
+        background: #fff8e6;
+        border: 1px solid #ffe082;
+        border-radius: 8px;
+        padding: 0.85rem 1rem;
+        margin: 1rem 0 1.25rem;
+        font-size: 0.88rem;
+      }
+      .note-box strong {
+        display: block;
+        margin-bottom: 0.35rem;
+      }
+      .prompt-ref {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin: -0.35rem 0 0.5rem;
+      }
+      .wizard-steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.75rem;
+      }
+      @media (max-width: 960px) {
+        .wizard-steps-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .wizard-steps-card {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 0.65rem 0.75rem;
+        background: #fafbfc;
+      }
+      .wizard-steps-card h4 {
+        margin: 0 0 0.45rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #333;
+      }
+      .wizard-steps-list {
+        margin: 0;
+        padding-left: 1.1rem;
+        font-size: 0.78rem;
+        line-height: 1.45;
+        color: #444;
+      }
+      .wizard-steps-list li {
+        margin: 0.2rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout layout--rehber">
+      <nav id="sidebar"></nav>
+      <main class="rehber-main" id="rehber-main">
+        <h1>İş analisti rehberi</h1>
+        <p class="subtitle">Müşteri isteği → örnek ekran → Jira task · Figma şart değil</p>
+
+        <div class="hero-analist">
+          <h2>Ne yapıyoruz?</h2>
+          <p style="margin: 0; font-size: 0.9rem">
+            <strong>HBC</strong> Cursor'a müşteri ihtiyacını yazıyorsun → <strong>örnek ekran</strong> (mockup) üretiliyor → onaylıyorsun →
+            <strong>Jira metinleri</strong> hazırlanıyor → sen Jira'ya yapıştırıyorsun. Yazılım bilgisi gerekmez.
+            İlk kurulum için <a href="kurulum-analist.html">Kurulum rehberine</a> bakın (Cursor, Python).
+          </p>
+        </div>
+
+        <h2>4 adım</h2>
+        <div class="phase">
+          <span class="phase-num">1</span>
+          <div>
+            <strong>Çalışmalarım</strong> — <a href="../index.html">Ana sayfada</a> başlığın altındaki <strong>+ Yeni çalışma</strong> ile klasör aç veya mevcut
+            çalışmaya gir.
+          </div>
+        </div>
+        <div class="phase">
+          <span class="phase-num">2</span>
+          <div>
+            <strong>İhtiyacı anlat → mockup üret</strong> — İki yol var; çoğu zaman sihirbaz yeterli:
+            <ul style="margin: 0.45rem 0 0; padding-left: 1.15rem; font-size: 0.88rem">
+              <li>
+                <strong>Önerilen: Ekran sihirbazı</strong> — Çalışma içinde <strong>Ekranlar</strong> → <strong>+ Yeni ekran</strong>. Liste, form veya
+                dashboard/rapor türünü seç; menü yolu, alanlar ve widget'ları adım adım yanıtla. Son adımda hazır Cursor metnini kopyalayıp sohbete yapıştır.
+                Ayrıntı: <a href="#ekran-sihirbazi">Ekran sihirbazı</a>.
+              </li>
+              <li>
+                <strong>Serbest yazım</strong> — Sihirbaz kapsamı dışındaysa veya «Emin değilim» ile kısa tarif verip Cursor'un sorularla netleştirmesini
+                isteyebilirsin. Hazır kalıplar: <a href="#cursor-promptlar">örnek cümleler</a>.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <span class="phase-num">3</span>
+          <div>
+            <strong>Onayla</strong> — Mockup'ları tarayıcıda gez (<a href="#mockup-nerede">bkz.</a>); <a href="#onay-kontrol">kontrol listesine</a> bak. Eksik
+            veya yanlışsa Cursor'a düzeltme iste; tamamsa «mockup'ları onaylıyorum, Jira task metinlerini yaz» de (<a href="#prompt-onay">örnek cümle</a>).
+          </div>
+        </div>
+        <div class="phase">
+          <span class="phase-num">4</span>
+          <div>
+            <strong>Jira</strong> — Çalışma <strong>Task hazır</strong> olunca <strong>Jira task metinleri</strong> sayfasını aç; Backend / Frontend sekmesinden
+            ilgili kutuda <strong>Tümünü kopyala</strong> → Jira'da önce <strong>Text</strong>, sonra <strong>Visual</strong> (<a href="jira-analist.html"
+              >ayrıntı</a
+            >). Sağdaki menüden task'lara atlayabilirsin; metin değişikliği gerekiyorsa <strong>Düzenle</strong> ile Cursor
+            prompt'u hazırla (<a href="#task-sayfasi">bkz.</a>).
+          </div>
+        </div>
+
+        <h2 id="ekran-sihirbazi">Ekranlar — yeni ekran sihirbazı</h2>
+        <p style="font-size: 0.9rem; margin: 0 0 0.75rem">
+          Sol menüden <strong>Ekranlar</strong> sayfasına gir. <strong>+ Yeni ekran</strong> ile tür seç. <strong>Liste</strong> şablonu tablo + isteğe bağlı
+          kayıt formu üretir; <strong>Form</strong> şablonu yalnızca tek bir form ekranıdır (iletişim formu gibi). Adımları yanıtla; son adımda Cursor metnini
+          kopyalayıp sohbete yapıştır.
+        </p>
+        <div class="wizard-steps-grid">
+          <div class="wizard-steps-card">
+            <h4>Liste</h4>
+            <ul class="wizard-steps-list">
+              <li>Ekran türü</li>
+              <li>Menü yolu (ör. Okul › Sınıflar)</li>
+              <li>Sayfa başlığı ve model adı</li>
+              <li>Liste sütunları</li>
+              <li>Sayfalama, filtre, sıralama, + Yeni butonu</li>
+              <li>İsteğe bağlı kayıt formu ve alanları</li>
+              <li>Cursor metni — kopyala ve yapıştır</li>
+            </ul>
+          </div>
+          <div class="wizard-steps-card">
+            <h4>Form (tekil)</h4>
+            <ul class="wizard-steps-list">
+              <li>Ekran türü</li>
+              <li>Menü yolu</li>
+              <li>Form adı (sayfa başlığı)</li>
+              <li>Form alanları (ad + tür)</li>
+              <li>Gönder butonu metni</li>
+              <li>Cursor metni — kopyala ve yapıştır</li>
+            </ul>
+          </div>
+          <div class="wizard-steps-card">
+            <h4>Dashboard / Rapor</h4>
+            <ul class="wizard-steps-list">
+              <li>Ekran türü</li>
+              <li>Menü yolu + rapor adı</li>
+              <li>Veri kaynağı (tablo/entity)</li>
+              <li>Filtreler (isteğe bağlı)</li>
+              <li>Excel'e aktar butonu</li>
+              <li>Widget listesi (KPI, harita, grafik, tablo)</li>
+              <li>Widget detayları (türe göre)</li>
+              <li>Cursor metni — kopyala ve yapıştır</li>
+            </ul>
+          </div>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin: 0.75rem 0 0">
+          Türler: <strong>Liste</strong>, <strong>Form</strong>, <strong>Dashboard / Rapor</strong> (KPI, grafik, harita, tablo) veya
+          <strong>Emin değilim</strong>.
+        </p>
+        <p style="font-size: 0.85rem; color: var(--muted); margin: 0.5rem 0 0">
+          Form alan türleri: Metin, <strong>Uzun metin</strong> (çok satırlı), Sayı, Tarih, Dropdown, Checkbox, <strong>Evet/Hayır</strong> (radio),
+          <strong>Çoklu seçim</strong> (etiketli seçim kutusu — Bootstrap 5). Mockup düzeltmek için ilgili mockup sayfasında sağ üstteki turuncu
+          <strong>Düzenle</strong> butonunu kullanın (özet mockup kartı da olur). Rapor ekranlarında dialogda ek olarak <strong>+ Widget ekle</strong> ile
+          sayfaya yeni bileşen isteyebilirsiniz.
+        </p>
+
+        <h3 id="dashboard-rapor-widget">Dashboard / Rapor — widget'lar ve harita</h3>
+        <p style="font-size: 0.9rem; margin: 0 0 0.75rem">
+          Ayrı bir «Dashboard» sihirbazı yok. Özet ekranında KPI, grafik, harita ve tablo aynı akışta seçilir. Menüde ekran adı «Dashboard» veya «… Raporu»
+          olabilir — teknik fark yok.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Widget</th>
+              <th>Ne işe yarar?</th>
+              <th>Örnek</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sayısal özet (KPI)</td>
+              <td>Üstte 2–4 özet kart</td>
+              <td>Toplam öğrenci, sınıf sayısı</td>
+            </tr>
+            <tr>
+              <td>Türkiye haritası</td>
+              <td>81 il, plakaya göre renk</td>
+              <td>Sihirbaz widget listesi</td>
+            </tr>
+            <tr>
+              <td>İl haritası (ör. Ankara)</td>
+              <td>Seçili ilin ilçeleri; metrik değere göre renk</td>
+              <td><a href="../calismalarim/taslak_demo/mockup/cografi-dagilim.html">Coğrafi Dağılım</a></td>
+            </tr>
+            <tr>
+              <td>Bar / Pie / Line</td>
+              <td>Grafik (Chart.js)</td>
+              <td><a href="../calismalarim/taslak_demo/mockup/ogrenci-rapor.html">Öğrenci Raporları</a></td>
+            </tr>
+            <tr>
+              <td>Özet liste</td>
+              <td>Salt okunur tablo</td>
+              <td><a href="../calismalarim/su_kalitesi_raporu/mockup/rapor.html">Bölgesel özet</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="note-box" style="margin-top: 0.75rem">
+          <strong>Widget kartları</strong>
+          <p style="font-size: 0.88rem; margin: 0.5rem 0 0">
+            KPI, harita, grafik ve tablo ayrı beyaz kartlar içinde gösterilir; rapor alanı açık gri arka planlıdır. Örnek:
+            <a href="../calismalarim/taslak_demo/mockup/ogrenci-rapor.html">Öğrenci Raporları</a>,
+            <a href="../calismalarim/taslak_demo/mockup/cografi-dagilim.html">Coğrafi Dağılım</a>.
+          </p>
+        </div>
+        <h3 id="harita-widgetlari">Harita widget'ları</h3>
+        <p style="font-size: 0.9rem; margin: 0 0 0.75rem">
+          Sihirbazda iki ayrı harita türü vardır. Hangisini istediğinizi widget listesine eklemeniz yeterli; teknik kurulumu Cursor / yazılımcı halleder.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Tür</th>
+              <th>Ne gösterir?</th>
+              <th>Sihirbazda bilmeniz gereken</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Türkiye haritası</strong></td>
+              <td>81 il; seçtiğiniz metriğe göre renk tonları</td>
+              <td>Her zaman tam genişlik. İl adları haritada görünür. Sol altta renk lejantı.</td>
+            </tr>
+            <tr>
+              <td><strong>İl haritası (ör. Ankara)</strong></td>
+              <td>Tek ilin ilçeleri; metriğe göre renk tonları</td>
+              <td>Tam genişlik; ilçe adları haritada görünür; sol altta renk lejantı. Örnek olarak şimdilik yalnızca Ankara kullanılır.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.88rem; margin: 0.75rem 0 0">
+          Canlı örnek (Türkiye + Ankara, alt alta): <a href="../calismalarim/taslak_demo/mockup/cografi-dagilim.html">Coğrafi Dağılım</a>.
+        </p>
+
+        <h2 id="cursor-butonlar">Özet sayfası — Cursor butonları</h2>
+        <p style="font-size: 0.9rem; margin: 0 0 0.75rem">
+          Çalışma özetinde başlığın altında <strong>Amaç</strong> kutusu görünür (yeni çalışma açarken yazdığınız metin). Durum çubuğunun altında aşamaya göre
+          butonlar çıkar; tıklayınca Cursor metni hazır gelir → <strong>Panoya kopyala</strong> → <strong>Ctrl+V</strong>.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Durum</th>
+              <th>Butonlar (özet sayfası)</th>
+              <th>Mockup düzelt</th>
+              <th>Cursor sonrası</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Mockup taslak</strong></td>
+              <td><a href="../calismalarim/taslak_demo/ekranlar.html">+ Yeni ekran</a> · İptal et…</td>
+              <td>—</td>
+              <td>Mockup üretilir → <strong>Onay bekliyor</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Onay bekliyor</strong></td>
+              <td>+ Yeni ekran · Onayla, task yaz… · İptal et…</td>
+              <td>Mockup sayfasında sağ üst <strong>Düzenle</strong> veya özet mockup kartı</td>
+              <td>Task metinleri → <strong>Task hazır</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Task hazır</strong></td>
+              <td>İptal et…</td>
+              <td><strong>Task metinleri</strong> sayfasında her kutuda <strong>Düzenle</strong></td>
+              <td><strong>isler.html</strong> güncellenir</td>
+            </tr>
+            <tr>
+              <td><strong>İptal</strong></td>
+              <td>Listeye geri al…</td>
+              <td>—</td>
+              <td>Önceki duruma döner</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.85rem; color: var(--muted); margin: 0.75rem 0 0">
+          Örnek çalışmalarda (Kaynaktan Musluğa, Su Kalitesi Özeti) bu butonlar yoktur — aşağıdaki örnek cümleleri referans alın.
+        </p>
+
+        <h2 id="cursor-promptlar">Cursor'a örnek cümleler</h2>
+
+        <div class="note-box">
+          <strong>Bunlar ne için?</strong>
+          Aşağıdaki kutular <a href="../calismalarim/kaynaktan_musluga/index.html">Kaynaktan Musluğa</a> (CRUD),
+          <a href="../calismalarim/su_kalitesi_raporu/index.html">Su Kalitesi Özeti</a> (rapor) ve
+          <a href="../calismalarim/taslak_demo/index.html">Taslak Demo</a> (tüm türler + üst menü) çalışmalarından alınmış örnek Cursor cümleleridir. Kendi
+          projen için kopyalayıp alan adlarını ve menü yolunu değiştirmen yeterli. İkinci örnek:
+          <a href="../calismalarim/su_kalitesi_raporu/index.html">Su Kalitesi Özeti</a> — form yok, salt okunur rapor (grafik + tablo). Üçüncü örnek:
+          <a href="../calismalarim/taslak_demo/index.html">Taslak Demo</a> — liste, form, rapor ve üst menü; her mockup sayfasında örnek prompt kutusu.
+        </div>
+
+        <h3>1 — Yeni çalışma klasörü</h3>
+        <p class="prompt-ref">
+          Ana sayfada başlığın altındaki <strong>+ Yeni çalışma</strong> ile açın: görünen ad, klasör adı, <strong>çalışmanın amacı</strong> ve
+          <strong>mockup menüsünün konumu</strong> (sol / üst) sorulur. Amaç özet sayfasında görünür. Yerel <strong>Bootstrap 5</strong> dosyaları çalışma
+          klasörüne (<code>calismalarim/&lt;modul&gt;/assets/</code>) otomatik kopyalanır; mockup sayfaları bundle'ı
+          <code>../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js</code> ile yükler. Cursor'a yazmak istersen:
+        </p>
+        <div class="prompt-box">
+          calismalarim altında "kullanicilar" adında yeni çalışma oluştur. Görünen ad: Kullanıcılar Amaç: Sistem kullanıcılarının kayıt ve yetki yönetimini
+          dijitalleştirmek Mockup uygulama menüsü: sol (sol dikey çubuk)
+        </div>
+
+        <h3>2 — Ekranları tarif et (mockup)</h3>
+        <p class="prompt-ref">
+          İş kurallarını, alanları ve listeyi söylemen yeterli — örnek sonuç:
+          <a href="../calismalarim/kaynaktan_musluga/mockup/kaynak-liste.html">Kaynak listesi mockup</a> (sayfanın altında örnek prompt kutusu var)
+        </p>
+        <div class="prompt-box">
+          Kaynaktan musluğa için mockup istiyorum. Ekranlar: kaynak listesi, kaynak formu, tesis listesi, tesis formu, musluk listesi, musluk formu. Kaynak
+          alanları: adı, kodu, su kalitesi (rakam), bulunduğu bölge (dropdown: Marmara, Ege, Akdeniz, İç Anadolu, Karadeniz, Doğu Anadolu, Güneydoğu Anadolu)
+          Kaynak listesi sütunları: adı, kodu, kalitesi, bölgesi Tesis alanları: adı, kodu, kalite (rakam), su kaynakları (çoklu seçim) Tesis listesi sütunları:
+          adı, kodu, kalite, su kaynakları (virgülle) Musluk alanları: adı, kodu, tesisler (çoklu seçim) Musluk listesi: adı, kodu, tesisler (birden fazlaysa
+          virgülle) Önce mockup'ları yap, Jira task yazma.
+        </div>
+
+        <h3>3 — Menü yapısı ekle</h3>
+        <p class="prompt-ref">
+          Uygulama içi menü (mockup kabuğu) — müşteriye gösterilecek menü. Konum: çalışma açılırken seçilen <strong>sol</strong> veya <strong>üst</strong>. Grup
+          ve alt menüler <strong>her zaman</strong> Bootstrap 5 açılır menü (<code>collapse</code>) ile yapılır; <code>&lt;details&gt;</code> veya sadece yazı
+          başlığı kullanılmaz.
+        </p>
+        <div class="prompt-box">
+          Mockup'lara menü ekle: "Etoloji" altında "Kaynaklar", "Tesisler" ve "Musluklar" (Bootstrap collapse grubu). Her liste ilgili menüden açılsın.
+          Breadcrumb'ta da bu yolu göster.
+        </div>
+        <div class="note-box">
+          <strong>Mockup menüsü — Bootstrap zorunlu</strong>
+          Sol veya üst menüdeki <em>gruplar</em> (ör. Listeler, Etoloji, Raporlar) tıklanınca açılıp kapanmalı; bunun için Bootstrap 5
+          <code>collapse</code> kullanılır. Örnek: <a href="../calismalarim/kaynaktan_musluga/mockup/kaynak-liste.html">Kaynak listesi</a> (Etoloji grubu),
+          <a href="../calismalarim/taslak_demo/mockup/sinif-liste.html">Sınıf listesi</a> (Listeler grubu). Sadece yazı başlığı veya tarayıcı
+          <code>&lt;details&gt;</code> kullanılmaz.
+        </div>
+
+        <h3>4 — Mockup düzeltme (tek ekran)</h3>
+        <p class="prompt-ref">
+          Mockup sayfasında sağ üstteki turuncu <strong>Düzenle</strong> butonuna tıklayın (veya özet sayfasındaki mockup kartından). Cursor metni seçili ekranı
+          içerir.
+        </p>
+        <div class="prompt-box">kaynaktan_musluga musluk formunda tesis seçimini Bootstrap 5 Tom Select çoklu seçim kutusu yap. Henüz Jira task yazma.</div>
+
+        <h3 id="prompt-onay">5 — Onay sonrası Jira task</h3>
+        <div class="prompt-box">kaynaktan_musluga mockup'larını onaylıyorum. Yazılımcılar için Jira task metinlerini isler.html sayfasına ekle.</div>
+
+        <h3>6 — Çalışmayı iptal et</h3>
+        <p class="prompt-ref">Özet sayfasındaki Cursor butonları — dialog metni hazırlar. Örnek çalışmalarda buton yoktur.</p>
+        <div class="prompt-box">deneme_modulu çalışmasını iptal et. Ana listeden kaldır, dosyaları silme. İptal eden: Hazal</div>
+
+        <h3>7 — Dashboard / Rapor ekranı (ikinci örnek kalıp)</h3>
+        <p class="prompt-ref">
+          Liste/form değil; özet rapor. Örnek sonuç:
+          <a href="../calismalarim/su_kalitesi_raporu/mockup/rapor.html">Bölgesel özet mockup</a>
+          (CSS grafik) ·
+          <a href="../calismalarim/taslak_demo/mockup/ogrenci-rapor.html">Öğrenci Raporları</a>
+          (Chart.js: pie, bar, line — harita yok) ·
+          <a href="../calismalarim/taslak_demo/mockup/cografi-dagilim.html">Coğrafi Dağılım</a>
+          (Türkiye + Ankara haritası)
+        </p>
+        <p class="prompt-ref" style="margin-top: 0.35rem">
+          Yeni dashboard/rapor mockup'larında Bar / Pie / Line grafikler <strong>Chart.js</strong> ile çizilir. Türkiye veya il haritası gerekiyorsa sihirbazda
+          ilgili widget türünü seçmeniz yeterli. Örnek: <a href="../calismalarim/taslak_demo/mockup/cografi-dagilim.html">Coğrafi Dağılım</a>. Sunum modunda
+          (<code>?sunum=1</code>) uzun rapor sağ panelde kaydırılır.
+        </p>
+        <div class="prompt-box">
+          su_kalitesi_raporu için mockup istiyorum. Menü: Raporlar altında Bölgesel özet. Veri: Kaynaktan Musluğa'daki kaynak tablosundan bölge bazında özet.
+          Filtre bölge, üstte özet kartlar, çubuk ve pasta grafik, altta tablo. Excel'e aktar butonu. Form veya düzenleme ekranı yok. Önce mockup, Jira task
+          yazma.
+        </div>
+
+        <h2 id="mockup-nerede">Mockup'ı nerede görürüm?</h2>
+        <ol>
+          <li><a href="../index.html">Çalışmalarım</a> → klasöre tıkla (ör. <a href="../calismalarim/kaynaktan_musluga/index.html">Kaynaktan Musluğa</a>)</li>
+          <li>
+            Sol menü sırası: <strong>Özet</strong> → <strong>Ekranlar</strong> → girintili mockup linkleri → <strong>Sunum</strong> →
+            <strong>Task Metinleri</strong>
+          </li>
+          <li>
+            Mockup'lara <strong>Ekranlar</strong> altındaki kartlardan veya özet sayfasındaki kartlardan gidebilirsin — <strong>Ekranlar</strong> sayfasında
+            yalnızca önizleme ve <strong>+ Yeni ekran</strong> vardır
+          </li>
+          <li>
+            Mockup açıkken üst çubukta sol <strong>Sunum</strong> (mavi), sağ <strong>Düzenle</strong> (turuncu). Düzenle → Cursor düzeltme metni. Örnek
+            çalışmalarda Düzenle görünmez
+          </li>
+          <li>
+            Müşteriye göstermek için <strong>Sunum</strong>'a tıkla — HBC menüsü, üst çubuk ve prompt kutuları gizlenir. Geri dönmek için sağ üstte turuncu
+            <strong>Sunumdan çık</strong>
+          </li>
+        </ol>
+        <p style="font-size: 0.88rem; margin: 0.75rem 0 0">
+          <strong>Liste</strong> mockup'larında sayfalama tablonun hemen altındadır; sütun başlıklarında sıralama ve filtre ikonları vardır.
+          <strong>Form</strong> mockup'ları gri arka plan üzerinde dar beyaz bir kartta gösterilir (alanlar üst üste, tek sütun; butonlar kart altında). Örnek:
+          <a href="../calismalarim/taslak_demo/mockup/sinif-form.html">Sınıf formu</a>. <strong>Dashboard / Rapor</strong> mockup'larında grafikler Chart.js ile
+          çizilir (varsayılan genişlik yaklaşık %50); coğrafi harita widget'ları her zaman tam genişlik (%100).
+        </p>
+
+        <h2 id="task-sayfasi">Jira task sayfası — hızlı erişim ve düzenleme</h2>
+        <p style="font-size: 0.9rem; margin: 0 0 0.75rem">
+          <strong>Task metinleri</strong> sayfasında (<code>isler.html</code>) sağda hızlı erişim menüsü vardır:
+          <strong>Backend</strong> ve <strong>Frontend</strong> başlıkları altında her task kutusuna tek tıkla gidersin; tıklayınca ilgili sekme de açılır.
+        </p>
+        <p style="font-size: 0.9rem; margin: 0 0 0.75rem">
+          Her task kutusunun sağ üstünde <strong>Düzenle</strong> ve <strong>Tümünü kopyala</strong> yan yana durur. <strong>Düzenle</strong> → düzenleme türünü
+          seç (İster, Kabul kriterleri, Method/Tablo/Menü, Diğer) → istediğin değişikliği yaz → oluşan Cursor metnini kopyala → sohbete yapıştır. Cursor
+          yalnızca o task kutusunu günceller; Jira'ya yapıştırmadan önce metni kontrol et.
+        </p>
+        <p style="font-size: 0.88rem; margin: 0.75rem 0 0">
+          Canlı örnek: <a href="../calismalarim/taslak_demo/isler.html">Taslak Demo — task metinleri</a>
+          (9 BE · 7 FE).
+        </p>
+
+        <h2>Çalışma durumu (ana sayfa ve özet)</h2>
+        <p style="font-size: 0.9rem; margin: 0 0 0.75rem">
+          Her çalışmanın hangi aşamada olduğu etiketle gösterilir; sen elle güncellemezsin — Cursor mockup / onay / task işlerinde halleder.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Etiket</th>
+              <th>Ne zaman?</th>
+              <th>Sen ne yaparsın?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Mockup taslak</strong></td>
+              <td><strong>+ Yeni çalışma</strong> açıldığında; henüz mockup ekranı yok veya tamamlanmadı</td>
+              <td>Özet sayfası <strong>Cursor</strong> butonları veya aşağıdaki örnek cümleler</td>
+            </tr>
+            <tr>
+              <td><strong>Onay bekliyor</strong></td>
+              <td>Mockup'lar hazır olduğunda. Onay versen bile Jira task metinleri yazılmadıysa bu etiket kalır</td>
+              <td>Mockup'ları gez; <strong>Onayla, task yaz…</strong> veya mockup sayfasında <strong>Düzenle</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Task hazır</strong></td>
+              <td>Cursor <strong>Jira task metinleri</strong> sayfasına task kutularını yazdığında</td>
+              <td><strong>Tümünü kopyala</strong> ile Jira'ya geç (<a href="jira-analist.html">ayrıntı</a>)</td>
+            </tr>
+            <tr>
+              <td><strong>İptal</strong></td>
+              <td>Başlanan çalışma listeden kaldırıldığında; mockup dosyaları durur</td>
+              <td>
+                Cursor'a «… çalışmasını iptal et» de; ana listede görünmez, <strong>İptal</strong> filtresinden erişilir. Özet sayfasındaki
+                <strong>Çalışmayı iptal et…</strong> butonu metni hazırlar
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.88rem; margin: 0.75rem 0 0"><strong>Etiket ne zaman değişir?</strong> Cursor'a yazdığın cümlelere göre:</p>
+        <ul style="font-size: 0.88rem; margin: 0.35rem 0 0">
+          <li>«mockup istiyorum» / ekran tarifi → genelde <strong>Onay bekliyor</strong></li>
+          <li>«mockup'ları onaylıyorum» → özet sayfasına onay tarihi ve ismin yazılır; task henüz yoksa <strong>Onay bekliyor</strong> kalır</li>
+          <li>«Jira task metinlerini yaz» / onay + task isteği → <strong>Task hazır</strong></li>
+          <li>«… çalışmasını iptal et» → <strong>İptal</strong> (ana listeden kalkar, dosyalar kalır)</li>
+        </ul>
+        <p style="font-size: 0.85rem; color: var(--muted); margin: 0.75rem 0 0">
+          Özet sayfasında onay tarihi ve onaylayan isim görünebilir. Ana sayfa klasör kartında turuncu <strong>Örnek</strong> veya gri
+          <strong>Gerçek</strong> tür rozeti, <em>7 mockup · 17 task</em> gibi özet sayılar ve durum etiketi yer alır. Kartlar en yeni çalışma üstte olacak
+          şekilde sıralanır; çok sayıda çalışmada filtre ve arama kullanın — 12'den fazlası için <strong>Tümünü göster</strong> çıkar.
+        </p>
+
+        <h2 id="onay-kontrol">Onay kontrol listesi</h2>
+        <p style="font-size: 0.88rem; margin: 0 0 0.75rem"><strong>CRUD ekranları</strong> (liste/form) için:</p>
+        <ul>
+          <li>Menü yolu doğru mu?</li>
+          <li>Alt menü grupları Bootstrap ile açılıp kapanıyor mu? (ör. Etoloji, Listeler)</li>
+          <li>İstenen tüm alanlar var mı?</li>
+          <li>Dropdown seçenekleri anlamlı mı?</li>
+          <li>Zorunlu alanlar * ile işaretli mi?</li>
+          <li>Liste ile form arasında Yeni / Düzenle / Listeye dön çalışıyor mu?</li>
+          <li>Form ekranında alanlar dar beyaz kartta, boş alan aşırı geniş değil mi?</li>
+          <li>Müşteri sunumu için <strong>Sunum</strong> linki düzgün görünüyor mu?</li>
+          <li>Düzeltme gerekiyorsa mockup sayfasında sağ üst <strong>Düzenle</strong> çalışıyor mu?</li>
+        </ul>
+        <p style="font-size: 0.88rem; margin: 0.75rem 0 0.5rem">
+          <strong>Dashboard / Rapor ekranları</strong> için (ör. <a href="../calismalarim/taslak_demo/mockup/ogrenci-rapor.html">Öğrenci Raporları</a> —
+          Chart.js grafikleri):
+        </p>
+        <ul>
+          <li>Filtre alanları ve Raporla mantıklı mı?</li>
+          <li>Özet kartlar ve grafikler istenen metrikleri gösteriyor mu?</li>
+          <li>
+            Haritalarda sol altta renk lejantı var mı, metrik aralıkları anlaşılır mı? (<a href="../calismalarim/taslak_demo/mockup/cografi-dagilim.html"
+              >Coğrafi Dağılım</a
+            >)
+          </li>
+          <li>Widget'lar (KPI, harita, grafik, tablo) ayrı kartlar içinde mi — boşta dağınık durmuyor mu?</li>
+          <li>Grafikler okunaklı mı? (varsayılan genişlik içeriğin yaklaşık %50'si)</li>
+          <li>Uzun raporda sağ panel kaydırılabiliyor mu? (Sunum modunda test edin)</li>
+          <li>Tablo sütunları yeterli mi?</li>
+          <li>Yanlışlıkla form veya «+ Yeni» butonu yok mu?</li>
+          <li><strong>Sunum</strong> linki düzgün görünüyor mu?</li>
+        </ul>
+
+        <h2>Senin alanın / değil</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Sen söylersin</th>
+              <th>Cursor / yazılımcı halleder</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>İş kuralı, ekran davranışı</td>
+              <td>Veritabanı, API</td>
+            </tr>
+            <tr>
+              <td>Menü yolu, alan adları</td>
+              <td>Teknik mimari</td>
+            </tr>
+            <tr>
+              <td>Mockup onayı</td>
+              <td>Kod geliştirme</td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+      <aside class="rehber-toc-wrap" id="rehber-toc" hidden aria-label="Sayfa içi bağlantılar"></aside>
+    </div>
+    <script>
+      window.TASK_HUB = { taskRoot: "..", page: "rehber-baslangic" };
+    </script>
+    <script src="../js/rehber-toc.js"></script>
+    <script src="../js/nav.js"></script>
+  </body>
+</html>

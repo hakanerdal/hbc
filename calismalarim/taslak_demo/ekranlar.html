@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ekranlar — Taslak Demo</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Ekranlar</h1>
+    <p class="subtitle">Taslak Demo — mockup ekranları</p>
+
+    <div class="lead">
+      Mevcut mockup'lara tıklayarak önizleyin. <strong>+ Yeni ekran</strong> ile adım adım soruları yanıtlayın;
+      Cursor metnini kopyalayıp sohbete yapıştırın.
+    </div>
+
+    <div class="ekran-toolbar">
+      <button type="button" class="calisma-action-btn calisma-action-btn--primary" id="btn-yeni-ekran">+ Yeni ekran</button>
+    </div>
+
+    <p class="empty-note" id="ekran-empty" hidden>Henüz mockup yok. İlk ekranınızı eklemek için <strong>+ Yeni ekran</strong> kullanın.</p>
+    <div id="ekran-list"></div>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../..',
+  page: 'calisma-ekranlar',
+  calisma: {
+    id: 'taslak_demo',
+    label: 'Taslak Demo',
+    base: '.',
+    menuYer: 'ust',
+    mockups: [
+      { id: 'mock-cografi-dagilim', label: 'Coğrafi Dağılım', href: 'mockup/cografi-dagilim.html', rapor: true },
+      { id: 'mock-ogrenci-rapor', label: 'Öğrenci Raporları', href: 'mockup/ogrenci-rapor.html', rapor: true },
+      { id: 'mock-iletisim-form', label: 'İletişim Formu', href: 'mockup/iletisim-form.html' },
+      { id: 'mock-sinif-liste', label: 'Sınıf Listesi', href: 'mockup/sinif-liste.html' },
+      { id: 'mock-sinif-form', label: 'Sınıf Formu', href: 'mockup/sinif-form.html' },
+      { id: 'mock-ogretmen-liste', label: 'Öğretmen Listesi', href: 'mockup/ogretmen-liste.html' },
+      { id: 'mock-ogretmen-form', label: 'Öğretmen Formu', href: 'mockup/ogretmen-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../../js/sunum-query.js"></script>
+<script src="../../js/rapor-widgets.js"></script>
+<script src="../../js/ekran-wizard.js"></script>
+<script src="../../js/ekranlar-page.js"></script>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

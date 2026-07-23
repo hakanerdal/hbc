@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Su Kalitesi Özeti — Jira Task Metinleri</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    .task-tabs { display: flex; gap: 0.35rem; margin: 1rem 0 0; border-bottom: 2px solid var(--border); }
+    .task-tab { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; font-size: 0.85rem; font-weight: 600; color: var(--muted); border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; border-radius: 6px 6px 0 0; }
+    .task-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: #fff; }
+    .tab-chip { display: inline-flex; align-items: center; justify-content: center; min-width: 1.35rem; height: 1.35rem; padding: 0 0.35rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; }
+    .tab-chip-be { background: #e3f2fd; color: #1565c0; }
+    .tab-chip-fe { background: #e8f5e9; color: #2e7d32; }
+    .task-tab.active .tab-chip-be { background: #1565c0; color: #fff; }
+    .task-tab.active .tab-chip-fe { background: #2e7d32; color: #fff; }
+    .tab-panel { padding-top: 1rem; }
+    .tab-panel[hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<div class="layout layout--isler">
+  <nav id="sidebar"></nav>
+  <main class="isler-main" id="isler-main">
+    <h1>Su Kalitesi Özeti — Jira task metinleri</h1>
+    <p class="subtitle">1 Backend · 1 Frontend — rapor örneği</p>
+    <div class="task-tabs" role="tablist">
+      <button type="button" class="task-tab active" data-tab="be" id="tab-be">Backend <span class="tab-chip tab-chip-be" id="chip-be">1</span></button>
+      <button type="button" class="task-tab" data-tab="fe" id="tab-fe">Frontend <span class="tab-chip tab-chip-fe" id="chip-fe">1</span></button>
+    </div>
+
+    <div class="tab-panel" id="panel-be" data-tab-panel="be">
+
+      <div class="issue" id="be-rapor-ozet">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/rapor.html" target="_blank" rel="noopener">mockup/rapor.html</a></div>
+        <h4>[BE] Su Kalitesi Bölgesel Özet Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getSuKalitesiBolgeselOzet</span>
+          <span><strong>Tablo:</strong> kaynak</span>
+          <span><strong>Veri kaynağı:</strong> Kaynak kayıtları — su_kalitesi ve bolge alanları (Kaynaktan Musluğa ile aynı şema)</span>
+          <span><strong>Tüketici:</strong> [FE] Su Kalitesi Bölgesel Özet Raporu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Bölge bazında kaynak sayısı ve su kalitesi özetinin rapor ekranı için getirilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>İsteğe bağlı filtre: bolge (boş veya «Tümü» = tüm bölgeler)</li>
+          <li>Dönüş — genel: toplamKaynakSayisi, genelOrtalamaKalite, enDusukOrtalamaBolge</li>
+          <li>Dönüş — bolgeler[]: bolge, kaynakSayisi, ortalamaKalite, minKalite, maxKalite</li>
+          <li>Bölge listesi Kaynaktan Musluğa kaynak formu ile aynı (7 bölge)</li>
+          <li>Kaynak kaydı olmayan bölge dönmeyebilir veya sayılar 0</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+    </div>
+
+    <div class="tab-panel" id="panel-fe" data-tab-panel="fe" hidden>
+
+      <div class="issue" id="fe-rapor">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/rapor.html" target="_blank" rel="noopener">mockup/rapor.html</a></div>
+        <h4>[FE] Su Kalitesi Bölgesel Özet Raporu</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Su Kalitesi Özeti › Raporlar › Bölgesel özet</span>
+          <span><strong>Veri:</strong> [BE] Su Kalitesi Bölgesel Özet Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Kaynak verisinden bölgesel su kalitesi özetinin grafik ve tablo ile salt okunur gösterilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Üst filtre: bölge dropdown (Tümü + 7 bölge); Raporla ile veri yenilenir</li>
+          <li>3 özet kart: toplam kaynak, genel ortalama kalite, en düşük ortalama bölge</li>
+          <li>Çubuk grafik: bölgeye göre ortalama su kalitesi</li>
+          <li>Pasta veya halka grafik: kaynak sayısının bölge dağılımı</li>
+          <li>Tablo: bölge, kaynak sayısı, ortalama, min, max kalite</li>
+          <li>Excel'e aktar butonu (endpoint veya istemci tarafı — yazılımcı kararı)</li>
+          <li>Form, düzenleme veya «+ Yeni» aksiyonu yok</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+    </div>
+  </main>
+  <aside class="isler-toc-wrap" id="isler-toc" aria-label="Task listesi"></aside>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../..',
+  page: 'calisma-isler',
+  calisma: {
+    id: 'su_kalitesi_raporu',
+    label: 'Su Kalitesi Özeti',
+    base: '.',
+    mockups: [
+      { id: 'mock-rapor', label: 'Bölgesel özet', href: 'mockup/rapor.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+(function () {
+  function switchTab(name) {
+    document.querySelectorAll('.task-tab').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-tab') === name);
+    });
+    document.querySelectorAll('[data-tab-panel]').forEach(function (panel) {
+      panel.hidden = panel.getAttribute('data-tab-panel') !== name;
+    });
+    if (location.hash !== '#' + name) location.hash = name;
+  }
+  document.querySelectorAll('.task-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () { switchTab(btn.getAttribute('data-tab')); });
+  });
+  var hash = (location.hash || '').replace('#', '');
+  if (hash === 'fe' || hash === 'be') switchTab(hash);
+})();
+</script>
+<script src="../../js/sunum-query.js"></script>
+<script src="../../js/isler-mockups.js"></script>
+<script src="../../js/isler-copy.js"></script>
+<script src="../../js/isler-task-edit.js"></script>
+<script src="../../js/isler-toc.js"></script>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

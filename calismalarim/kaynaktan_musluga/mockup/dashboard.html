@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockup: Dashboard</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="mock-shell.css" />
+  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Mockup: Dashboard</h1>
+    <p class="subtitle mock-doc">Harita üzerinde kaynak → tesis → musluk ilişkileri</p>
+    <div class="mock-app-shell mock-app-shell--map">
+      <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+        <div class="menu-app">Kaynaktan Musluğa</div>
+        <button class="mock-menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mock-menu-etoloji" aria-expanded="true" aria-controls="mock-menu-etoloji">Etoloji</button>
+        <div class="collapse show mock-menu-collapse" id="mock-menu-etoloji">
+          <div class="mock-menu-sub">
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="kaynak-liste.html">Kaynaklar</a>
+            <a href="tesis-liste.html">Tesisler</a>
+            <a href="musluk-liste.html">Musluklar</a>
+          </div>
+        </div>
+      </nav>
+      <div class="mock-app-body">
+        <div class="mock-header">
+          <div class="mock-breadcrumb">Kaynaktan Musluğa › Etoloji › Dashboard</div>
+          <strong>Etoloji Haritası</strong>
+        </div>
+        <div class="mock-map-legend">
+          <span><i class="mock-legend-dot mock-legend-dot--kaynak"></i> Kaynak</span>
+          <span><i class="mock-legend-icon mock-legend-icon--tesis" aria-hidden="true"></i> Tesis</span>
+          <span><i class="mock-legend-icon mock-legend-icon--musluk" aria-hidden="true"></i> Musluk</span>
+          <span class="mock-legend-line">— — → akış (ikonlar arası)</span>
+        </div>
+        <div class="mock-map-canvas">
+          <svg class="mock-map-svg" viewBox="0 0 640 360" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <marker id="mock-map-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L8,4 L0,8 Z" fill="#7e57c2" />
+              </marker>
+            </defs>
+            <!-- Arıtma Tesisi Kuzey ve bağlantıları -->
+            <line class="mock-map-line" x1="79" y1="115" x2="281" y2="180" marker-end="url(#mock-map-arrow)" />
+            <line class="mock-map-line" x1="79" y1="245" x2="281" y2="180" marker-end="url(#mock-map-arrow)" />
+            <line class="mock-map-line" x1="307" y1="180" x2="537" y2="115" marker-end="url(#mock-map-arrow)" />
+            <line class="mock-map-line" x1="307" y1="180" x2="537" y2="245" marker-end="url(#mock-map-arrow)" />
+          </svg>
+
+          <div class="mock-map-marker mock-map-marker--kaynak" style="left:11%;top:32%">
+            <div class="mock-map-pin"><span class="mock-map-dot" title="Gediz Kaynağı"></span></div>
+            <span class="mock-map-label">Gediz Kaynağı</span>
+          </div>
+          <div class="mock-map-marker mock-map-marker--kaynak" style="left:11%;top:68%">
+            <div class="mock-map-pin"><span class="mock-map-dot" title="Melen Kaynağı"></span></div>
+            <span class="mock-map-label">Melen Kaynağı</span>
+          </div>
+
+          <div class="mock-map-marker mock-map-marker--tesis" style="left:46%;top:50%">
+            <div class="mock-map-pin"><span class="mock-map-icon mock-map-icon--tesis" title="Arıtma Tesisi Kuzey"></span></div>
+            <span class="mock-map-label">Arıtma Tesisi Kuzey</span>
+          </div>
+
+          <div class="mock-map-marker mock-map-marker--musluk" style="left:86%;top:32%">
+            <div class="mock-map-pin"><span class="mock-map-icon mock-map-icon--musluk" title="Merkez Musluk A"></span></div>
+            <span class="mock-map-label">Merkez Musluk A</span>
+          </div>
+          <div class="mock-map-marker mock-map-marker--musluk" style="left:86%;top:68%">
+            <div class="mock-map-pin"><span class="mock-map-icon mock-map-icon--musluk" title="Şehir Meydanı"></span></div>
+            <span class="mock-map-label">Şehir Meydanı</span>
+          </div>
+        </div>
+        <p class="mock-map-note">Örnek: Arıtma Tesisi Kuzey — Gediz ve Melen kaynaklarından beslenir; Merkez Musluk A ve Şehir Meydanı'na akar.</p>
+      </div>
+    </div>
+
+    <section class="mock-prompt" aria-label="Cursor örnek prompt">
+      <h2>Cursor'a örnek prompt</h2>
+      <div class="mock-prompt-note">
+        <strong>Örnek proje — bu ekran böyle tarif edildi</strong>
+        Kutuyu kopyalayıp Cursor'a yapıştır; kendi çalışmanda menü yolunu ve varlık adlarını değiştirmen yeterli.
+        Tüm akış için <a href="../../../module-creator/is-analisti.html">iş analisti rehberi</a>.
+      </div>
+      <h3>1 — Dashboard mockup</h3>
+      <div class="prompt-box">kaynaktan_musluga çalışmasında dashboard mockup'ı istiyorum.
+
+Menü: Etoloji altında ilk sırada Dashboard (Kaynaklar, Tesisler, Musluklar'dan önce)
+Harita görünümü: kaynaklar, tesisler ve musluklar aynı haritada görünsün.
+Kaynaklar: yuvarlak, mavi nokta
+Tesisler: fabrika ikonu
+Musluklar: ev ikonu
+Liste ekranlarındaki ilişkilere göre kesikli çizgi ile bağla:
+  kaynak → tesis (tesis formundaki su kaynakları)
+  tesis → musluk (musluk formundaki tesisler)
+Üstte kısa legend (kaynak / tesis / musluk / kesikli çizgi anlamı).
+
+Sadece dashboard ekranı; Jira task yazma.</div>
+
+      <h3>2 — Ok yönü (düzeltme)</h3>
+      <div class="prompt-box">kaynaktan_musluga dashboard mockup'ında kesikli çizgilerin ucuna ok ekle.
+Kaynak → tesis çizgilerinde ok tesis tarafına baksın (akış kaynaktan tesise).
+Tesis → musluk çizgilerinde ok musluk tarafına baksın (akış tesisten musluğa).
+Legend'da da yön anlaşılsın.
+
+Henüz Jira task yazma.</div>
+
+      <h3>3 — Çizgi görünümü (düzeltme)</h3>
+      <div class="prompt-box">kaynaktan_musluga dashboard haritasını sadeleştir.
+Kesikli çizgileri daha baskın mor renkte yap (ince gri yerine).
+Oklar ve çizgiler yazı etiketine değil, ikon merkezinden ikon merkezine gitsin.
+Etiketler ikonun altında kalsın; akış soldan sağa kaynak → tesis → musluk kolonları halinde okunabilsin.
+
+Henüz Jira task yazma.</div>
+    </section>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../../..',
+  page: 'mock-dashboard',
+  calisma: {
+    label: 'Kaynaktan Musluğa',
+    base: '..',
+    mockups: [
+      { id: 'mock-dashboard', label: 'Dashboard', href: 'mockup/dashboard.html' },
+      { id: 'mock-kaynak-liste', label: 'Kaynak listesi', href: 'mockup/kaynak-liste.html' },
+      { id: 'mock-kaynak-form', label: 'Kaynak formu', href: 'mockup/kaynak-form.html' },
+      { id: 'mock-tesis-liste', label: 'Tesis listesi', href: 'mockup/tesis-liste.html' },
+      { id: 'mock-tesis-form', label: 'Tesis formu', href: 'mockup/tesis-form.html' },
+      { id: 'mock-musluk-liste', label: 'Musluk listesi', href: 'mockup/musluk-liste.html' },
+      { id: 'mock-musluk-form', label: 'Musluk formu', href: 'mockup/musluk-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+<script src="../../../js/mock-tom-select.js"></script>
+<script src="../../../js/calismalar-meta.js"></script>
+<script src="../../../js/rapor-widgets.js"></script>
+<script src="../../../js/calisma-cursor.js"></script>
+<script src="../../../js/sunum-query.js"></script>
+<script src="../../../js/mock-sunum.js"></script>
+<script src="../../../js/nav.js"></script>
+</body>
+</html>

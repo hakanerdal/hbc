@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockup: Kaynak Formu</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="mock-shell.css" />
+  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Mockup: Kaynak formu</h1>
+    <p class="subtitle">Yeni kayıt / düzenle</p>
+    <div class="mock-app-shell">
+      <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+        <div class="menu-app">Kaynaktan Musluğa</div>
+        <button class="mock-menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mock-menu-etoloji" aria-expanded="true" aria-controls="mock-menu-etoloji">Etoloji</button>
+        <div class="collapse show mock-menu-collapse" id="mock-menu-etoloji">
+          <div class="mock-menu-sub">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="kaynak-liste.html" class="active">Kaynaklar</a>
+            <a href="tesis-liste.html">Tesisler</a>
+            <a href="musluk-liste.html">Musluklar</a>
+          </div>
+        </div>
+      </nav>
+      <div class="mock-app-body">
+        <div class="mock-header">
+          <div class="mock-breadcrumb">Kaynaktan Musluğa › Etoloji › Kaynaklar › Yeni</div>
+          <strong>Kaynak Kaydı</strong>
+        </div>
+        <div class="mock-content mock-content--form">
+        <div class="mock-form-panel">
+          <div class="mock-field">
+            <label>Adı *</label>
+            <input class="mock-input" type="text" placeholder="Örn. Gediz Kaynağı" value="Gediz Kaynağı" />
+          </div>
+          <div class="mock-field">
+            <label>Kodu *</label>
+            <input class="mock-input" type="text" placeholder="Örn. GDZ-K01" value="GDZ-K01" />
+          </div>
+          <div class="mock-field">
+            <label>Su Kalitesi *</label>
+            <input class="mock-input" type="number" min="0" max="100" placeholder="0–100" value="72" />
+            <div class="mock-hint">Sayısal değer (ör. 0–100)</div>
+          </div>
+          <div class="mock-field">
+            <label>Bulunduğu Bölge *</label>
+            <select class="mock-input">
+              <option value="">Seçiniz</option>
+              <option>Marmara</option>
+              <option selected>Ege</option>
+              <option>Akdeniz</option>
+              <option>İç Anadolu</option>
+              <option>Karadeniz</option>
+              <option>Doğu Anadolu</option>
+              <option>Güneydoğu Anadolu</option>
+            </select>
+          </div>
+          <div class="mock-footer">
+            <a href="kaynak-liste.html" class="mock-btn">← Listeye Dön</a>
+            <a href="kaynak-liste.html" class="mock-btn mock-btn-primary">Kaydet</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mock-prompt" aria-label="Cursor örnek prompt">
+      <h2>Cursor'a örnek prompt</h2>
+      <div class="mock-prompt-note">
+        <strong>Örnek proje — bu ekran böyle tarif edildi</strong>
+        Kutuyu kopyalayıp Cursor'a yapıştır; kendi çalışmanda klasör adı, menü yolu ve alanları değiştirmen yeterli.
+        Tüm akış için <a href="../../../module-creator/is-analisti.html">iş analisti rehberi</a>.
+      </div>
+      <div class="prompt-box">kaynaktan_musluga çalışmasında kaynak formu mockup'ı istiyorum.
+
+Menü: Etoloji › Kaynaklar (breadcrumb'ta «Yeni» veya «Düzenle» görünsün)
+Alanlar: adı *, kodu *, su kalitesi * (sayı, 0–100), bulunduğu bölge * (dropdown: Marmara, Ege, Akdeniz, İç Anadolu, Karadeniz, Doğu Anadolu, Güneydoğu Anadolu)
+Altta «Listeye Dön» ve «Kaydet» butonları; listeye kaynak listesine gitsin.
+Kaynak listesindeki Yeni ve Düzenle bu forma bağlansın.
+
+Sadece bu form ekranı; Jira task yazma.</div>
+    </section>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../../..',
+  page: 'mock-kaynak-form',
+  calisma: {
+    label: 'Kaynaktan Musluğa',
+    base: '..',
+    mockups: [
+      { id: 'mock-dashboard', label: 'Dashboard', href: 'mockup/dashboard.html' },
+      { id: 'mock-kaynak-liste', label: 'Kaynak listesi', href: 'mockup/kaynak-liste.html' },
+      { id: 'mock-kaynak-form', label: 'Kaynak formu', href: 'mockup/kaynak-form.html' },
+      { id: 'mock-tesis-liste', label: 'Tesis listesi', href: 'mockup/tesis-liste.html' },
+      { id: 'mock-tesis-form', label: 'Tesis formu', href: 'mockup/tesis-form.html' },
+      { id: 'mock-musluk-liste', label: 'Musluk listesi', href: 'mockup/musluk-liste.html' },
+      { id: 'mock-musluk-form', label: 'Musluk formu', href: 'mockup/musluk-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+<script src="../../../js/mock-tom-select.js"></script>
+<script src="../../../js/calismalar-meta.js"></script>
+<script src="../../../js/rapor-widgets.js"></script>
+<script src="../../../js/calisma-cursor.js"></script>
+<script src="../../../js/sunum-query.js"></script>
+<script src="../../../js/mock-sunum.js"></script>
+<script src="../../../js/nav.js"></script>
+</body>
+</html>

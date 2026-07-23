@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yazı Oluştur | Çalışmalarım</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    .tile { display: block; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-decoration: none; color: inherit; margin-bottom: 0.5rem; }
+    .tile:hover { border-color: var(--accent); }
+    .tile strong { color: var(--accent); }
+    .tile span { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Yazı Oluştur</h1>
+
+    <div class="calisma-amac-panel" id="calisma-amac-panel">
+      <h2 class="calisma-amac-heading">Amaç</h2>
+      <p class="calisma-amac" id="calisma-amac"></p>
+    </div>
+
+    <div class="calisma-durum-bar" id="calisma-durum-bar"></div>
+
+    <div class="lead">
+      Kurumun Excel tabanlı <strong>Yazı hazırlama programı</strong>nın web karşılığı.
+      <strong>Yazı listesi</strong> ve <strong>adımlı form</strong> mockup olarak hazırlandı; referans veri için <strong>Hükümler Tablosu</strong> yönetim ekranı eklendi.
+    </div>
+
+    <h2>FE Mockup'lar</h2>
+    <div class="tile-panel">
+      <p class="tile-panel__lead">Wireframe ekranlar — geliştirme öncesi onay.</p>
+      <div class="tile-grid tile-grid--mock">
+        <a class="tile-card tile-card--fe" href="mockup/yazi-liste.html">
+          <span class="tile-card__badge">1</span>
+          <div class="tile-card__body">
+            <strong>Yazı Listesi</strong>
+            <span>Görüş Yazısı › Yazılar — oluşturma / güncelleme tarihi</span>
+          </div>
+        </a>
+        <a class="tile-card tile-card--fe" href="mockup/yazi-form.html">
+          <span class="tile-card__badge">2</span>
+          <div class="tile-card__body">
+            <strong>Yazı Formu</strong>
+            <span>Adımlı form: Genel Bilgiler → … → Özet → Yazı</span>
+          </div>
+        </a>
+        <a class="tile-card tile-card--fe" href="mockup/hukumler-liste.html">
+          <span class="tile-card__badge">3</span>
+          <div class="tile-card__body">
+            <strong>Hükümler Tablosu</strong>
+            <span>Koruma alanı + sektör → madde — liste / düzenle</span>
+          </div>
+        </a>
+        <a class="tile-card tile-card--fe" href="mockup/hukumler-form.html">
+          <span class="tile-card__badge">4</span>
+          <div class="tile-card__body">
+            <strong>Hüküm Kaydı</strong>
+            <span>Hükümler tablosu › yeni / düzenle formu</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <h2>Jira</h2>
+    <a class="tile" href="isler.html"><strong>Task metinleri</strong><span>10 Backend · 4 Frontend — mockup onaylandı</span></a>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../..',
+  page: 'calisma-ozet',
+  calisma: {
+    id: 'yazi_olustur',
+    label: 'Yazı Oluştur',
+    base: '.',
+    mockups: [
+      { id: 'mock-yazi-liste', label: 'Yazı Listesi', href: 'mockup/yazi-liste.html' },
+      { id: 'mock-yazi-form', label: 'Yazı Formu', href: 'mockup/yazi-form.html' },
+      { id: 'mock-hukumler-liste', label: 'Hükümler Tablosu', href: 'mockup/hukumler-liste.html' },
+      { id: 'mock-hukumler-form', label: 'Hüküm Kaydı', href: 'mockup/hukumler-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../../js/sunum-query.js"></script>
+<script src="../../js/calismalar-meta.js"></script>
+<script src="../../js/calisma-ozet.js"></script>
+<script src="../../js/rapor-widgets.js"></script>
+<script src="../../js/calisma-cursor.js"></script>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

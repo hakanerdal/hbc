@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockup: Öğretmen Listesi</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="mock-shell.css" />
+  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1 class="mock-dev-only">Mockup: Öğretmen listesi</h1>
+    <p class="subtitle mock-dev-only">Okul › Öğretmenler</p>
+    <div class="mock-app-shell mock-app-shell--menu-ust">
+      <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+        <div class="menu-app">Okul</div>
+        <a href="cografi-dagilim.html">Dashboard</a>
+        <a href="ogrenci-rapor.html">Raporlar</a>
+        <a href="iletisim-form.html">İletişim</a>
+        <div class="dropdown mock-menu-dropdown mock-menu-dropdown--child-active">
+          <button class="mock-menu-toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Listeler</button>
+          <ul class="dropdown-menu mock-menu-dropdown-menu">
+            <li><a class="dropdown-item" href="sinif-liste.html">Sınıflar</a></li>
+            <li><a class="dropdown-item active" href="ogretmen-liste.html">Öğretmenler</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="mock-app-body">
+        <div class="mock-header">
+          <div class="mock-breadcrumb">Okul › Listeler › Öğretmenler › Liste</div>
+          <strong>Öğretmenler</strong>
+        </div>
+        <div class="mock-toolbar">
+          <a href="ogretmen-form.html" class="mock-btn mock-btn-primary">+ Yeni Öğretmen</a>
+        </div>
+        <div class="mock-content">
+          <div class="mock-list-wrap">
+          <table class="mock-table">
+            <thead>
+              <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Doğum tarihi</th>
+                <th>Telefon</th>
+                <th class="mock-th-tools mock-th-tools--action"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ayşe</td><td>Yılmaz</td><td>15.03.1985</td><td>0532 111 22 33</td>
+                <td><a href="ogretmen-form.html" class="mock-icon-btn" title="Düzenle" aria-label="Düzenle"><svg class="mock-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a></td>
+              </tr>
+              <tr>
+                <td>Mehmet</td><td>Kaya</td><td>22.07.1982</td><td>0533 444 55 66</td>
+                <td><a href="ogretmen-form.html" class="mock-icon-btn" title="Düzenle" aria-label="Düzenle"><svg class="mock-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a></td>
+              </tr>
+              <tr>
+                <td>Zeynep</td><td>Demir</td><td>08.11.1990</td><td>0535 777 88 99</td>
+                <td><a href="ogretmen-form.html" class="mock-icon-btn" title="Düzenle" aria-label="Düzenle"><svg class="mock-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a></td>
+              </tr>
+              <tr>
+                <td>Can</td><td>Öztürk</td><td>30.01.1988</td><td>0536 222 33 44</td>
+                <td><a href="ogretmen-form.html" class="mock-icon-btn" title="Düzenle" aria-label="Düzenle"><svg class="mock-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="mock-pagination">
+            <span>Toplam 18 kayıt · sayfa başına 10</span>
+            <div class="mock-pagination-pages" aria-label="Sayfalama">
+              <button type="button" disabled aria-label="Önceki">‹</button>
+              <button type="button" class="active">1</button>
+              <button type="button">2</button>
+              <button type="button" aria-label="Sonraki">›</button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mock-prompt" aria-label="Cursor örnek prompt">
+      <h2>Cursor'a örnek prompt</h2>
+      <div class="mock-prompt-note">
+        <strong>Taslak Demo — örnek · tüm türler</strong>
+        Liste, form, rapor ve üst menü bu çalışmada bir arada. Kutuyu kopyalayıp Cursor'a yapıştır; kendi çalışmanda klasör adı, menü yolu ve alanları değiştirmen yeterli.
+        Tüm akış için <a href="../../../module-creator/is-analisti.html">iş analisti rehberi</a>.
+      </div>
+      <div class="prompt-box">taslak_demo çalışmasında öğretmen listesi mockup'ı istiyorum.
+
+Menü: üst menü. Listeler dropdown altında Öğretmenler.
+Liste sütunları: ad, soyad, doğum tarihi, telefon
+Üstte «+ Yeni Öğretmen»; forma gitsin. Her satırda düzenle ikonu.
+
+Sadece bu liste ekranı; Jira task yazma.</div>
+    </section>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../../..',
+  page: 'mock-ogretmen-liste',
+  calisma: {
+    id: 'taslak_demo',
+    label: 'Taslak Demo',
+    base: '..',
+    mockups: [
+      { id: 'mock-cografi-dagilim', label: 'Coğrafi Dağılım', href: 'mockup/cografi-dagilim.html', rapor: true },
+      { id: 'mock-ogrenci-rapor', label: 'Öğrenci Raporları', href: 'mockup/ogrenci-rapor.html', rapor: true },
+      { id: 'mock-iletisim-form', label: 'İletişim Formu', href: 'mockup/iletisim-form.html' },
+      { id: 'mock-sinif-liste', label: 'Sınıf Listesi', href: 'mockup/sinif-liste.html' },
+      { id: 'mock-sinif-form', label: 'Sınıf Formu', href: 'mockup/sinif-form.html' },
+      { id: 'mock-ogretmen-liste', label: 'Öğretmen Listesi', href: 'mockup/ogretmen-liste.html' },
+      { id: 'mock-ogretmen-form', label: 'Öğretmen Formu', href: 'mockup/ogretmen-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+<script src="../../../js/mock-tom-select.js"></script>
+<script src="../../../js/calismalar-meta.js"></script>
+<script src="../../../js/rapor-widgets.js"></script>
+<script src="../../../js/calisma-cursor.js"></script>
+<script src="../../../js/sunum-query.js"></script>
+<script src="../../../js/mock-sunum.js"></script>
+<script src="../../../js/nav.js"></script>
+</body>
+</html>

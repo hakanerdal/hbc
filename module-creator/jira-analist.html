@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jira İş Açma | HBC</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Jira İş Açma</h1>
+    <p class="subtitle">3 dakikalık kılavuz</p>
+
+    <div class="lead">
+      Task metni hazır kutularda durur. Sen kopyalarsın; metni kendin yazmana gerek yok.
+    </div>
+
+    <h2>Adımlar</h2>
+    <table>
+      <thead><tr><th>#</th><th>Ne yaparsın</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><a href="../index.html">Çalışmalarım</a> → modül klasörüne gir (ör. Kaynaktan Musluğa)</td></tr>
+        <tr><td>2</td><td><strong>Jira task metinleri</strong> sayfasını aç — üstte <strong>Backend</strong> ve <strong>Frontend</strong> sekmeleri vardır</td></tr>
+        <tr><td>3</td><td>İlgili sekmede task kutusunun sağ üstünden <strong>Tümünü kopyala</strong> (mockup linki kopyaya dahil değildir)</td></tr>
+        <tr><td>4</td><td>Jira'da issue aç → <strong>Description</strong> (Açıklama) alanına git</td></tr>
+        <tr><td>5</td><td>Alttaki <strong>Text</strong> sekmesine geç → yapıştır (Ctrl+V)</td></tr>
+        <tr><td>6</td><td><strong>Visual</strong> sekmesine geç → biçimlendirilmiş metni görüntüle ve gerekirse düzenle</td></tr>
+        <tr><td>7</td><td>Issue başlığı = kutudaki başlık (ör. <code>[FE] Kaynak Listesi</code>)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Text ve Visual modu</h2>
+    <div class="lead" style="margin-top:0.5rem">
+      Jira açıklama kutusunun altında iki sekme vardır: <strong>Visual</strong> ve <strong>Text</strong>.
+      Kopyaladığın metni önce <strong>Text</strong> modunda yapıştır; sonra <strong>Visual</strong>'a geçerek
+      başlıkların ve listelerin düzgün göründüğünü kontrol et. Küçük düzeltmeleri Visual modda yapabilirsin.
+    </div>
+    <ol>
+      <li><strong>Text</strong> sekmesini seç (mavi / aktif görünür)</li>
+      <li>İmleci açıklama alanına getir → <strong>yapıştır</strong></li>
+      <li><strong>Visual</strong> sekmesine tıkla → biçimlendirilmiş önizleme açılır</li>
+      <li>Gerekirse Visual modda son kontrolleri yap → kaydet</li>
+    </ol>
+    <p style="font-size:0.85rem;color:var(--muted)">
+      Doğrudan Visual modda yapıştırırsan biçim bozulabilir; önce Text önerilir.
+    </p>
+
+    <h2>BE ve FE</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.5rem">
+      Task metinleri sayfasında <strong>Backend</strong> ve <strong>Frontend</strong> ayrı sekmelerdedir.
+      Kutunun başlığında <code>[BE]</code> veya <code>[FE]</code> öneki görünür; hangi sekmede olduğun zaten belli olur.
+    </p>
+    <table>
+      <thead><tr><th>Önek</th><th>Kime</th></tr></thead>
+      <tbody>
+        <tr><td><strong>[BE]</strong></td><td>Backend — arka plan / veri işleri</td></tr>
+        <tr><td><strong>[FE]</strong></td><td>Frontend — ekran işleri</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Örnek</h2>
+    <p><a href="../calismalarim/kaynaktan_musluga/isler.html">Kaynaktan Musluğa › task metinleri</a></p>
+
+    <h2>İlgili sayfalar</h2>
+    <ul style="font-size:0.9rem;margin:0;padding-left:1.25rem">
+      <li><a href="is-analisti.html">Başlangıç rehberi</a></li>
+      <li><a href="kurulum-analist.html">Kurulum ve gereksinimler</a> — Cursor, Python</li>
+    </ul>
+  </main>
+</div>
+<script>window.TASK_HUB = { taskRoot: '..', page: 'rehber-jira' };</script>
+<script src="../js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "name": "hbc-task-hub",
+  "private": true,
+  "scripts": {
+    "start": "node scripts/yeni-calisma-server.mjs"
+  }
+}

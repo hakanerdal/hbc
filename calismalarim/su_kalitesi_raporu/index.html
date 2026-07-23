@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Su Kalitesi Özeti | Çalışmalarım</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    .tile-jira {
+      display: block; background: #fff; border: 1px solid var(--border); border-radius: 8px;
+      padding: 1rem; text-decoration: none; color: inherit; margin-top: 0.5rem;
+    }
+    .tile-jira:hover { border-color: var(--accent); }
+    .tile-jira strong { color: var(--accent); }
+    .tile-jira span { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Su Kalitesi Özeti</h1>
+    <p class="subtitle">Salt okunur rapor — ikinci örnek çalışma (CRUD değil)</p>
+
+    <div class="calisma-durum-bar" id="calisma-durum-bar"></div>
+
+    <div class="lead">
+      Menü: <strong>Su Kalitesi Özeti › Raporlar › Bölgesel özet</strong>.
+      Veri <strong>hbc.kaynak</strong> tablosundan bölge bazında özetlenir (Kaynaktan Musluğa kaynakları ile uyumlu).
+      Form veya düzenleme ekranı yok — filtre, grafik, tablo ve dışa aktarma.
+    </div>
+
+    <h2>FE Mockup'lar</h2>
+    <div class="tile-panel">
+      <p class="tile-panel__lead">Wireframe rapor ekranı — geliştirme öncesi PM / analist onayı.</p>
+      <div class="tile-grid tile-grid--mock">
+        <a class="tile-card tile-card--fe" href="mockup/rapor.html">
+          <span class="tile-card__badge">1</span>
+          <div class="tile-card__body">
+            <strong>Bölgesel Özet</strong>
+            <span>Raporlar · grafik + tablo</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <h2>Jira</h2>
+    <a class="tile-jira" href="isler.html"><strong>Task metinleri</strong><span>1 BE + 1 FE — Tümünü kopyala</span></a>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../..',
+  page: 'calisma-ozet',
+  calisma: {
+    id: 'su_kalitesi_raporu',
+    label: 'Su Kalitesi Özeti',
+    base: '.',
+    mockups: [
+      { id: 'mock-rapor', label: 'Bölgesel özet', href: 'mockup/rapor.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../../js/sunum-query.js"></script>
+<script src="../../js/calismalar-meta.js"></script>
+<script src="../../js/calisma-ozet.js"></script>
+<script src="../../js/rapor-widgets.js"></script>
+<script src="../../js/calisma-cursor.js"></script>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

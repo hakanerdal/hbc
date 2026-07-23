@@ -1,0 +1,401 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Taslak Demo — Jira Task Metinleri</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    .task-tabs { display: flex; gap: 0.35rem; margin: 1rem 0 0; border-bottom: 2px solid var(--border); }
+    .task-tab { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1rem; font-size: 0.85rem; font-weight: 600; color: var(--muted); border: none; background: none; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; border-radius: 6px 6px 0 0; }
+    .task-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: #fff; }
+    .tab-chip { display: inline-flex; align-items: center; justify-content: center; min-width: 1.35rem; height: 1.35rem; padding: 0 0.35rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; }
+    .tab-chip-be { background: #e3f2fd; color: #1565c0; }
+    .tab-chip-fe { background: #e8f5e9; color: #2e7d32; }
+    .task-tab.active .tab-chip-be { background: #1565c0; color: #fff; }
+    .task-tab.active .tab-chip-fe { background: #2e7d32; color: #fff; }
+    .tab-panel { padding-top: 1rem; }
+    .tab-panel[hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<div class="layout layout--isler">
+  <nav id="sidebar"></nav>
+  <main class="isler-main" id="isler-main">
+    <h1>Taslak Demo — Jira task metinleri</h1>
+    <p class="subtitle">9 Backend · 7 Frontend — örnek · tüm türler</p>
+    <div class="task-tabs" role="tablist">
+      <button type="button" class="task-tab active" data-tab="be" id="tab-be">Backend <span class="tab-chip tab-chip-be" id="chip-be">9</span></button>
+      <button type="button" class="task-tab" data-tab="fe" id="tab-fe">Frontend <span class="tab-chip tab-chip-fe" id="chip-fe">7</span></button>
+    </div>
+
+    <div class="tab-panel" id="panel-be" data-tab-panel="be">
+
+      <div class="issue" id="be-cografi-dagilim">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/cografi-dagilim.html" target="_blank" rel="noopener">mockup/cografi-dagilim.html</a></div>
+        <h4>[BE] Coğrafi Dağılım Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getCografiDagilim</span>
+          <span><strong>Tablo:</strong> ogrenci, ogrenci_adres (il, ilce)</span>
+          <span><strong>Tüketici:</strong> [FE] Coğrafi Dağılım</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Dashboard haritaları ve il özet tablosu için öğrenci adres dağılımı.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş — turkiyeIller[]: il, plaka, ogrenciSayisi</li>
+          <li>Dönüş — ankaraIlceler[]: ilce, ogrenciSayisi (sıra no ile harita eşlemesi)</li>
+          <li>İl özet tablosu için aynı veri kümesi kullanılabilir</li>
+          <li>Metrik: öğrenci sayısı</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-ogrenci-rapor">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/ogrenci-rapor.html" target="_blank" rel="noopener">mockup/ogrenci-rapor.html</a></div>
+        <h4>[BE] Öğrenci Raporları Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getOgrenciRaporlari</span>
+          <span><strong>Tablo:</strong> ogrenci, sinif, ogretmen</span>
+          <span><strong>Tüketici:</strong> [FE] Öğrenci Raporları</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Öğrenci raporu ekranı için KPI, grafik ve özet tablo verisi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>İsteğe bağlı filtre: sinifId (boş = tümü)</li>
+          <li>KPI: toplamOgrenci, toplamOgretmen, toplamSinif</li>
+          <li>Grafikler: sinifaGoreOrtalama[], ogretmeneGoreOrtalama[], ogrenciOrtalama[]</li>
+          <li>sinifMevcutlari[]: sinifAdi, ogrenciSayisi — sayfalanabilir</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-iletisim-kaydet">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/iletisim-form.html" target="_blank" rel="noopener">mockup/iletisim-form.html</a></div>
+        <h4>[BE] İletişim Mesajı Kaydet Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> saveIletisimMesaji</span>
+          <span><strong>Tablo:</strong> iletisim_mesaji</span>
+          <span><strong>Tüketici:</strong> [FE] İletişim Formu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">İletişim formundan gelen mesajın kaydedilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Zorunlu: adSoyad, veliMi (evet/hayır), telefon, eposta, mesaj</li>
+          <li>E-posta formatı doğrulanır</li>
+          <li>Başarılı kayıtta onay mesajı döner; liste ekranı yok</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-sinif-list">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/sinif-liste.html" target="_blank" rel="noopener">mockup/sinif-liste.html</a></div>
+        <h4>[BE] Sınıf Listesi Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getSinifListesi</span>
+          <span><strong>Tablo:</strong> sinif, ogretmen</span>
+          <span><strong>Tüketici:</strong> [FE] Sınıf Listesi</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Sınıf listesi ekranı için kayıtların listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: id, ad, mevcut, sinifOgretmeniAdi</li>
+          <li>Sayfalama ve sıralama (varsayılan: ad)</li>
+          <li>İsteğe bağlı arama: ad</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-sinif-detay">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/sinif-form.html" target="_blank" rel="noopener">mockup/sinif-form.html</a></div>
+        <h4>[BE] Sınıf Detay Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getSinifById</span>
+          <span><strong>Tablo:</strong> sinif</span>
+          <span><strong>Tüketici:</strong> [FE] Sınıf Formu (düzenle)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Sınıf formunda tek kaydın getirilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>id ile tek kayıt döner</li>
+          <li>Dönüş: id, ad, mevcut, ogretmenId</li>
+          <li>Kayıt yoksa uygun hata</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-sinif-save">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/sinif-form.html" target="_blank" rel="noopener">mockup/sinif-form.html</a></div>
+        <h4>[BE] Sınıf Kaydet Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> saveSinif</span>
+          <span><strong>Tablo:</strong> sinif</span>
+          <span><strong>Tüketici:</strong> [FE] Sınıf Formu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Yeni sınıf oluşturma ve mevcut sınıfı güncelleme.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Zorunlu: ad, mevcut (≥ 0), ogretmenId</li>
+          <li>ogretmenId geçerli öğretmen kaydına referans verir</li>
+          <li>id varsa güncelle, yoksa ekle</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-ogretmen-list">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/ogretmen-liste.html" target="_blank" rel="noopener">mockup/ogretmen-liste.html</a></div>
+        <h4>[BE] Öğretmen Listesi Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getOgretmenListesi</span>
+          <span><strong>Tablo:</strong> ogretmen</span>
+          <span><strong>Tüketici:</strong> [FE] Öğretmen Listesi</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Öğretmen listesi ekranı için kayıtların listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Dönüş: id, ad, soyad, dogumTarihi, telefon</li>
+          <li>Sayfalama ve sıralama (varsayılan: ad)</li>
+          <li>İsteğe bağlı arama: ad veya soyad</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-ogretmen-detay">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/ogretmen-form.html" target="_blank" rel="noopener">mockup/ogretmen-form.html</a></div>
+        <h4>[BE] Öğretmen Detay Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> getOgretmenById</span>
+          <span><strong>Tablo:</strong> ogretmen</span>
+          <span><strong>Tüketici:</strong> [FE] Öğretmen Formu (düzenle)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Öğretmen formunda tek kaydın getirilmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>id ile tek kayıt döner</li>
+          <li>Dönüş: id, ad, soyad, dogumTarihi, telefon</li>
+          <li>Kayıt yoksa uygun hata</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="be-ogretmen-save">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/ogretmen-form.html" target="_blank" rel="noopener">mockup/ogretmen-form.html</a></div>
+        <h4>[BE] Öğretmen Kaydet Endpoint'i</h4>
+        <div class="issue-meta">
+          <span><strong>Method:</strong> saveOgretmen</span>
+          <span><strong>Tablo:</strong> ogretmen</span>
+          <span><strong>Tüketici:</strong> [FE] Öğretmen Formu</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Yeni öğretmen oluşturma ve mevcut öğretmeni güncelleme.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Zorunlu: ad, soyad, dogumTarihi, telefon</li>
+          <li>id varsa güncelle, yoksa ekle</li>
+        </ul>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+    </div>
+
+    <div class="tab-panel" id="panel-fe" data-tab-panel="fe" hidden>
+
+      <div class="issue" id="fe-cografi-dagilim">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/cografi-dagilim.html" target="_blank" rel="noopener">mockup/cografi-dagilim.html</a></div>
+        <h4>[FE] Coğrafi Dağılım</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Okul › Dashboard (üst menü)</span>
+          <span><strong>Veri:</strong> [BE] Coğrafi Dağılım Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Türkiye ve Ankara ilçe haritaları ile il özet tablosu; salt okunur dashboard.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Toolbar: Raporla, Excel'e aktar</li>
+          <li>Türkiye il haritası — tam genişlik, sol alt lejant</li>
+          <li>Ankara ilçe haritası — tam genişlik, lejant</li>
+          <li>İl bazında özet tablo</li>
+          <li>SVG gömülü template; file:// uyumlu</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-ogrenci-rapor">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/ogrenci-rapor.html" target="_blank" rel="noopener">mockup/ogrenci-rapor.html</a></div>
+        <h4>[FE] Öğrenci Raporları</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Okul › Raporlar (üst menü)</span>
+          <span><strong>Veri:</strong> [BE] Öğrenci Raporları Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">KPI, Chart.js grafikleri ve sınıf mevcutları tablosu; salt okunur rapor.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Filtre: sınıf dropdown (Tümü + sınıflar); Raporla</li>
+          <li>KPI kartları: toplam öğrenci, öğretmen, sınıf</li>
+          <li>Pasta, yatay çubuk ve çizgi grafik (Chart.js)</li>
+          <li>Sınıf mevcutları tablosu — sayfalama</li>
+          <li>Excel'e aktar; form veya + Yeni yok</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-iletisim-form">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/iletisim-form.html" target="_blank" rel="noopener">mockup/iletisim-form.html</a></div>
+        <h4>[FE] İletişim Formu</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Okul › İletişim (üst menü, tekil form)</span>
+          <span><strong>Veri:</strong> [BE] İletişim Mesajı Kaydet</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Veli / ziyaretçi iletişim formu; liste ekranı yok.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Alanlar: Ad Soyad *, Veli mi? * (Evet/Hayır radio), Telefon *, E-posta *, Mesaj * (textarea)</li>
+          <li>Gönder butonu — [BE] kaydet endpoint'ini çağırır</li>
+          <li>Beyaz form kartı; gri arka plan</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-sinif-liste">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/sinif-liste.html" target="_blank" rel="noopener">mockup/sinif-liste.html</a></div>
+        <h4>[FE] Sınıf Listesi</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Okul › Listeler › Sınıflar (üst menü dropdown)</span>
+          <span><strong>Veri:</strong> [BE] Sınıf Listesi Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Sınıfların tabloda listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Sütunlar: Ad, Mevcut, Sınıf öğretmeni</li>
+          <li>«+ Yeni Sınıf» ile forma gider</li>
+          <li>Satırda düzenle ikonu ile forma gider</li>
+          <li>Sayfalama tablo altında; kolon sıralama / filtre ikonları</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-sinif-form">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/sinif-form.html" target="_blank" rel="noopener">mockup/sinif-form.html</a></div>
+        <h4>[FE] Sınıf Formu</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Okul › Listeler › Sınıflar › Yeni / Düzenle</span>
+          <span><strong>Veri:</strong> [BE] Sınıf Detay + [BE] Sınıf Kaydet, öğretmen listesi (dropdown)</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Sınıf adı, mevcut ve sınıf öğretmeni alanları.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Alanlar: Ad *, Mevcut * (sayı), Sınıf öğretmeni * (dropdown)</li>
+          <li>Kaydet ve Listeye Dön butonları çalışır</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-ogretmen-liste">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/ogretmen-liste.html" target="_blank" rel="noopener">mockup/ogretmen-liste.html</a></div>
+        <h4>[FE] Öğretmen Listesi</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Okul › Listeler › Öğretmenler</span>
+          <span><strong>Veri:</strong> [BE] Öğretmen Listesi Endpoint'i</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Öğretmenlerin tabloda listelenmesi.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Sütunlar: Ad, Soyad, Doğum tarihi, Telefon</li>
+          <li>«+ Yeni Öğretmen» ile forma gider</li>
+          <li>Satırda düzenle ikonu ile forma gider</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+      <div class="issue" id="fe-ogretmen-form">
+        <div class="issue-mockup no-copy"><span>Mockup: </span><a href="mockup/ogretmen-form.html" target="_blank" rel="noopener">mockup/ogretmen-form.html</a></div>
+        <h4>[FE] Öğretmen Formu</h4>
+        <div class="issue-meta">
+          <span><strong>Menü:</strong> Okul › Listeler › Öğretmenler › Yeni / Düzenle</span>
+          <span><strong>Veri:</strong> [BE] Öğretmen Detay + [BE] Öğretmen Kaydet</span>
+        </div>
+        <h5>İster</h5>
+        <p class="desc">Öğretmen kişisel bilgileri formu.</p>
+        <h5>Kabul kriterleri</h5>
+        <ul class="criteria">
+          <li>Alanlar: Ad *, Soyad *, Doğum tarihi *, Telefon *</li>
+          <li>Kaydet ve Listeye Dön butonları çalışır</li>
+        </ul>
+        <br>
+        <p class="desc issue-fe-theme-note"><strong>Ekranlar örnektir, mevcut temaya uygun şekilde yapılmalıdır.</strong></p>
+        <button type="button" class="copy-btn">Tümünü kopyala</button>
+      </div>
+
+    </div>
+  </main>
+  <aside class="isler-toc-wrap" id="isler-toc" aria-label="Task listesi"></aside>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../..',
+  page: 'calisma-isler',
+  calisma: {
+    id: 'taslak_demo',
+    label: 'Taslak Demo',
+    base: '.',
+    mockups: [
+      { id: 'mock-cografi-dagilim', label: 'Coğrafi Dağılım', href: 'mockup/cografi-dagilim.html', rapor: true },
+      { id: 'mock-ogrenci-rapor', label: 'Öğrenci Raporları', href: 'mockup/ogrenci-rapor.html', rapor: true },
+      { id: 'mock-iletisim-form', label: 'İletişim Formu', href: 'mockup/iletisim-form.html' },
+      { id: 'mock-sinif-liste', label: 'Sınıf Listesi', href: 'mockup/sinif-liste.html' },
+      { id: 'mock-sinif-form', label: 'Sınıf Formu', href: 'mockup/sinif-form.html' },
+      { id: 'mock-ogretmen-liste', label: 'Öğretmen Listesi', href: 'mockup/ogretmen-liste.html' },
+      { id: 'mock-ogretmen-form', label: 'Öğretmen Formu', href: 'mockup/ogretmen-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+(function () {
+  function switchTab(name) {
+    document.querySelectorAll('.task-tab').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-tab') === name);
+    });
+    document.querySelectorAll('[data-tab-panel]').forEach(function (panel) {
+      panel.hidden = panel.getAttribute('data-tab-panel') !== name;
+    });
+    if (location.hash !== '#' + name) location.hash = name;
+  }
+  document.querySelectorAll('.task-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () { switchTab(btn.getAttribute('data-tab')); });
+  });
+  var hash = (location.hash || '').replace('#', '');
+  if (hash === 'fe' || hash === 'be') switchTab(hash);
+})();
+</script>
+<script src="../../js/sunum-query.js"></script>
+<script src="../../js/isler-mockups.js"></script>
+<script src="../../js/isler-copy.js"></script>
+<script src="../../js/isler-task-edit.js"></script>
+<script src="../../js/isler-toc.js"></script>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

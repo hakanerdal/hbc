@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mockup: Tesis Listesi</title>
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="mock-shell.css" />
+  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Mockup: Tesis listesi</h1>
+    <p class="subtitle mock-doc">Örnek ekran — tarayıcıda müşteriye gösterilebilir</p>
+    <div class="mock-app-shell">
+      <nav class="mock-app-menu" aria-label="Uygulama menüsü">
+        <div class="menu-app">Kaynaktan Musluğa</div>
+        <button class="mock-menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mock-menu-etoloji" aria-expanded="true" aria-controls="mock-menu-etoloji">Etoloji</button>
+        <div class="collapse show mock-menu-collapse" id="mock-menu-etoloji">
+          <div class="mock-menu-sub">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="kaynak-liste.html">Kaynaklar</a>
+            <a href="tesis-liste.html" class="active">Tesisler</a>
+            <a href="musluk-liste.html">Musluklar</a>
+          </div>
+        </div>
+      </nav>
+      <div class="mock-app-body">
+        <div class="mock-header">
+          <div class="mock-breadcrumb">Kaynaktan Musluğa › Etoloji › Tesisler › Liste</div>
+          <strong>Tesisler</strong>
+        </div>
+        <div class="mock-toolbar">
+          <a href="tesis-form.html" class="mock-btn mock-btn-primary">+ Yeni Tesis</a>
+        </div>
+        <div class="mock-content">
+          <div class="mock-list-wrap">
+          <table class="mock-table">
+            <thead>
+              <tr>
+                <th class="mock-th-tools">
+                  <span class="mock-th-label">Adı</span>
+                  <span class="mock-th-btns">
+                    <button type="button" class="mock-col-btn mock-col-btn--sort is-active" title="Sırala" aria-label="Adı sırala">▲</button>
+                    <button type="button" class="mock-col-btn mock-col-btn--filter" title="Filtrele" aria-label="Adı filtrele">⌕</button>
+                  </span>
+                </th>
+                <th class="mock-th-tools">
+                  <span class="mock-th-label">Kodu</span>
+                  <span class="mock-th-btns">
+                    <button type="button" class="mock-col-btn mock-col-btn--sort" title="Sırala" aria-label="Kodu sırala">↕</button>
+                    <button type="button" class="mock-col-btn mock-col-btn--filter" title="Filtrele" aria-label="Kodu filtrele">⌕</button>
+                  </span>
+                </th>
+                <th class="mock-th-tools">
+                  <span class="mock-th-label">Kalite</span>
+                  <span class="mock-th-btns">
+                    <button type="button" class="mock-col-btn mock-col-btn--sort" title="Sırala" aria-label="Kalite sırala">↕</button>
+                    <button type="button" class="mock-col-btn mock-col-btn--filter" title="Filtrele" aria-label="Kalite filtrele">⌕</button>
+                  </span>
+                </th>
+                <th class="mock-th-tools">
+                  <span class="mock-th-label">Su Kaynakları</span>
+                  <span class="mock-th-btns">
+                    <button type="button" class="mock-col-btn mock-col-btn--sort" title="Sırala" aria-label="Kaynak sırala">↕</button>
+                    <button type="button" class="mock-col-btn mock-col-btn--filter" title="Filtrele" aria-label="Kaynak filtrele">⌕</button>
+                  </span>
+                </th>
+                <th class="mock-th-tools mock-th-tools--action"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Arıtma Tesisi Kuzey</td>
+                <td>ART-K01</td>
+                <td>78</td>
+                <td class="mock-muted">Gediz Kaynağı, Melen Kaynağı</td>
+                <td><a href="tesis-form.html" class="mock-icon-btn" title="Düzenle" aria-label="Düzenle"><svg class="mock-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a></td>
+              </tr>
+              <tr>
+                <td>İçme Suyu Tesisi Merkez</td>
+                <td>IC-M02</td>
+                <td>82</td>
+                <td class="mock-muted">Manavgat Kaynağı</td>
+                <td><a href="tesis-form.html" class="mock-icon-btn" title="Düzenle" aria-label="Düzenle"><svg class="mock-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a></td>
+              </tr>
+              <tr>
+                <td>Dağıtım Tesisi Güney</td>
+                <td>DAG-G03</td>
+                <td>75</td>
+                <td class="mock-muted">Çoruh Kaynağı, Gediz Kaynağı</td>
+                <td><a href="tesis-form.html" class="mock-icon-btn" title="Düzenle" aria-label="Düzenle"><svg class="mock-icon-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="mock-pagination">
+            <span>Toplam 3 kayıt · sayfa başına 10</span>
+            <div class="mock-pagination-pages" aria-label="Sayfalama">
+              <button type="button" disabled aria-label="Önceki">‹</button>
+              <button type="button" class="active">1</button>
+              <button type="button" disabled aria-label="Sonraki">›</button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mock-prompt" aria-label="Cursor örnek prompt">
+      <h2>Cursor'a örnek prompt</h2>
+      <div class="mock-prompt-note">
+        <strong>Örnek proje — bu ekran böyle tarif edildi</strong>
+        Kutuyu kopyalayıp Cursor'a yapıştır; kendi çalışmanda klasör adı, menü yolu ve sütunları değiştirmen yeterli.
+        Tüm akış için <a href="../../../module-creator/is-analisti.html">iş analisti rehberi</a>.
+      </div>
+      <div class="prompt-box">kaynaktan_musluga çalışmasında tesis listesi mockup'ı istiyorum.
+
+Menü: Etoloji altında Tesisler
+Liste sütunları: adı, kodu, kalite, su kaynakları (birden fazlaysa virgülle)
+Üstte «+ Yeni Tesis» butonu; satırda düzenle ikonu.
+
+Sadece liste ekranı; Jira task yazma.</div>
+    </section>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../../..',
+  page: 'mock-tesis-liste',
+  calisma: {
+    label: 'Kaynaktan Musluğa',
+    base: '..',
+    mockups: [
+      { id: 'mock-dashboard', label: 'Dashboard', href: 'mockup/dashboard.html' },
+      { id: 'mock-kaynak-liste', label: 'Kaynak listesi', href: 'mockup/kaynak-liste.html' },
+      { id: 'mock-kaynak-form', label: 'Kaynak formu', href: 'mockup/kaynak-form.html' },
+      { id: 'mock-tesis-liste', label: 'Tesis listesi', href: 'mockup/tesis-liste.html' },
+      { id: 'mock-tesis-form', label: 'Tesis formu', href: 'mockup/tesis-form.html' },
+      { id: 'mock-musluk-liste', label: 'Musluk listesi', href: 'mockup/musluk-liste.html' },
+      { id: 'mock-musluk-form', label: 'Musluk formu', href: 'mockup/musluk-form.html' }
+    ],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
+<script src="../../../js/mock-tom-select.js"></script>
+<script src="../../../js/calismalar-meta.js"></script>
+<script src="../../../js/rapor-widgets.js"></script>
+<script src="../../../js/calisma-cursor.js"></script>
+<script src="../../../js/sunum-query.js"></script>
+<script src="../../../js/mock-sunum.js"></script>
+<script src="../../../js/nav.js"></script>
+</body>
+</html>
