@@ -381,6 +381,25 @@ Sonra değişiklikleri commit edip GitHub'a push etmeye hazır olduğumu söyle 
       </p>
     </div>
 
+    <div class="note-box">
+      <strong>Çakışma olursa (korkutucu değil)</strong>
+      Pull veya push sırasında Cursor / Git «conflict», «çakışma» veya «rejected» derse:
+      aynı dosyaya sizden önce başka biri de yazmış demektir. Komut ezberlemeyin — sohbete yapıştırın:
+      <div class="path-duo" style="margin-top:0.65rem;margin-bottom:0">
+        <div class="path-card path-card--cursor">
+          <span class="path-card__label">Cursor ile</span>
+          <div class="prompt-box">Git çakışması / conflict var. Dosyaları bozmadan çöz:
+önce durumu kısaca Türkçe anlat, sonra çakışmayı gider.
+Benim son mockup / çalışma değişikliklerimi koru; ortak dosyalarda (ör. calismalar-meta.js) her iki tarafın eklemelerini birleştir.
+Bitince push etmeye hazır mı söyle; onaylarsam push et.</div>
+        </div>
+        <div class="path-card path-card--manuel">
+          <span class="path-card__label">Önlem</span>
+          <p>Çakışmayı azaltmak için: işe başlamadan <strong>pull</strong>, aynı çalışma klasörüne aynı anda iki kişi girmeyin, bitince <strong>push</strong>.</p>
+        </div>
+      </div>
+    </div>
+
     <h2>7. Değişiklikleri GitHub'a gönderme (ayrıntı)</h2>
     <p style="font-size:0.9rem;margin:0 0 0.65rem">
       Cursor'da mockup ürettiniz veya düzelttiniz. Bunlar şimdilik sadece sizin bilgisayarınızda.
@@ -484,6 +503,7 @@ Kaydettikten sonra tekrar kontrol edip bana göster.</div>
       <thead><tr><th>Belirti</th><th>Ne yapın?</th></tr></thead>
       <tbody>
         <tr><td>Klon oldu, sol ağaç boş / yanlış klasör</td><td>Bölüm 4 turuncu kutu — <code>hbc</code> için Open Folder</td></tr>
+        <tr><td>«conflict» / çakışma / push rejected</td><td>Adım 6'daki yeşil <strong>çakışma</strong> prompt'unu Cursor'a yapıştırın</td></tr>
         <tr><td>«configure your user.name and user.email»</td><td>Bölüm <strong>7a</strong> yeşil prompt (ad + e-posta); Cancel → yapıştır → sonra 7b</td></tr>
         <tr><td>«git is not recognized» / Git yok</td><td>Bölüm 2 yeşil kurulum prompt'u; olmazsa turuncu manuel indirme. Cursor'ı yeniden açın</td></tr>
         <tr><td>Klon / push oturum istiyor</td><td>Tarayıcıda GitHub'a giriş yapın; ekip sizi repo'ya eklemiş olmalı</td></tr>
