@@ -96,6 +96,40 @@
       margin: 0.5rem 0 0;
       font-size: 0.8rem;
     }
+    .prompt-box-wrap {
+      position: relative;
+      margin: 0.5rem 0 0;
+    }
+    .prompt-box-wrap .prompt-box {
+      margin: 0;
+      padding-top: 2.35rem;
+      padding-right: 0.85rem;
+    }
+    .prompt-copy-btn {
+      position: absolute;
+      top: 0.45rem;
+      right: 0.45rem;
+      z-index: 1;
+      font: inherit;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.28rem 0.55rem;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #e8eef4;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .prompt-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+    .prompt-copy-btn.is-copied {
+      background: #2e7d32;
+      border-color: #66bb6a;
+      color: #fff;
+    }
     .path-card p { margin: 0 0 0.45rem; }
     .path-card p:last-child { margin-bottom: 0; }
     .path-card ol {
@@ -321,30 +355,65 @@ Sonra Source Control ile Commit + Push yapabileceğimi söyle (push'u ben manuel
     <h2>6. Her çalışmada: önce pull, bitince push (manuel)</h2>
     <p style="font-size:0.9rem;margin:0 0 0.65rem">
       Ekip aynı projeyi paylaşıyor. Pull ve push'u <strong>Cursor sohbetine yaptırmayın</strong> —
-      sol paneldeki <strong>Source Control</strong> (dal / çatal ikonu) ile kendiniz yapın.
-      Bu iki adımı atlamayın; aksi halde başkasının işini ezer veya sizin işiniz canlıya / arkadaşlara gitmez.
+      sol paneldeki <strong>Source Control</strong> ile kendiniz yapın.
     </p>
-    <div class="path-duo">
-      <div class="path-card path-card--manuel">
-        <span class="path-card__label">Başlamadan · Pull</span>
-        <ol>
-          <li>Sol kenarda <strong>Source Control</strong> ikonuna tıklayın.</li>
-          <li><strong>…</strong> (üç nokta) menü → <strong>Pull</strong>, veya üstteki <strong>Sync</strong>.</li>
-          <li>Bitince mockup / düzeltmeye başlayın.</li>
-        </ol>
-        <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--muted)">Görseller sonra eklenecek.</p>
-      </div>
-      <div class="path-card path-card--manuel">
-        <span class="path-card__label">Bitince · Commit + Push</span>
-        <ol>
-          <li>Source Control'de değişen dosyaları görün.</li>
-          <li>Üstteki kutuya kısa bir mesaj yazın (ör. «Kaynak listesi mockup»).</li>
-          <li><strong>Commit</strong> → ardından <strong>Sync</strong> veya <strong>Push</strong>.</li>
-        </ol>
-        <p style="margin-top:0.5rem">Push olmadan canlı site ve ekip sizin değişikliklerinizi görmez.</p>
-        <p style="margin-top:0.35rem;font-size:0.8rem;color:var(--muted)">Görseller sonra eklenecek.</p>
-      </div>
-    </div>
+
+    <h3 style="font-size:1rem;margin:1rem 0 0.5rem">6.1 Source Control'ü açın</h3>
+    <p style="font-size:0.88rem;margin:0 0 0.5rem">
+      Üstteki etkinlik çubuğunda dal / çatal ikonuna tıklayın (yeşil daire ile işaretli yer).
+    </p>
+    <figure class="rehber-figure">
+      <img src="images/kurulum-sc-1-ac.png" alt="Cursor'da Source Control ikonu" width="420" height="auto" loading="lazy" />
+      <figcaption>Bu ikon Source Control paneli — pull, commit ve push burada.</figcaption>
+    </figure>
+
+    <h3 style="font-size:1rem;margin:1.25rem 0 0.5rem">6.2 Ok yönleri ne anlama geliyor?</h3>
+    <p style="font-size:0.88rem;margin:0 0 0.5rem">
+      Sync düğmesinde veya alttaki durum çubuğunda <strong>↓</strong> / <strong>↑</strong> sayıları görünebilir:
+    </p>
+    <ul style="font-size:0.88rem;margin:0 0 0.75rem;padding-left:1.25rem">
+      <li><strong>↓</strong> (aşağı) — GitHub'da sizin bilgisayarınızda olmayan güncelleme var → çalışmadan önce alın.</li>
+      <li><strong>↑</strong> (yukarı) — Sizin commit'iniz henüz GitHub'a gitmedi → gönderin.</li>
+      <li><strong>Ok / sayı yoksa</strong> — Alınacak veya gönderilecek bir şey yok; ekstra işlem gerekmez.</li>
+    </ul>
+    <figure class="rehber-figure">
+      <img src="images/kurulum-sc-5-temiz.png" alt="Source Control — Sync ok sayısı yok" width="360" height="auto" loading="lazy" />
+      <figcaption>
+        Alttaki durum çubuğunda (main yanında) <strong>↓ / ↑ sayısı yoksa</strong> alınacak veya gönderilecek bir şey yoktur — ekstra Sync gerekmez.
+        Değişiklik listeniz boşsa Commit'e de basmayın.
+      </figcaption>
+    </figure>
+
+    <h3 style="font-size:1rem;margin:1.25rem 0 0.5rem">6.3 Başlamadan önce — Pull (her zaman olmayabilir)</h3>
+    <p style="font-size:0.88rem;margin:0 0 0.5rem">
+      Başka biri push ettiyse Sync'te <strong>↓</strong> görünür. Görünüyorsa mavi <strong>Sync Changes</strong>'e basın (veya … → Pull).
+      ↓ yoksa bu adımı atlayıp çalışmaya geçebilirsiniz.
+    </p>
+    <figure class="rehber-figure">
+      <img src="images/kurulum-sc-4-pull.png" alt="Sync Changes 1 aşağı — GitHub'dan güncelleme" width="360" height="auto" loading="lazy" />
+      <figcaption>«Sync Changes 1 ↓» = GitHub'dan 1 güncelleme alınacak. Çalışmaya başlamadan önce basın.</figcaption>
+    </figure>
+
+    <h3 style="font-size:1rem;margin:1.25rem 0 0.5rem">6.4 Bitince — Commit</h3>
+    <p style="font-size:0.88rem;margin:0 0 0.5rem">
+      İşiniz bitince Source Control'de değişen dosyalar listelenir. Üstteki kutuya kısa bir mesaj yazın
+      (ör. «Mockup eklendi») → mavi <strong>Commit</strong>'e basın.
+    </p>
+    <figure class="rehber-figure">
+      <img src="images/kurulum-sc-2-commit.png" alt="Commit mesajı ve Commit düğmesi" width="360" height="auto" loading="lazy" />
+      <figcaption>Mesaj yazın → <strong>Commit</strong>. Bu henüz sadece bilgisayarınıza kaydeder; GitHub'a gitmez.</figcaption>
+    </figure>
+
+    <h3 style="font-size:1rem;margin:1.25rem 0 0.5rem">6.5 Bitince — Push (GitHub'a gönder)</h3>
+    <p style="font-size:0.88rem;margin:0 0 0.5rem">
+      Commit'ten sonra Sync'te <strong>↑</strong> görünür. <strong>Sync Changes</strong>'e basın — değişiklikler GitHub'a gider;
+      1–3 dk sonra canlı site güncellenir (eskiyse Ctrl+F5).
+    </p>
+    <figure class="rehber-figure">
+      <img src="images/kurulum-sc-3-push.png" alt="Sync Changes 1 yukarı — GitHub'a gönder" width="360" height="auto" loading="lazy" />
+      <figcaption>«Sync Changes 1 ↑» = 1 commit GitHub'a gönderilecek. Buna basın.</figcaption>
+    </figure>
+
     <div class="ok-box">
       <strong>Cursor ne için?</strong>
       Mockup üretmek, düzeltmek, yeni çalışma oluşturmak — sohbet burada.
@@ -364,7 +433,7 @@ Sonra Source Control ile Commit + Push yapabileceğimi söyle (push'u ben manuel
           <span class="tile-card__badge">2</span>
           <div class="tile-card__body">
             <strong>Pull</strong>
-            <span>Source Control</span>
+            <span>↓ varsa Sync</span>
           </div>
         </div>
         <div class="tile-card tile-card--fe">
@@ -378,7 +447,7 @@ Sonra Source Control ile Commit + Push yapabileceğimi söyle (push'u ben manuel
           <span class="tile-card__badge">4</span>
           <div class="tile-card__body">
             <strong>Push</strong>
-            <span>Commit + Sync</span>
+            <span>Commit + Sync ↑</span>
           </div>
         </div>
         <div class="tile-card tile-card--fe">
@@ -390,8 +459,7 @@ Sonra Source Control ile Commit + Push yapabileceğimi söyle (push'u ben manuel
         </div>
       </div>
       <p class="tile-panel__foot">
-        İlk kez gönderiyorsanız ad / e-posta için <strong>7a</strong>'ya bakın.
-        Ayrıntılı adımlar: 7. ve 8.
+        İlk kez gönderiyorsanız ad / e-posta için <strong>7</strong>. adıma bakın.
       </p>
     </div>
 
@@ -405,22 +473,16 @@ Sonra Source Control ile Commit + Push yapabileceğimi söyle (push'u ben manuel
           <div class="prompt-box">Git çakışması / conflict var. Dosyaları bozmadan çöz:
 önce durumu kısaca Türkçe anlat, sonra çakışmayı gider.
 Benim son mockup / çalışma değişikliklerimi koru; ortak dosyalarda (ör. calismalar-meta.js) her iki tarafın eklemelerini birleştir.
-Bitince «Source Control ile Commit + Push yapabilirsin» de; push'u ben manuel yapacağım.</div>
+Commit veya push yapma — bitince sadece «çakışma çözüldü, Source Control'den Commit + Sync yap» yaz.</div>
         </div>
         <div class="path-card path-card--manuel">
           <span class="path-card__label">Önlem</span>
-          <p>Çakışmayı azaltmak için: işe başlamadan <strong>pull</strong>, aynı çalışma klasörüne aynı anda iki kişi girmeyin, bitince <strong>push</strong>.</p>
+          <p>Çakışmayı azaltmak için: işe başlamadan <strong>↓ varsa Sync</strong>, aynı çalışma klasörüne aynı anda iki kişi girmeyin, bitince <strong>Commit + Sync ↑</strong>.</p>
         </div>
       </div>
     </div>
 
-    <h2>7. Değişiklikleri GitHub'a gönderme (ayrıntı)</h2>
-    <p style="font-size:0.9rem;margin:0 0 0.65rem">
-      Cursor'da mockup ürettiniz veya düzelttiniz. Bunlar şimdilik sadece sizin bilgisayarınızda.
-      Arkadaşların ve <strong>canlı sitenin</strong> görmesi için Source Control ile göndermeniz gerekir.
-    </p>
-
-    <h3 style="font-size:1rem;margin:1rem 0 0.5rem">7a. İlk gönderimden önce — adınızı bir kez kaydedin</h3>
+    <h2>7. İlk gönderim — ad / e-posta (bir kez)</h2>
     <p style="font-size:0.88rem;margin:0 0 0.5rem">
       Git, «bu işi kim yaptı?» bilgisini ister. Bunu <strong>bir kez</strong> yaparsınız; sonraki gönderimlerde tekrar gerekmez.
       Ad ve e-postayı kendi bilgilerinizle yazın — e-posta olarak <strong>GitHub üyelik e-postanızı</strong> kullanın.
@@ -438,7 +500,7 @@ Kaydettikten sonra tekrar kontrol edip bana göster.</div>
       </div>
       <div class="path-card path-card--manuel">
         <span class="path-card__label">Not</span>
-        <p>Bu adım dışında günlük pull / push için Cursor sohbeti kullanmayın — Source Control yeterli.</p>
+        <p>Bu adım dışında günlük pull / push için Cursor sohbeti kullanmayın — Source Control yeterli (adım 6).</p>
       </div>
     </div>
     <div class="note-box">
@@ -446,36 +508,10 @@ Kaydettikten sonra tekrar kontrol edip bana göster.</div>
       <figure class="rehber-figure" style="margin:0.5rem 0">
         <img src="images/kurulum-git-user-uyari.png" alt="Cursor user.name user.email uyarısı" width="380" height="auto" loading="lazy" />
       </figure>
-      Korkutucu değil. <strong>Cancel</strong>'a basın → yukarıdaki yeşil prompt'u yapıştırın → bitince 7b'ye geçin.
+      Korkutucu değil. <strong>Cancel</strong>'a basın → yukarıdaki yeşil prompt'u yapıştırın → sonra adım 6 ile Commit + Sync yapın.
     </div>
 
-    <h3 style="font-size:1rem;margin:1.15rem 0 0.5rem">7b. Commit + Push (manuel)</h3>
-    <div class="path-card path-card--manuel" style="margin:0.75rem 0 1.15rem">
-      <span class="path-card__label">Manuel</span>
-      <ol>
-        <li>Sol kenar <strong>Source Control</strong> (dal ikonu).</li>
-        <li>Mesaj kutusuna kısa not yazın.</li>
-        <li><strong>Commit</strong> → <strong>Sync</strong> veya <strong>Push</strong>.</li>
-        <li>1–3 dk sonra canlı site güncellenir. Eski görünüyorsa Ctrl+F5.</li>
-      </ol>
-      <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--muted)">Ekran görüntüleri sonra eklenecek.</p>
-    </div>
-
-    <h2>8. Başkasının güncellemesini almak (pull — ayrıntı)</h2>
-    <p style="font-size:0.9rem;margin:0 0 0.5rem">
-      Günlük kullanım için adım 6 yeter. Ayrıntı:
-    </p>
-    <div class="path-card path-card--manuel" style="margin:0.75rem 0 1.15rem">
-      <span class="path-card__label">Manuel</span>
-      <ol>
-        <li>Source Control açın.</li>
-        <li><strong>…</strong> menü → <strong>Pull</strong>, veya <strong>Sync</strong>.</li>
-        <li>«conflict» / çakışma çıkarsa adım 6'daki Cursor prompt'unu kullanın; çözülünce yine Source Control ile push edin.</li>
-      </ol>
-      <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--muted)">Ekran görüntüleri sonra eklenecek.</p>
-    </div>
-
-    <h2>9. Canlı siteyi açma</h2>
+    <h2>8. Canlı siteyi açma</h2>
     <ol class="rehber-steps">
       <li>Tarayıcıda canlı siteyi açın: <a href="https://hakanerdal.github.io/hbc/" target="_blank" rel="noopener"><code>https://hakanerdal.github.io/hbc/</code></a></li>
       <li>Ana sayfada <strong>Çalışmalarım</strong> kartlarını görürsünüz; karttan mockup'a girersiniz.</li>
@@ -490,7 +526,7 @@ Kaydettikten sonra tekrar kontrol edip bana göster.</div>
     <h2>+ Yeni çalışma</h2>
     <p style="font-size:0.9rem;margin:0 0 0.5rem">
       Ana sayfadaki <strong>+ Yeni çalışma</strong> butonu formu doldurduktan sonra Cursor'a yapıştırılacak metni <strong>panoya kopyalar</strong>.
-      Metni Cursor sohbetine yapıştırın; klasör oluşur. Bitince Source Control ile <strong>Commit + Push</strong> edin (adım 6 / 7b).
+      Metni Cursor sohbetine yapıştırın; klasör oluşur. Bitince Source Control ile <strong>Commit + Sync ↑</strong> edin (adım 6).
     </p>
 
     <h2>İlk kontrol listesi</h2>
@@ -515,7 +551,7 @@ Kaydettikten sonra tekrar kontrol edip bana göster.</div>
       <tbody>
         <tr><td>Klon oldu, sol ağaç boş / yanlış klasör</td><td>Bölüm 4 turuncu kutu — <code>hbc</code> için Open Folder</td></tr>
         <tr><td>«conflict» / çakışma / push rejected</td><td>Adım 6'daki yeşil <strong>çakışma</strong> prompt'unu Cursor'a yapıştırın; çözülünce Source Control ile push</td></tr>
-        <tr><td>«configure your user.name and user.email»</td><td>Bölüm <strong>7a</strong> yeşil prompt (ad + e-posta); Cancel → yapıştır → sonra 7b</td></tr>
+        <tr><td>«configure your user.name and user.email»</td><td>Bölüm <strong>7</strong> yeşil prompt (ad + e-posta); Cancel → yapıştır → sonra adım 6 ile Sync</td></tr>
         <tr><td>«git is not recognized» / Git yok</td><td>Bölüm 2 yeşil kurulum prompt'u; olmazsa turuncu manuel indirme. Cursor'ı yeniden açın</td></tr>
         <tr><td>Klon / push oturum istiyor</td><td>Tarayıcıda GitHub'a giriş yapın; ekip sizi repo'ya eklemiş olmalı</td></tr>
         <tr><td>Push ettim, canlı eski</td><td>1–3 dk bekleyin; Ctrl+F5. Sync/Push tamamlandı mı Source Control'den bakın</td></tr>
@@ -538,5 +574,62 @@ Kaydettikten sonra tekrar kontrol edip bana göster.</div>
 <script>window.TASK_HUB = { taskRoot: '..', page: 'rehber-kurulum' };</script>
 <script src="../js/rehber-toc.js"></script>
 <script src="../js/nav.js"></script>
+<script>
+(function () {
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        resolve();
+      } catch (e) {
+        reject(e);
+      } finally {
+        document.body.removeChild(ta);
+      }
+    });
+  }
+
+  document.querySelectorAll('.prompt-box').forEach(function (box) {
+    if (box.parentElement && box.parentElement.classList.contains('prompt-box-wrap')) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'prompt-box-wrap';
+    box.parentNode.insertBefore(wrap, box);
+    wrap.appendChild(box);
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'prompt-copy-btn';
+    btn.setAttribute('aria-label', 'Promptu panoya kopyala');
+    btn.textContent = 'Kopyala';
+    wrap.appendChild(btn);
+
+    btn.addEventListener('click', function () {
+      var text = (box.innerText || box.textContent || '').replace(/\r\n/g, '\n').trim();
+      copyText(text).then(function () {
+        var prev = btn.textContent;
+        btn.textContent = 'Kopyalandı';
+        btn.classList.add('is-copied');
+        setTimeout(function () {
+          btn.textContent = prev;
+          btn.classList.remove('is-copied');
+        }, 1600);
+      }).catch(function () {
+        btn.textContent = 'Hata';
+        setTimeout(function () { btn.textContent = 'Kopyala'; }, 1600);
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
