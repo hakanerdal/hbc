@@ -674,7 +674,7 @@ HBC meta dosyasını tarayıcıdan yazamaz. **Çalışma özet sayfasında** (`#
 |-------|--------|
 | `module-creator/is-analisti.html` | 4 adım, Cursor promptları, mockup/Sunum, çalışma durumu, onay listesi |
 | `module-creator/jira-analist.html` | **Jira İş Açma** — Text/Visual, `[BE]`/`[FE]` önekleri |
-| `module-creator/kurulum-analist.html` | **Kurulum** — iş analisti bilgisayarı (Cursor, Python) |
+| `module-creator/kurulum.html` | **Kurulum** — iş analisti bilgisayarı (Cursor, Python) |
 | `module-creator.md` | Plan, tamamlananlar, iptal edilen fikirler |
 
 Analist rehberine teknik dosya yolu, `nav.js`, `calismalar-meta.js` detayı yazma — yalnızca ne görecekleri ve ne diyecekleri.
@@ -684,7 +684,7 @@ Analist rehberine teknik dosya yolu, `nav.js`, `calismalar-meta.js` detayı yazm
 - Müşteri toplantısı şablonu (#5)
 - Sekme bazlı toplu kopyala (#9)
 - Basit veri modeli sayfası (#10)
-- Analist kurulum rehberi: `kurulum-analist.html` (Cursor, Python — Node.js analist için şart değil)
+- Analist kurulum rehberi: `kurulum.html` (Cursor, Python — Node.js analist için şart değil)
 - Jira mini SSS (#3), ekran görüntülü Jira adımı (#12)
 
 ## Klasör yapısı
@@ -705,7 +705,7 @@ calismalarim/<modul>/
 module-creator/
   is-analisti.html    # Başlangıç rehberi
   jira-analist.html   # Jira İş Açma
-  kurulum-analist.html # Kurulum — iş analisti gereksinimleri
+  kurulum.html # Kurulum — iş analisti gereksinimleri
 module-creator.md     # plan / ilerleme (chat dışı takip)
 css/
   mock-bootstrap.css  # Bootstrap 5 (assets/bootstrap-5.0.2-dist) + Tom Select CDN; mockup kabuğu

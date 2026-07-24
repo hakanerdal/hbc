@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kurulum ve Gereksinimler | HBC</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .note-box {
+      background: #fff8e6;
+      border: 1px solid #ffe082;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin: 1rem 0 1.25rem;
+      font-size: 0.88rem;
+    }
+    .note-box strong { display: block; margin-bottom: 0.35rem; }
+    .ok-box {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin: 1rem 0 1.25rem;
+      font-size: 0.88rem;
+    }
+    .ok-box strong { display: block; margin-bottom: 0.35rem; }
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin: 1rem 0 1.35rem;
+    }
+    @media (max-width: 900px) {
+      .flow-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 520px) {
+      .flow-grid { grid-template-columns: 1fr; }
+    }
+    .flow-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.75rem 0.85rem;
+      background: #fafbfc;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+    .flow-card b {
+      display: block;
+      font-size: 0.78rem;
+      color: #1565c0;
+      margin-bottom: 0.25rem;
+    }
+    .path-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 0.75rem 0 1.15rem;
+      align-items: stretch;
+    }
+    @media (max-width: 720px) {
+      .path-duo { grid-template-columns: 1fr; }
+    }
+    .path-card {
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+    .path-card__label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.55rem;
+    }
+    .path-card--cursor {
+      background: #e8f5e9;
+      border: 1px solid #81c784;
+    }
+    .path-card--cursor .path-card__label {
+      background: #2e7d32;
+      color: #fff;
+    }
+    .path-card--manuel {
+      background: #fff3e0;
+      border: 1px solid #ffb74d;
+    }
+    .path-card--manuel .path-card__label {
+      background: #ef6c00;
+      color: #fff;
+    }
+    .path-card .prompt-box {
+      margin: 0.5rem 0 0;
+      font-size: 0.8rem;
+    }
+    .path-card p { margin: 0 0 0.45rem; }
+    .path-card p:last-child { margin-bottom: 0; }
+    .path-card ol {
+      margin: 0.35rem 0 0;
+      padding-left: 1.15rem;
+    }
+    .path-card li { margin: 0.25rem 0; }
+    .path-hint {
+      font-size: 0.8rem;
+      color: var(--muted, #64748b);
+      margin: 0 0 0.35rem;
+    }
+    .tile-grid--gunluk {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    @media (max-width: 900px) {
+      .tile-grid--gunluk { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px) {
+      .tile-grid--gunluk { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .tile-panel--gunluk { margin: 1rem 0 1.25rem; }
+    .tile-panel--gunluk .tile-panel__foot {
+      margin: 0.85rem 0 0;
+      font-size: 0.82rem;
+      color: var(--muted, #64748b);
+      text-align: center;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+<div class="layout layout--rehber">
+  <nav id="sidebar"></nav>
+  <main class="rehber-main" id="rehber-main">
+    <h1>Kurulum ve Gereksinimler</h1>
+    <p class="subtitle">Bilgisayarı hazırlama · GitHub'dan alma · Canlıya gönderme</p>
+
+    <div class="lead">
+      HBC ile mockup tasarlayıp Jira task metinlerini üretmek için <strong>Cursor</strong> kullanırsınız.
+      Çalışmalarınız <strong>GitHub</strong>'da saklanır; böylece bilgisayar formatı veya silme durumunda kaybolmaz.
+      Bu sayfa, bilgisayarda bir kez yapılacak kurulum ve günlük gönderme adımlarını özetler.
+    </div>
+
+    <h2>Büyük resim (4 adım)</h2>
+    <div class="flow-grid">
+      <div class="flow-card"><b>1 · Kur</b>Cursor + Git + Python + Chrome bir kez kurulur.</div>
+      <div class="flow-card"><b>2 · İndir &amp; aç</b>GitHub'dan klon + Cursor'da aç (bir kez).</div>
+      <div class="flow-card"><b>3 · Kaydet</b>Workspace kaydedin; sonraki sefer Open Recent.</div>
+      <div class="flow-card"><b>4 · Pull → çalış → Push</b>Her oturumda önce güncelle, bitince gönder.</div>
+    </div>
+
+    <h2>Ne kurulmalı?</h2>
+    <table>
+      <thead><tr><th>Program</th><th>Gerekli mi?</th><th>Ne için?</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Cursor</strong></td>
+          <td>Evet</td>
+          <td>Mockup üretimi, düzeltme, task metinleri; HBC'den kopyalanan metinleri buraya yapıştırırsınız</td>
+        </tr>
+        <tr>
+          <td><strong>Git</strong></td>
+          <td>Evet</td>
+          <td>Projeyi GitHub'dan indirmek ve yaptığınız değişiklikleri geri göndermek (kod yazmanız gerekmez)</td>
+        </tr>
+        <tr>
+          <td><strong>Python 3</strong></td>
+          <td>Evet</td>
+          <td>Mockup script'leri (Excel vb.). Cursor ile kontrol + kurulum prompt'u yeter</td>
+        </tr>
+        <tr>
+          <td><strong>Chrome</strong></td>
+          <td>Evet</td>
+          <td>HBC'yi açmak, mockup gezmek, <strong>Sunum</strong> modu, Jira <strong>Tümünü kopyala</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="path-hint">Aşağıda yeşil kutu = <strong>Cursor ile</strong> (önerilen). Turuncu kutu = <strong>Manuel</strong> (Cursor yetmezse veya tercih ederseniz).</p>
+
+    <h2>1. Cursor kurulumu</h2>
+    <ol class="rehber-steps">
+      <li><a href="https://cursor.com" target="_blank" rel="noopener">cursor.com</a> adresinden Cursor'ı indirip kurun.</li>
+      <li>Açılışta e-posta ile oturum açın (ekip hesabınız varsa onu kullanın).</li>
+    </ol>
+
+    <h2>2. Git kurulumu (bir kez)</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.65rem">
+      Git, dosyaları GitHub ile eşitleyen küçük bir programdır. Komut ezberlemeniz gerekmez.
+      Cursor önce <strong>kurulu mu diye bakar</strong>; yoksa kurulumda yardımcı olur.
+    </p>
+    <div class="path-duo">
+      <div class="path-card path-card--cursor">
+        <span class="path-card__label">Cursor ile</span>
+        <p>Önerilen. Sohbete yapıştırın:</p>
+        <div class="prompt-box">Git kurulu mu kontrol et (git --version). Kuruluysa sürümü söyle, başka bir şey yapma.
+Kurulu değilse Windows'ta Git for Windows kurmama yardım et (winget veya resmi indirici). Kurulum onay isterse bana söyle. Bitince tekrar kontrol et.</div>
+      </div>
+      <div class="path-card path-card--manuel">
+        <span class="path-card__label">Manuel</span>
+        <ol>
+          <li><a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com/download/win</a> adresinden Git for Windows indirin.</li>
+          <li>Kurulumda varsayılanları kabul edin (Next / Next / Finish).</li>
+          <li>İsterseniz Cursor'ı bir kez kapatıp açın.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>GitHub hesabı</strong>
+      Ekip size bir GitHub daveti göndermiş olmalı. İlk klon / gönderme sırasında tarayıcıda oturum açmanız istenebilir — <strong>GitHub üyeliğinize</strong> giriş yapın.
+    </div>
+
+    <h2>3. Python kurulumu (bir kez)</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.65rem">
+      Mockup script'leri (Excel vb.) için Python gerekir. Cursor önce <strong>kurulu mu diye bakar</strong>; yoksa kurulumda yardımcı olur.
+      Bu adımı proje indirmeden önce tamamlayın.
+    </p>
+    <div class="path-duo">
+      <div class="path-card path-card--cursor">
+        <span class="path-card__label">Cursor ile</span>
+        <p>Önerilen. Sohbete yapıştırın:</p>
+        <div class="prompt-box">Python 3 kurulu mu kontrol et (python --version veya py -3 --version). Kuruluysa sürümü söyle.
+Kurulu değilse Windows'ta Python 3 kurmama yardım et (PATH'e ekle seçeneği açık olsun).
+HBC mockup script'leri için gerekirse openpyxl paketini de kur.
+Bitince tekrar kontrol et ve kısa özet ver.</div>
+      </div>
+      <div class="path-card path-card--manuel">
+        <span class="path-card__label">Manuel</span>
+        <ol>
+          <li><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a> → Windows installer.</li>
+          <li>Kurulumda <strong>Add python.exe to PATH</strong> kutusunu işaretleyin.</li>
+          <li>Install Now. Bitince Cursor'ı yeniden açın.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h2>4. Projeyi GitHub'dan alma ve Cursor'da açma (bir kez)</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.65rem">
+      Bu adım <strong>bir kez</strong> yapılır. <strong>Klon</strong> = projenin kopyasını bilgisayarınıza indirmek.
+      Sonraki günlerde tekrar klonlamazsınız; workspace'ten açıp (adım 5) güncelleme alırsınız (adım 6).
+      Önce çalışma klasörünüzü seçin (ör. <code>D:\worx</code>), sonra aşağıdaki yollardan birini kullanın.
+    </p>
+    <div class="ok-box">
+      <strong>Adresler</strong>
+      Repo (klon için): <a href="https://github.com/hakanerdal/hbc" target="_blank" rel="noopener"><code>https://github.com/hakanerdal/hbc</code></a><br />
+      Canlı site: <a href="https://hakanerdal.github.io/hbc/" target="_blank" rel="noopener"><code>https://hakanerdal.github.io/hbc/</code></a>
+    </div>
+    <div class="path-duo">
+      <div class="path-card path-card--cursor">
+        <span class="path-card__label">Cursor ile</span>
+        <p>Önerilen. Sohbete yapıştırın (klasör yolunu gerekirse değiştirin):</p>
+        <div class="prompt-box">D:\worx klasörüne https://github.com/hakanerdal/hbc reposunu klonla. Klon bitince hbc klasörünü Cursor'da Open Folder ile aç; sol dosya ağacında calismalarim görünür hale gelsin.</div>
+        <p style="margin-top:0.5rem">Başarılıysa sol panelde <code>calismalarim</code> listelenir.</p>
+        <figure class="rehber-figure" style="margin-top:0.5rem;margin-bottom:0">
+          <img src="images/kurulum-cursor-calismalarim.png" alt="Cursor sol panelinde calismalarim" width="280" height="auto" loading="lazy" />
+        </figure>
+      </div>
+      <div class="path-card path-card--manuel">
+        <span class="path-card__label">Manuel</span>
+        <p>Sol taraftaki prompt işe yaramadıysa veya klasör açılmadıysa:</p>
+        <ol>
+          <li>Klon olduysa: <strong>File › Open Folder…</strong> (veya Add Folder to Workspace…) → doğrudan <code>hbc</code> klasörünü seçin.</li>
+          <li>Klon da olmadıysa ekibe bildirin veya Cursor'a «klon neden başarısız?» diye sorun.</li>
+        </ol>
+        <figure class="rehber-figure" style="margin-top:0.5rem;margin-bottom:0">
+          <img src="images/kurulum-cursor-add-folder.png" alt="Add Folder to Workspace" width="280" height="auto" loading="lazy" />
+        </figure>
+      </div>
+    </div>
+    <p style="font-size:0.88rem;margin:0.5rem 0">Windows klasöründe de kontrol: <code>hbc</code> içinde <code>index.html</code> ve <code>calismalarim</code> olmalı.</p>
+    <figure class="rehber-figure">
+      <img src="images/kurulum-hbc-klasor.png" alt="Dosya gezgininde hbc klasörü" width="320" height="auto" loading="lazy" />
+      <figcaption>Dosya gezgininde <strong>hbc</strong> klasörü.</figcaption>
+    </figure>
+    <div class="note-box">
+      <strong>Daha önce zip / kopya ile aldıysanız (eski çalışmalarınız varsa)</strong>
+      Eski klasördeki işlerinizi GitHub'a da taşımak için:
+      <ol style="margin:0.45rem 0 0;padding-left:1.2rem">
+        <li>Eski klasörün adını <code>eski_hbc</code> yapın (sağ tık → Yeniden adlandır).</li>
+        <li>Yukarıdaki yeşil prompt ile yeni <code>hbc</code> klonunu alın ve Cursor'da açın.</li>
+        <li>Cursor sohbetine şunu yapıştırın (yolları kendinize göre düzeltin):
+          <div class="prompt-box" style="margin-top:0.45rem">eski_hbc klasöründeki kendi çalışmalarımı yeni hbc'ye aktar.
+calismalarim altındaki çalışma klasörlerini kopyala; js/calismalar-meta.js listesine eksik girişleri ekle.
+Çakışan dosyada bana sor. Bitince ne kopyalandığını kısa özetle.
+Sonra değişiklikleri commit edip GitHub'a push etmeye hazır olduğumu söyle (ben onaylayınca push ederiz).</div>
+        </li>
+        <li>Canlı sitede ve Cursor'da çalışmalarınızı görünce <code>eski_hbc</code>'yi silebilirsiniz (veya bir süre yedek tutun).</li>
+      </ol>
+    </div>
+
+    <h2>5. Workspace kaydetme (sonraki açılışlar için)</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.65rem">
+      Her seferinde klasör aramayın. Bir kez <strong>workspace</strong> kaydedin; sonraki sefer kısayoldan açın.
+    </p>
+    <ol class="rehber-steps">
+      <li>
+        <code>hbc</code> Cursor'da açıkken: <strong>File › Save Workspace As…</strong>
+        (Türkçe arayüzde «Çalışma Alanını Farklı Kaydet» benzeri).
+      </li>
+      <li>
+        Dosya adı örn. <code>hbc.code-workspace</code> — kolay bulacağınız bir yere kaydedin
+        (masaüstü veya <code>D:\worx</code>).
+      </li>
+      <li>
+        <strong>Sonraki sefer:</strong>
+        <ul style="margin:0.35rem 0 0;padding-left:1.2rem">
+          <li><strong>File › Open Recent</strong> listesinden <code>hbc (Workspace)</code> seçin, veya</li>
+          <li>Kaydettiğiniz <code>hbc.code-workspace</code> dosyasına çift tıklayın — Cursor doğrudan HBC ile açılır.</li>
+        </ul>
+      </li>
+      <li>
+        Yerelde mockup gezmek için: Dosya gezgininde <code>hbc</code> → <code>index.html</code> çift tıklayın (Chrome).
+        Cursor'dan değil, Windows klasöründen açın.
+        <figure class="rehber-figure">
+          <img src="images/kurulum-index-html.png" alt="Dosya gezgininde hbc klasöründe index.html" width="320" height="auto" loading="lazy" />
+          <figcaption><code>index.html</code> — dosya gezgininden çift tıklayın.</figcaption>
+        </figure>
+      </li>
+      <li>Günlük akış: <a href="is-analisti.html">Başlangıç rehberi</a> — metni kopyala → Cursor sohbetine yapıştır.</li>
+    </ol>
+
+    <h2>6. Her çalışmada: önce pull, bitince push</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.65rem">
+      Ekip aynı projeyi paylaşıyor. Bu iki adımı atlamayın — aksi halde başkasının işini ezer veya sizin işiniz canlıya / arkadaşlara gitmez.
+    </p>
+    <div class="path-duo">
+      <div class="path-card path-card--cursor">
+        <span class="path-card__label">Başlamadan · Pull</span>
+        <p>Cursor'ı açtıktan sonra, mockup veya düzeltmeye <strong>başlamadan</strong> sohbete yapıştırın:</p>
+        <div class="prompt-box">HBC reposunu GitHub'dan güncelle (pull). Çakışma olursa bana basitçe anlat.</div>
+        <p style="margin-top:0.5rem">Böylece bilgisayarınızda en güncel dosyalar olur.</p>
+      </div>
+      <div class="path-card path-card--cursor" style="border-color:#66bb6a">
+        <span class="path-card__label">Bitince · Push</span>
+        <p>İşi bitirince (veya günün sonunda) mutlaka gönderin:</p>
+        <div class="prompt-box">Yaptığım HBC değişikliklerini commit et ve GitHub'a push et. Kısa bir commit mesajı yaz.</div>
+        <p style="margin-top:0.5rem">Push olmadan canlı site ve ekip sizin değişikliklerinizi görmez.</p>
+      </div>
+    </div>
+    <div class="tile-panel tile-panel--gunluk">
+      <p class="tile-panel__lead">Kısa kural — her oturumda bu sıra</p>
+      <div class="tile-grid tile-grid--mock tile-grid--gunluk">
+        <div class="tile-card tile-card--fe">
+          <span class="tile-card__badge">1</span>
+          <div class="tile-card__body">
+            <strong>Aç</strong>
+            <span>Workspace / Cursor</span>
+          </div>
+        </div>
+        <div class="tile-card tile-card--fe">
+          <span class="tile-card__badge">2</span>
+          <div class="tile-card__body">
+            <strong>Pull</strong>
+            <span>GitHub'dan güncelle</span>
+          </div>
+        </div>
+        <div class="tile-card tile-card--fe">
+          <span class="tile-card__badge">3</span>
+          <div class="tile-card__body">
+            <strong>Çalış</strong>
+            <span>Mockup / düzeltme</span>
+          </div>
+        </div>
+        <div class="tile-card tile-card--fe">
+          <span class="tile-card__badge">4</span>
+          <div class="tile-card__body">
+            <strong>Push</strong>
+            <span>GitHub'a gönder</span>
+          </div>
+        </div>
+        <div class="tile-card tile-card--fe">
+          <span class="tile-card__badge">5</span>
+          <div class="tile-card__body">
+            <strong>Kapat</strong>
+            <span>İşi bitir</span>
+          </div>
+        </div>
+      </div>
+      <p class="tile-panel__foot">
+        İlk kez gönderiyorsanız ad / e-posta için <strong>7a</strong>'ya bakın.
+        Ayrıntılı push / pull: 7. ve 8. adımlar.
+      </p>
+    </div>
+
+    <h2>7. Değişiklikleri GitHub'a gönderme (ayrıntı)</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.65rem">
+      Cursor'da mockup ürettiniz veya düzelttiniz. Bunlar şimdilik sadece sizin bilgisayarınızda.
+      Arkadaşların ve <strong>canlı sitenin</strong> görmesi için GitHub'a göndermeniz gerekir.
+    </p>
+
+    <h3 style="font-size:1rem;margin:1rem 0 0.5rem">7a. İlk gönderimden önce — adınızı bir kez kaydedin</h3>
+    <p style="font-size:0.88rem;margin:0 0 0.5rem">
+      Git, «bu işi kim yaptı?» bilgisini ister. Bunu <strong>bir kez</strong> yaparsınız; sonraki gönderimlerde tekrar gerekmez.
+      Ad ve e-postayı kendi bilgilerinizle yazın — e-posta olarak <strong>GitHub üyelik e-postanızı</strong> kullanın.
+    </p>
+    <div class="path-duo">
+      <div class="path-card path-card--cursor">
+        <span class="path-card__label">Cursor ile</span>
+        <p>Önerilen. Sohbete yapıştırın:</p>
+        <div class="prompt-box">Git'te adım ve e-postam kayıtlı mı kontrol et.
+Kayıtlıysa ekrana yaz, başka bir şey yapma.
+Kayıtlı değilse şunu kaydet (bilgisayardaki tüm projeler için geçerli olsun):
+Ad: Adınız Soyadınız
+E-posta: GitHub üyelik e-postanız
+Kaydettikten sonra tekrar kontrol edip bana göster.</div>
+      </div>
+      <div class="path-card path-card--manuel">
+        <span class="path-card__label">Manuel</span>
+        <p>Gerekmez — yeşil kutuyu kullanın. Teknik komut bilmeniz şart değil.</p>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>Bu uyarıyı görürseniz</strong>
+      <figure class="rehber-figure" style="margin:0.5rem 0">
+        <img src="images/kurulum-git-user-uyari.png" alt="Cursor user.name user.email uyarısı" width="380" height="auto" loading="lazy" />
+      </figure>
+      Korkutucu değil. <strong>Cancel</strong>'a basın → yukarıdaki yeşil prompt'u yapıştırın → bitince 7b'ye geçin.
+    </div>
+
+    <h3 style="font-size:1rem;margin:1.15rem 0 0.5rem">7b. Gönderin (push)</h3>
+    <div class="path-duo">
+      <div class="path-card path-card--cursor">
+        <span class="path-card__label">Cursor ile</span>
+        <p>Önerilen. Sohbete yapıştırın:</p>
+        <div class="prompt-box">Yaptığım HBC değişikliklerini commit et ve GitHub'a push et. Kısa bir commit mesajı yaz.</div>
+        <p style="margin-top:0.5rem">1–3 dk sonra canlı site güncellenir. Eski görünüyorsa Ctrl+F5.</p>
+      </div>
+      <div class="path-card path-card--manuel">
+        <span class="path-card__label">Manuel</span>
+        <p>Sol kenar <strong>Source Control</strong> (dal ikonu) → mesaj yazın → <strong>Commit</strong> → <strong>Sync</strong> / <strong>Push</strong>.</p>
+      </div>
+    </div>
+
+    <h2>8. Başkasının güncellemesini almak (pull — ayrıntı)</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.5rem">
+      Günlük kullanım için adım 6 yeter. Burada aynı işlemin Cursor / manuel yolları var.
+    </p>
+    <div class="path-duo">
+      <div class="path-card path-card--cursor">
+        <span class="path-card__label">Cursor ile</span>
+        <div class="prompt-box">HBC reposunu GitHub'dan güncelle (pull). Çakışma olursa bana basitçe anlat.</div>
+      </div>
+      <div class="path-card path-card--manuel">
+        <span class="path-card__label">Manuel</span>
+        <p>Source Control'de <strong>…</strong> menü → <strong>Pull</strong> (veya Sync).</p>
+      </div>
+    </div>
+
+    <h2>9. Canlı siteyi açma</h2>
+    <ol class="rehber-steps">
+      <li>Tarayıcıda canlı siteyi açın: <a href="https://hakanerdal.github.io/hbc/" target="_blank" rel="noopener"><code>https://hakanerdal.github.io/hbc/</code></a></li>
+      <li>Ana sayfada <strong>Çalışmalarım</strong> kartlarını görürsünüz; karttan mockup'a girersiniz.</li>
+      <li>Jira'ya veya mail'e paylaşırken bu canlı linki kullanın (bilgisayarınızdaki <code>file://</code> yolu değil).</li>
+    </ol>
+    <div class="ok-box">
+      <strong>Ne zaman lokal, ne zaman canlı?</strong>
+      · <strong>Lokal</strong> (<code>index.html</code> çift tık): Siz tasarlarken hızlı bakış.<br />
+      · <strong>Canlı</strong> (github.io): Müşteri / ekip / Jira paylaşımı; push sonrası güncel sürüm.
+    </div>
+
+    <h2>+ Yeni çalışma</h2>
+    <p style="font-size:0.9rem;margin:0 0 0.5rem">
+      Ana sayfadaki <strong>+ Yeni çalışma</strong> butonu formu doldurduktan sonra Cursor'a yapıştırılacak metni <strong>panoya kopyalar</strong>.
+      Metni Cursor sohbetine yapıştırın; klasör oluşur. Bitince mutlaka <strong>push</strong> edin (adım 6 / 7b).
+    </p>
+
+    <h2>İlk kontrol listesi</h2>
+    <table>
+      <thead><tr><th>Kontrol</th><th>Beklenen</th></tr></thead>
+      <tbody>
+        <tr><td>Git kurulu</td><td>Bölüm 2 yeşil prompt → «kurulu» + sürüm</td></tr>
+        <tr><td>Python 3 kurulu</td><td>Bölüm 3 yeşil prompt → sürüm görünür</td></tr>
+        <tr><td><code>hbc</code> klasörü</td><td>İçinde <code>index.html</code> ve <code>calismalarim</code> var</td></tr>
+        <tr><td>Cursor'da <code>calismalarim</code></td><td>Sol ağaçta görünür (bölüm 4 yeşil prompt veya turuncu Open Folder)</td></tr>
+        <tr><td>Workspace kaydı</td><td><code>hbc.code-workspace</code> kaydedildi; Open Recent'te çıkar</td></tr>
+        <tr><td>Lokal <code>index.html</code></td><td>Çalışmalarım kartları açılır</td></tr>
+        <tr><td>Canlı site</td><td><a href="https://hakanerdal.github.io/hbc/" target="_blank" rel="noopener"><code>https://hakanerdal.github.io/hbc/</code></a> açılır</td></tr>
+        <tr><td>Push denemesi</td><td>Küçük bir değişiklik → commit+push → canlıda görünür</td></tr>
+        <tr><td>Günlük alışkanlık</td><td>Başlamadan pull · bitince push (adım 6)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Sorun giderme</h2>
+    <table>
+      <thead><tr><th>Belirti</th><th>Ne yapın?</th></tr></thead>
+      <tbody>
+        <tr><td>Klon oldu, sol ağaç boş / yanlış klasör</td><td>Bölüm 4 turuncu kutu — <code>hbc</code> için Open Folder</td></tr>
+        <tr><td>«configure your user.name and user.email»</td><td>Bölüm <strong>7a</strong> yeşil prompt (ad + e-posta); Cancel → yapıştır → sonra 7b</td></tr>
+        <tr><td>«git is not recognized» / Git yok</td><td>Bölüm 2 yeşil kurulum prompt'u; olmazsa turuncu manuel indirme. Cursor'ı yeniden açın</td></tr>
+        <tr><td>Klon / push oturum istiyor</td><td>Tarayıcıda GitHub'a giriş yapın; ekip sizi repo'ya eklemiş olmalı</td></tr>
+        <tr><td>Push ettim, canlı eski</td><td>1–3 dk bekleyin; Ctrl+F5. Hâlâ eskiyse Cursor'a «push başarılı oldu mu?» diye sorun</td></tr>
+        <tr><td>HBC sayfası düz metin / stiller yok</td><td>Tek dosyayı değil, tüm <code>hbc</code> klasörünü koruyarak açın</td></tr>
+        <tr><td>+ Yeni çalışma sonrası klasör yok</td><td>Panodaki metni Cursor sohbetine yapıştırdınız mı kontrol edin</td></tr>
+        <tr><td>Cursor «script» / Python hatası</td><td>Bölüm 3 yeşil kontrol + kurulum prompt'unu gönderin</td></tr>
+        <tr><td>Mockup bozuk görünüyor</td><td>Sayfayı yenileyin; düzelmezse mockup'ta <strong>Düzenle</strong> → Cursor'a neyin bozuk olduğunu yazın</td></tr>
+      </tbody>
+    </table>
+
+    <h2>İlgili sayfalar</h2>
+    <ul style="font-size:0.9rem;margin:0;padding-left:1.25rem">
+      <li><a href="is-analisti.html">Başlangıç rehberi</a> — 4 adımlı akış, ekran sihirbazı</li>
+      <li><a href="jira-analist.html">Jira İş Açma</a> — Text / Visual, Tümünü kopyala</li>
+      <li><a href="../index.html">Çalışmalarım</a></li>
+    </ul>
+  </main>
+  <aside class="rehber-toc-wrap" id="rehber-toc" hidden aria-label="Sayfa içi bağlantılar"></aside>
+</div>
+<script>window.TASK_HUB = { taskRoot: '..', page: 'rehber-kurulum' };</script>
+<script src="../js/rehber-toc.js"></script>
+<script src="../js/nav.js"></script>
+</body>
+</html>

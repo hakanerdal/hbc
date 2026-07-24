@@ -8,7 +8,7 @@ Giriş: **[../index.html](../index.html)** (Çalışmalarım · Hazal · Berna �
 |-------|----------|
 | [is-analisti.html](is-analisti.html) | Başlangıç, Cursor promptları, özet Cursor butonları, Sunum, durum tablosu |
 | [jira-analist.html](jira-analist.html) | Jira İş Açma — sekmeler, Text/Visual, Tümünü kopyala |
-| [kurulum-analist.html](kurulum-analist.html) | Kurulum — Git, GitHub klon, Cursor, push, canlı site (github.io) |
+| [kurulum.html](kurulum.html) | Kurulum — Git, GitHub klon, Cursor, push, canlı site (github.io) |
 
 Örnek çalışmalar:
 | Tür | Klasör |

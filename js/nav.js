@@ -29,7 +29,7 @@
   html += '<h2>Rehber</h2>';
   html += '<a href="' + t + '/module-creator/is-analisti.html"' + (cfg.page === 'rehber-baslangic' ? ' class="active"' : '') + '>Başlangıç</a>';
   html += '<a href="' + t + '/module-creator/jira-analist.html"' + (cfg.page === 'rehber-jira' ? ' class="active"' : '') + '>Jira İş Açma</a>';
-  html += '<a href="' + t + '/module-creator/kurulum-analist.html"' + (cfg.page === 'rehber-kurulum' ? ' class="active"' : '') + '>Kurulum</a>';
+  html += '<a href="' + t + '/module-creator/kurulum.html"' + (cfg.page === 'rehber-kurulum' ? ' class="active"' : '') + '>Kurulum</a>';
 
   if (cfg.calisma) {
     var c = cfg.calisma;
