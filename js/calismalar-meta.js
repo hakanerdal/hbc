@@ -1,6 +1,18 @@
 /** Çalışma listesi — yeni modül eklenince ve durum değişince Cursor günceller. */
 window.HBC_CALISMALAR = [
   {
+    id: 'iklim',
+    label: 'IKLIM',
+    desc: 'IKLIM',
+    eklendi: '2026-07-30',
+    menuYer: 'sol',
+    durum: 'mockup-taslak',
+    mockupSayisi: 0,
+    taskBe: 0,
+    taskFe: 0,
+    icon: '📁'
+  },
+  {
     id: 'kaynaktan_musluga',
     label: 'Kaynaktan Musluğa',
     desc: 'Su kaynağı, tesis ve musluk — örnek çalışma',
