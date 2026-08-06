@@ -4,8 +4,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CSS_MOCK = '  <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />'
-BOOTSTRAP_JS_MOCK = '../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js'
-BOOTSTRAP_JS_EKR = 'assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js'
+BOOTSTRAP_JS_MOCK = '../../../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js'
+BOOTSTRAP_JS_EKR = '../../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js'
 SCRIPTS_MOCK = f"""<script src="{BOOTSTRAP_JS_MOCK}"></script>
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
 <script src="../../../js/mock-tom-select.js"></script>

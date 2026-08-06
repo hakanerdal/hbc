@@ -7,9 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TASK_ROOT = path.resolve(__dirname, '..');
 const CALISMALAR_DIR = path.join(TASK_ROOT, 'calismalarim');
 const META_JS = path.join(TASK_ROOT, 'js', 'calismalar-meta.js');
-const BOOTSTRAP_DIR_NAME = 'bootstrap-5.0.2-dist';
-const BOOTSTRAP_SRC = path.join(TASK_ROOT, 'assets', BOOTSTRAP_DIR_NAME);
-const BOOTSTRAP_JS = 'assets/' + BOOTSTRAP_DIR_NAME + '/js/bootstrap.bundle.min.js';
+const BOOTSTRAP_JS = '../../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js';
 const MOCK_SHELL_TEMPLATE = path.join(TASK_ROOT, 'templates', 'mock-shell.css');
 
 const SLUG_RE = /^[a-z][a-z0-9_]*$/;
@@ -20,15 +18,6 @@ function normalizeMenuYer(menuYer) {
 
 function menuYerLabel(menuYer) {
   return normalizeMenuYer(menuYer) === 'ust' ? 'üst' : 'sol';
-}
-
-function copyBootstrapAssets(calismaDir) {
-  if (!fs.existsSync(BOOTSTRAP_SRC)) {
-    throw new Error('Bootstrap kaynağı bulunamadı: assets/' + BOOTSTRAP_DIR_NAME);
-  }
-  const dest = path.join(calismaDir, 'assets', BOOTSTRAP_DIR_NAME);
-  fs.mkdirSync(path.join(calismaDir, 'assets'), { recursive: true });
-  fs.cpSync(BOOTSTRAP_SRC, dest, { recursive: true });
 }
 
 function copyMockShellTemplate(calismaDir) {
@@ -293,7 +282,6 @@ export function scaffoldCalisma({ slug, label, desc, menuYer = 'sol' }) {
     throw new Error('Klasör zaten var: calismalarim/' + slug);
   }
   fs.mkdirSync(path.join(dir, 'mockup'), { recursive: true });
-  copyBootstrapAssets(dir);
   copyMockShellTemplate(dir);
   writeCalismaJson(dir, { id: slug, label, desc, menuYer: yer });
   fs.writeFileSync(path.join(dir, 'index.html'), indexHtml(slug, label, desc, yer), 'utf8');

@@ -1,7 +1,7 @@
 /**
  * Mockup: Bootstrap 5 (yerel) + Tom Select (CDN) — çoklu seçim ve form kontrolleri.
  * mock-shell.css / style.css sonrası yüklenir; kabuk stilleri korunur.
- * Kaynak: assets/bootstrap-5.0.2-dist — yeni çalışmada scaffold bu klasörü calismalarim/<modul>/assets/ altına kopyalar.
+ * Kaynak: repo kökü assets/bootstrap-5.0.2-dist — çalışma klasörüne kopyalanmaz; mockup JS de aynı kök assets'ten yüklenir.
  */
 @import url('../assets/bootstrap-5.0.2-dist/css/bootstrap.min.css');
 @import url('https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.bootstrap5.min.css');

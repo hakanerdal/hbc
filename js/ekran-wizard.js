@@ -94,7 +94,7 @@
       lines.push('Sol menüde grup/alt menü: Bootstrap 5 collapse (button.mock-menu-toggle + data-bs-toggle="collapse" + div.collapse.mock-menu-collapse).');
     }
     lines.push('<details> veya statik .menu-group yasak.');
-    lines.push('bootstrap.bundle.min.js zorunlu: ../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js (mockup/ içinden; çalışma klasöründeki assets kopyası)');
+    lines.push('bootstrap.bundle.min.js zorunlu: ../../../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js (mockup/ içinden; repo kökü assets — çalışma klasörüne kopyalanmaz)');
     lines.push('Bu çalışmadaki ilk mockup — mock-shell, menü ve Sunum iskeletini kur.');
     return lines;
   }
@@ -216,7 +216,7 @@
       lines.push(rw().haritaAssetsSetupPrompt(c.id, d.raporWidgetlari));
       lines.push('Harita widget: js/mock-geo-map.js + MOCK_GEO_MAP.init({ templateId, legendScale }). Türkiye → kapsam turkiye. İl (ör. Ankara) → kapsam ankara. İl / ilçe adları görünür. Sol alt lejant zorunlu. Sarmalayıcı .mock-report-chart--map (her zaman tam genişlik).');
     }
-    lines.push('İl filtresi: tür «İl (çoklu seçim)» — toolbar\'da <select multiple class="form-select mock-tom-select">; Bootstrap 5 (yerel assets/bootstrap-5.0.2-dist) + Tom Select. mock-bootstrap.css + mock-tom-select.js.');
+    lines.push('İl filtresi: tür «İl (çoklu seçim)» — toolbar\'da <select multiple class="form-select mock-tom-select">; Bootstrap 5 (repo kökü assets/bootstrap-5.0.2-dist) + Tom Select. mock-bootstrap.css + mock-tom-select.js.');
     lines.push('İlişki/akış özeti (kaynak→tesis gibi, coğrafi değil) ayrı ekran kalabilir — kaynaktan_musluga dashboard mockup referans.');
     lines.push('KPI kartları ve özet tablo HTML; sunum modunda .mock-content kaydırılabilir (mock-shell.css).');
     if (ilk) {

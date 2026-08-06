@@ -19,7 +19,7 @@
       'Görünen ad: ' + label + '\n' +
       'Amaç: ' + desc + '\n' +
       'Mockup uygulama menüsü: ' + yer + (yer === 'üst' ? ' (yatay üst çubuk, mock-app-shell--menu-ust)' : ' (sol dikey çubuk)') + '\n' +
-      'Boş şablon (index.html, isler.html, mockup klasörü, bootstrap-5.0.2-dist kopyası, mock-shell.css) ve Çalışmalarım listesine ekle. Mockup henüz yok.'
+      'Boş şablon (index.html, isler.html, mockup klasörü, mock-shell.css; Bootstrap repo kökü assets\'ten) ve Çalışmalarım listesine ekle. Mockup henüz yok.'
     );
   }
 

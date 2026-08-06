@@ -238,7 +238,7 @@ Referans: `calismalarim/kaynaktan_musluga/index.html`
 <script src="../../js/calisma-ozet.js"></script>
 ```
 
-Yeni scaffold (`scaffold-calisma.mjs`) bunları otomatik ekler; ayrıca `assets/bootstrap-5.0.2-dist` kopyası, `templates/mock-shell.css` → `mockup/mock-shell.css` ve `calisma.json` (`menuYer`: `sol` \| `ust`).
+Yeni scaffold (`scaffold-calisma.mjs`) bunları otomatik ekler; ayrıca `templates/mock-shell.css` → `mockup/mock-shell.css` ve `calisma.json` (`menuYer`: `sol` \| `ust`). Bootstrap **kopyalanmaz** — repo kökü `assets/bootstrap-5.0.2-dist/` kullanılır.
 
 ### Mockup uygulama menüsü — zorunlu (Bootstrap)
 
@@ -249,7 +249,7 @@ Yeni scaffold (`scaffold-calisma.mjs`) bunları otomatik ekler; ayrıca `assets/
 | Kabuk | `.mock-app-shell` + `.mock-app-menu` | `.mock-app-shell.mock-app-shell--menu-ust` |
 | Düz link | `<a href="…">` | aynı |
 | Grup / alt menü | **collapse** — `mock-menu-toggle` + `data-bs-toggle="collapse"` + `div.collapse.mock-menu-collapse` + `.mock-menu-sub` | **dropdown** — `div.dropdown.mock-menu-dropdown` + `data-bs-toggle="dropdown"` + `ul.dropdown-menu.mock-menu-dropdown-menu` + `li > a.dropdown-item` |
-| Script | `../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` (zorunlu) | aynı |
+| Script | `../../../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` (zorunlu) | aynı |
 
 **Yasak:** `<details>/<summary>`, yalnızca görsel başlık olan `.menu-group` (açılır olmayan grup), özel JS ile toggle. Üst menüde alt menü için **collapse** (tam genişlik ikinci satır) kullanma — Bootstrap **dropdown** kullan.
 
@@ -297,26 +297,28 @@ Alt sayfa açıkken: `mock-menu-dropdown--child-active` (üst çubukta alt çizg
 
 ### Bootstrap — yerel dosyalar ve yollar
 
-**Neden yerel?** Mockup'lar çoğu zaman `file://` ile açılır; CDN veya repo kökündeki paylaşımlı klasöre bağımlılık `ERR_FILE_NOT_FOUND` üretir. Yeni çalışmada `scaffold-calisma.mjs`, repo `assets/bootstrap-5.0.2-dist/` kopyasını **her çalışmanın kendi** `calismalarim/<modul>/assets/` klasörüne yazar.
+**Tek kaynak:** Bootstrap yalnızca repo kökü `assets/bootstrap-5.0.2-dist/` altında tutulur. Çalışma klasörüne **kopyalanmaz** (boyut / bakım). Mockup'lar tam repo ağacı ile açılır (`file://` veya GitHub Pages); göreli path kök `assets`'e çıkar.
 
 | HTML dosyası | Bootstrap JS yolu |
 |--------------|-------------------|
-| `calismalarim/<modul>/mockup/*.html` | `../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` |
-| `calismalarim/<modul>/ekranlar.html` | `assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` |
+| `calismalarim/<modul>/mockup/*.html` | `../../../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` |
+| `calismalarim/<modul>/ekranlar.html` | `../../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` |
 
 CSS: mockup head'te `../../../css/mock-bootstrap.css` (repo `css/`); bu dosya `@import` ile repo kökündeki `assets/bootstrap-5.0.2-dist/css/bootstrap.min.css` yükler — form stilleri için yeterli. **Menü collapse** için ayrıca yukarıdaki **JS bundle** şarttır.
 
-**Yaygın hata:** mockup'ta `../../assets/…` → `calismalarim/assets/…` (klasör yok). Doğrusu bir üst dizin: `../assets/…` → `calismalarim/<modul>/assets/…`.
+**Yasak:** `calismalarim/<modul>/assets/bootstrap-5.0.2-dist/` kopyası; CDN Bootstrap JS. **Not:** `calismalarim/<modul>/assets/` yalnızca harita SVG vb. çalışma özel dosyaları için (Bootstrap değil).
+
+**Yaygın hata:** mockup'ta `../assets/bootstrap-…` → çalışma klasörü (Bootstrap yok). Doğrusu üç üst: `../../../assets/bootstrap-…` → repo kökü.
 
 ### Form — çoklu seçim (Bootstrap 5 + Tom Select)
 
-Mockup sayfalarında **Bootstrap 5** (yerel: `assets/bootstrap-5.0.2-dist`) ve çoklu seçim için **Tom Select** (`tom-select.bootstrap5` teması) kullanılır. Görünüm: seçili öğeler etiket (pill) olarak, arama kutulu açılır liste — müşteri/yazılımcıya gösterilebilir kalitede.
+Mockup sayfalarında **Bootstrap 5** (repo kökü `assets/bootstrap-5.0.2-dist`) ve çoklu seçim için **Tom Select** (`tom-select.bootstrap5` teması) kullanılır. Görünüm: seçili öğeler etiket (pill) olarak, arama kutulu açılır liste — müşteri/yazılımcıya gösterilebilir kalitede.
 
 **Dosyalar:**
-- Kaynak: repo `assets/bootstrap-5.0.2-dist/` — yeni çalışmada `scaffold-calisma.mjs` bunu `calismalarim/<modul>/assets/` altına kopyalar
+- Kaynak: repo `assets/bootstrap-5.0.2-dist/` — çalışma klasörüne kopyalanmaz; mockup/ekranlar göreli path ile kökten yükler
 - `css/mock-bootstrap.css` — Bootstrap (yerel `@import`) + Tom Select CDN ve mockup kabuğu düzeltmeleri
 - `js/mock-tom-select.js` — `select.mock-tom-select[multiple]` otomatik init
-- Mockup HTML: `mock-shell.css` sonrası `mock-bootstrap.css`; script: `../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` + Tom Select + `mock-tom-select.js`
+- Mockup HTML: `mock-shell.css` sonrası `mock-bootstrap.css`; script: `../../../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js` + Tom Select + `mock-tom-select.js`
 
 **HTML kalıbı:**
 
@@ -568,7 +570,7 @@ Harita widget içeren yeni mockup: önce `calismalarim/<modul>/assets/` altına 
 
 ### Çoklu seçim (zorunlu kalıp)
 
-**Kullan:** Bootstrap 5 (yerel `assets/bootstrap-5.0.2-dist`) + Tom Select — `<select multiple class="form-select mock-tom-select">`. Mockup head: `mock-bootstrap.css`; script: `mock-tom-select.js` (otomatik init).
+**Kullan:** Bootstrap 5 (repo kökü `assets/bootstrap-5.0.2-dist`) + Tom Select — `<select multiple class="form-select mock-tom-select">`. Mockup head: `mock-bootstrap.css`; script: `mock-tom-select.js` (otomatik init).
 
 ```html
 <link rel="stylesheet" href="../../../css/mock-bootstrap.css" />
@@ -576,7 +578,7 @@ Harita widget içeren yeni mockup: önce `calismalarim/<modul>/assets/` altına 
 <select class="form-select mock-tom-select" id="f-il" multiple data-placeholder="İl seçin…">
   <option value="06" selected>Ankara</option>
 </select>
-<script src="../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../../assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
 <script src="../../../js/mock-tom-select.js"></script>
 ```
@@ -695,9 +697,10 @@ calismalarim/<modul>/
   calisma.json        # id, label, desc, menuYer (sol|ust)
   index.html          # özet: durum çubuğu + FE Mockup'lar tile-panel + Jira linki
   ekranlar.html       # mockup listesi + yeni ekran sihirbazı
-  assets/bootstrap-5.0.2-dist/  # scaffold kopyası (kaynak: repo assets/)
+  assets/             # yalnızca harita SVG vb. (Bootstrap kopyası yok)
   mockup/mock-shell.css  # scaffold: templates/mock-shell.css (sol + üst menü stilleri)
-  mockup → ../../../css/mock-bootstrap.css  # Bootstrap 5 (yerel) + Tom Select CDN
+  mockup → ../../../css/mock-bootstrap.css  # Bootstrap 5 + Tom Select CDN
+  mockup → ../../../assets/bootstrap-5.0.2-dist/js/…  # Bootstrap JS (repo kökü)
   js/mock-sunum.js       # Sunum modu + mockup üst çubuğu (Sunum / Düzenle)
   isler.html          # tab: Backend | Frontend (basit modül)
   db/*.sql            # isteğe bağlı örnek şema
@@ -708,7 +711,7 @@ module-creator/
   kurulum.html # Kurulum — iş analisti gereksinimleri
 module-creator.md     # plan / ilerleme (chat dışı takip)
 css/
-  mock-bootstrap.css  # Bootstrap 5 (assets/bootstrap-5.0.2-dist) + Tom Select CDN; mockup kabuğu
+  mock-bootstrap.css  # Bootstrap 5 (kök assets) + Tom Select CDN; mockup kabuğu
 js/
   calismalar-meta.js  # modül listesi, durum, sayılar, onay
   calisma-ozet.js     # modül özet durum çubuğu
@@ -725,11 +728,12 @@ js/
   sunum-query.js      # ?sunum=1 yardımcı (nav + mockup gezinme)
   nav.js
   isler-mockups.js
-scripts/scaffold-calisma.mjs  # yeni çalışma + bootstrap kopyası + mock-shell şablonu + calisma.json
+scripts/scaffold-calisma.mjs  # yeni çalışma + mock-shell şablonu + calisma.json (Bootstrap kopyalamaz)
 templates/mock-shell.css      # mockup kabuğu şablonu (sol menü + --menu-ust)
-scripts/patch-mockup-bootstrap.py  # mevcut mockup HTML'e yerel Bootstrap + Tom Select ekler
+scripts/patch-mockup-bootstrap.py  # mevcut mockup HTML'e kök Bootstrap path + Tom Select ekler
 scripts/embed-geo-map-templates.py  # harita SVG → mockup HTML <template> gömme (file://)
 assets/
+  bootstrap-5.0.2-dist/  # Bootstrap 5 — tek kopya (çalışmalara kopyalanmaz)
   map.svg             # Türkiye il haritası (data-plate / plaka eşlemesi)
 ```
 
