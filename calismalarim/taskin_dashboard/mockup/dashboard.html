@@ -26,6 +26,7 @@
         </div>
       </nav>
       <div class="mock-app-body">
+        <div class="td-sticky-chrome">
         <div class="mock-header td-dash-header">
           <div>
             <div class="mock-breadcrumb">Taşkın Dashboard › Taşkın Bilgi Sistemi › Dashboard</div>
@@ -39,7 +40,7 @@
           </div>
         </div>
 
-        <!-- 1. Bilgi kartları + filtreler -->
+        <!-- 1. Bilgi kartları + filtreler (sunumda sticky) -->
         <div class="td-top-row">
           <div class="mock-report-widget mock-report-widget--kpis td-kpis">
             <div class="mock-report-kpis td-kpi-grid">
@@ -104,9 +105,10 @@
             <p class="mock-hint" id="td-timeout-tip" hidden style="flex-basis:100%;margin:0.25rem 0 0"></p>
           </div>
         </div>
+        </div>
 
-        <div class="mock-content mock-content--report td-dash-content">
-          <!-- 2. Harita -->
+        <div class="td-map-panel">
+          <!-- 2. Harita — kaydırılabilir içerik (KPI/filtre sticky kalır) -->
           <div class="mock-report-widget td-map-widget">
             <div class="td-map-head">
               <h3>Harita</h3>
@@ -244,7 +246,9 @@
               </div>
             </div>
           </div>
+        </div>
 
+        <div class="mock-content mock-content--report td-dash-content">
           <!-- 3. Listeler / sorgular -->
           <div class="mock-report-widget td-lists-widget">
             <div class="td-list-tabs" role="tablist">

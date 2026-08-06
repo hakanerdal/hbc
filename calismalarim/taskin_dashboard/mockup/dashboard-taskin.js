@@ -4,7 +4,8 @@
 (function () {
   var charts = {};
 
-  function showCard(feature) {
+  function showCard(feature, opts) {
+    opts = opts || {};
     var cards = document.querySelectorAll('#td-info-cards .td-info-card');
     cards.forEach(function (c) {
       c.hidden = c.getAttribute('data-feature') !== feature;
@@ -16,7 +17,7 @@
       var on = tr.getAttribute('data-feature') === feature;
       tr.classList.toggle('is-selected', on);
       tr.classList.toggle('is-map-linked', on);
-      if (on) {
+      if (on && !opts.skipScroll) {
         tr.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       }
     });
@@ -269,6 +270,10 @@
     wireChartsUi();
     wireFilter();
     wireLayers();
-    showCard('risk-1');
+    /* İlk seçim — scroll yapma; aksi halde tablo satırına kayıp harita alta kaçar */
+    showCard('risk-1', { skipScroll: true });
+    var appBody = document.querySelector('.mock-app-body');
+    if (appBody) appBody.scrollTop = 0;
+    window.scrollTo(0, 0);
   });
 })();

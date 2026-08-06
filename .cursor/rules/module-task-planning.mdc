@@ -34,17 +34,29 @@ Bir ekrandaki buton/aksiyon başka bir ekrana gidiyorsa mockup'ta **gerçek link
 
 Analist ve müşteri mockup'ta akışı tıklayarak gezebilmeli. Ölü buton bırakma.
 
+### Mockup kabuğu — genişlik
+
+Mockup uygulama kabuğu (`.mock-app-shell`) **her zaman** HBC sol menüsünün yanındaki alanı **tam genişlik** kullanır — sunum modu şart değil.
+
+- `.mock-app-shell { max-width: none; width: 100%; }` — şablon: `templates/mock-shell.css`
+- HBC `main` varsayılanı `max-width: 960px`; mockup sayfalarında `body:has(.mock-app-shell) main { max-width: none }` (`css/style.css` + `mock-shell.css`)
+- Form kartı (`.mock-form-panel` ~420px) dar kalır; liste / dashboard / rapor kabuğu genişler
+- Eski `.mock-app-shell--wide` / 920px sınır **kullanma** — varsayılan zaten tam genişlik
+- Sunum (`?sunum=1`): ayrıca `100vh` tam ekran (HBC menüsü gizlenir)
+
 ### Sunum modu
 
 Her mockup sayfasında mockup kabuğunun üstünde **Sunum** linki (sol) ve **Düzenle** butonu (sağ, turuncu) bulunur (`js/mock-sunum.js` + `js/calisma-cursor.js` + `mock-shell.css`). Örnek çalışmalarda (`ornek` / `ornekRapor` / `ornekTumTurler`) Düzenle gizlenir; örnek mockup'larda altta **Cursor örnek prompt** kutusu kalır.
 
 - **Sunum** (sol): müşteri gösterimi — `?sunum=1`
 - **Düzenle** (sağ): `TASK_CURSOR.open({ mode: 'mockup-duzelt', mockup })` — seçili ekran için Cursor düzeltme metni; rapor mockup'larında **+ Widget ekle** paneli de açılır
-- Sunum modunda (`?sunum=1`) üst çubuk ve Düzenle gizlenir; sağ üstte yalnızca **Sunumdan çık** kalır
+- Sunum modunda (`?sunum=1`) üst çubuk ve Düzenle gizlenir; sol altta yalnızca **Sunumdan çık** kalır (`.mock-sunum-exit` — `position: fixed; bottom/left`; şablon: `templates/mock-shell.css`)
 - Tıklanınca `?sunum=1` — sol **HBC** menüsü, sayfa başlığı, alttaki Cursor prompt bölümü ve üst çubuk (Sunum / Düzenle) gizlenir
 - Yalnızca uygulama mockup'ı (sol menü + içerik) tam sayfa kalır; müşteri sunumu için
 - Uzun raporlarda içerik alanı kaydırılabilir (`body.mock-sunum .mock-content { overflow-y: auto }`)
 - **Sunumda kabuk:** `.mock-app-shell` ve `.mock-app-menu` tam ekran yüksekliği (`100vh`); sol uygulama menüsü içerik kısa olsa bile aşağıya uzanır
+- **Dashboard / harita (sunum):** KPI + filtre şeridi (`.td-sticky-chrome` / `.td-top-row`) **sticky/fixed** üstte kalır; harita ve listeler **kaydırılabilir** (eski doğal yükseklik, flex-split yok). Kaydırınca filtreler görünür kalır; harita alta doğru akar
+
 - **Liste mockup:** içerik alanı (`mock-content`) tablo altında biter — sayfalama tabloya yapışık kalır, ekranın dibine itilmez
 - **HBC sol menü (çalışma):** Özet → **Ekranlar** → girintili mockup linkleri → **Sunum** butonu → **Task Metinleri** (`nav.js`)
 - **Sunumda gezinme:** `?sunum=1` açıkken mockup içi linkler (`mock-app-menu`, toolbar, tablo satırları) ve HBC **Ekranlar** listesi `sunum=1` parametresini korur — ekran değişince sunum modundan çıkılmaz
@@ -369,6 +381,7 @@ CRUD değil — tek veya az sayıda **özet ekranı** (dashboard veya rapor adı
 - **Harita widget'ları:** SVG gövdesi mockup HTML'de `<template hidden>`; `MOCK_GEO_MAP.init({ templateId, legendScale })`. Sarmalayıcı `.mock-report-chart--map` — **her zaman tam genişlik (%100)**; sol alt **lejant zorunlu** (`legendScale.colors` harita tonlarıyla uyumlu).
 - **Harita etiketleri:** İl ve ilçe adları varsayılan görünür. İl haritası örneği şimdilik yalnızca Ankara.
 - Sunum modu (`?sunum=1`): `.mock-content` içinde `overflow-y: auto`
+- **Sunum + haritalı dashboard:** KPI/filtre üstte sticky (`.td-sticky-chrome`); harita doğal yükseklikte kaydırılır; liste/grafik haritanın altında aynı scroll içinde
 - Satır işlemi ikonu yok; tablo salt okunur
 - **Tablo hizalama (`mock-table`):** Sayısal sütunlarda hem `<th class="num">` hem `<td class="num">` kullan — ikisi de sağa hizalı (`text-align: right`; `tabular-nums`). Yalnız `td`'ye `num` vermek başlık ile değeri kaydırır. İki sütunlu basit özet listeler (`.mock-report-widget .mock-list-wrap` içinde, örn. sınıf mevcutları) istisna: sola hizalı kalır.
 - `mock-prompt` kutusunda veri kaynağı tablosu ve filtre alanlarını yaz

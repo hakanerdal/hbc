@@ -1,12 +1,19 @@
-/* Taslak Demo mockup — uygulama kabuğu */
+﻿/* Taslak Demo mockup — uygulama kabuğu */
 .mock-app-shell {
-  max-width: 920px;
+  max-width: none;
+  width: 100%;
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   min-height: 420px;
+}
+/* Mockup sayfalarında HBC main de tam genişlik (sunum dışı dahil) */
+body:has(.mock-app-shell) main {
+  max-width: none;
+  width: 100%;
+  min-width: 0;
 }
 .mock-app-menu {
   width: 188px;
@@ -443,7 +450,7 @@ textarea.mock-input--readonly,
 }
 
 .mock-prompt {
-  max-width: 920px;
+  max-width: none;
   margin-top: 1.75rem;
   padding-top: 1.25rem;
   border-top: 2px solid var(--border);
@@ -465,7 +472,7 @@ textarea.mock-input--readonly,
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  max-width: 920px;
+  max-width: none;
   margin-bottom: 0.5rem;
   font-size: 0.8rem;
 }
@@ -507,8 +514,8 @@ textarea.mock-input--readonly,
 .mock-sunum-exit {
   display: none;
   position: fixed;
-  top: 0.65rem;
-  right: 0.75rem;
+  bottom: 0.75rem;
+  left: 0.75rem;
   z-index: 2000;
   padding: 0.45rem 0.95rem;
   border: 1px solid #e65100;
