@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Genel Dashboard | Çalışmalarım</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <style>
+    .tile { display: block; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-decoration: none; color: inherit; margin-bottom: 0.5rem; }
+    .tile:hover { border-color: var(--accent); }
+    .tile strong { color: var(--accent); }
+    .tile span { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+    .empty-note { font-size: 0.88rem; color: var(--muted); background: #f5f7fa; border: 1px dashed var(--border); border-radius: 8px; padding: 1rem; }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <nav id="sidebar"></nav>
+  <main>
+    <h1>Genel Dashboard</h1>
+
+    <div class="calisma-amac-panel" id="calisma-amac-panel">
+      <h2 class="calisma-amac-heading">Amaç</h2>
+      <p class="calisma-amac" id="calisma-amac">Yönetici Ekranı</p>
+    </div>
+
+    <div class="calisma-durum-bar" id="calisma-durum-bar"></div>
+
+    <div class="lead">
+      Yeni çalışma. Mockup uygulama menüsü <strong>sol</strong> konumda planlandı.
+      Sol menüden <strong>Ekranlar</strong> sayfasında <strong>+ Yeni ekran</strong> sihirbazını kullanarak
+      <strong>mockup</strong> oluşturun; onay sonrası <strong>task metinleri</strong> eklenecek.
+    </div>
+    <h2>Mockup'lar</h2>
+    <p class="empty-note">Henüz mockup yok. Sol menüden <strong>Ekranlar</strong> sayfasında <strong>+ Yeni ekran</strong> sihirbazını kullanın.</p>
+    <h2>Jira</h2>
+    <a class="tile" href="isler.html"><strong>Task metinleri</strong><span>Mockup onayından sonra doldurulacak</span></a>
+  </main>
+</div>
+<script>
+window.TASK_HUB = {
+  taskRoot: '../..',
+  page: 'calisma-ozet',
+  calisma: {
+    id: "genel_dashboard",
+    label: "Genel Dashboard",
+    base: '.',
+    menuYer: "sol",
+    mockups: [],
+    islerHref: 'isler.html'
+  }
+};
+</script>
+<script src="../../js/sunum-query.js"></script>
+<script src="../../js/calismalar-meta.js"></script>
+<script src="../../js/calisma-ozet.js"></script>
+<script src="../../js/rapor-widgets.js"></script>
+<script src="../../js/calisma-cursor.js"></script>
+<script src="../../js/nav.js"></script>
+</body>
+</html>

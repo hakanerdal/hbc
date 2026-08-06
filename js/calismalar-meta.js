@@ -1,6 +1,31 @@
 /** Çalışma listesi — yeni modül eklenince ve durum değişince Cursor günceller. */
 window.HBC_CALISMALAR = [
   {
+    id: 'taskin_dashboard',
+    label: 'Taşkın Dashboard',
+    desc: 'Taşkın Dashboard',
+    eklendi: '2026-08-06',
+    menuYer: 'sol',
+    durum: 'task-hazir',
+    mockupSayisi: 1,
+    taskBe: 10,
+    taskFe: 7,
+    onay: { tarih: '2026-08-06', kim: 'Hazal' },
+    icon: '📁'
+  },
+  {
+    id: 'genel_dashboard',
+    label: 'Genel Dashboard',
+    desc: 'Yönetici Ekranı',
+    eklendi: '2026-07-30',
+    menuYer: 'sol',
+    durum: 'mockup-taslak',
+    mockupSayisi: 0,
+    taskBe: 0,
+    taskFe: 0,
+    icon: '📁'
+  },
+  {
     id: 'iklim',
     label: 'IKLIM',
     desc: 'IKLIM',
